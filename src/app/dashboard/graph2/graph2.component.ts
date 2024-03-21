@@ -18,11 +18,14 @@ export class Graph2Component implements OnInit{
       type: 'pie',
       values: [20, 14, 23, 25], // Example counts for different themes
       labels: ['Theme 1', 'Theme 2', 'Theme 3', 'Theme 4'], // Example theme names
-      textinfo: 'label+percent',
-      insidetextorientation: 'radial',
+      textinfo: 'label+percent',  // Show label and the percentage
+      insidetextorientation: 'radial', // Orientation of the text value
       hoverinfo: 'label+value', // Show theme name and count on hover
       textposition: 'outside',
-      automargin: true
+      automargin: true,
+      marker: {
+        colors: ['#F0AB00', '#8A8D90', '#009596', '#5752D1'] // Custom colors for each slice
+    }
     }];
 
   const layout = {

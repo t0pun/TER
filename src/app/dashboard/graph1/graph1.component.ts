@@ -27,7 +27,7 @@ export class Graph1Component implements OnInit{
         name: 'True',
         x: sampleDates,
         y: trueCounts,
-        line: { color: '#17BECF' }
+        line: { color: '#4CB140' }
       },
       {
         type: 'scatter',
@@ -35,15 +35,15 @@ export class Graph1Component implements OnInit{
         name: 'False',
         x: sampleDates,
         y: falseCounts,
-        line: { color: '#7F7F7F' }
+        line: { color: '#A30000' }
       },
       {
         type: 'scatter',
-        mode: 'lines',
+        mode: 'lines', 
         name: 'Mixed',
         x: sampleDates,
         y: mixedCounts,
-        line: { color: '#DAA520' }
+        line: { color: '#519DE9' }
       },
       {
         type: 'scatter',
@@ -51,7 +51,7 @@ export class Graph1Component implements OnInit{
         name: 'Others',
         x: sampleDates,
         y: otherCounts,
-        line: { color: '#B22222' }
+        line: { color: '#F4C145' }
       },
       {
         type: 'scatter',
@@ -59,7 +59,7 @@ export class Graph1Component implements OnInit{
         name: 'All',
         x: sampleDates,
         y: allCounts,
-        line: { color: '#2E8B57' }
+        line: { color: '#009596', dash: 'dash' }
       }
     ];
 
@@ -73,6 +73,7 @@ export class Graph1Component implements OnInit{
         title: 'Number of Claims'
       }
     };
+
 
     Plotly.newPlot('graph1', traces, layout);
   }
