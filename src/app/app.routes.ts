@@ -19,7 +19,7 @@ const routeConfig: Routes = [
         path: 'dashboard',
         component: DashboardComponent,
         title: 'Dashboard'
-    },
+    },  
     {
         path: 'search',
         component: SearchComponent,
