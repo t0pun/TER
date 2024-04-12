@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, inject } from '@angular/core';
 import Plotly, { Data, Layout} from 'plotly.js-basic-dist-min';
 
 @Component({
@@ -9,51 +10,32 @@ import Plotly, { Data, Layout} from 'plotly.js-basic-dist-min';
   styleUrl: './graph3.component.css'
 })
 export class Graph3Component implements OnInit{
+  data: any;
+  private apiUrl = "http://127.0.0.1:5000/json_per_source_label"
+  private http = inject(HttpClient)
+  
   ngOnInit(): void {
-    this.buildChart();
+    this.buildChart(this.fetchData());
   }
 
-  private buildChart(): void {
-    // Names of the sources
-const sourceNames = [
-  'Source 1', 'Source 2', 'Source 3', 'Source 4', 'Source 5',
-  'Source 6', 'Source 7', 'Source 8', 'Source 9', 'Source 10',
-  'Source 11', 'Source 12', 'Source 13'
-];
+  private buildChart(data_1: any): void {
 
-// Counts of true claims for each source
-const allCounts = [
-  230, 255, 315, 260, 320,
-  300, 330, 360, 390, 420,
-  450, 480, 510
-];
-const trueCounts = [
-  120, 150, 180, 130, 200,
-  160, 170, 180, 190, 200,
-  210, 220, 230
-];
 
-// Counts of false claims for each source
-const falseCounts = [
-  80, 60, 90, 70, 50,
-  60, 70, 80, 90, 100,
-  110, 120, 130
-];
+  const sourceNames: string[] = [];
+  const trueCounts: number[] = [];
+  const falseCounts: number[] = [];
+  const mixedCounts: number[] = [];
+  const otherCounts: number[] = [];
+  const allCounts: number[] = [];
 
-// Counts of mixed claims for each source
-const mixedCounts = [
-  20, 30, 25, 35, 40,
-  45, 50, 55, 60, 65,
-  70, 75, 80
-];
-
-// Counts of other claims for each source
-const otherCounts = [
-  10, 15, 20, 25, 30,
-  35, 40, 45, 50, 55,
-  60, 65, 70
-];
-
+  for (let i = 0; i < data_1.length; i++){
+    sourceNames.push(data_1[i]['Source'])
+    if(data_1[i]['Label']='True'){
+      trueCounts.push(data_1[i]['Numbers of claims'])
+    }else if(data_1[i]['Label']='False'){
+      trueCounts.push(data_1[i]['Numbers of claims'])
+    }
+  }
 
     const data : Data[]= [
       { 
@@ -104,5 +86,15 @@ const otherCounts = [
       responsive: true,
     };
     Plotly.newPlot('graph3', data, layout, config);
+  }
+  fetchData() {
+    fetch(this.apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        this.buildChart(data)
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
   }
 }

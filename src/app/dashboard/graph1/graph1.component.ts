@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, inject } from '@angular/core';
 import Plotly, { Data, Layout } from 'plotly.js-basic-dist-min';
 
 @Component({
@@ -9,22 +10,40 @@ import Plotly, { Data, Layout } from 'plotly.js-basic-dist-min';
   styleUrl: './graph1.component.css'
 })
 export class Graph1Component implements OnInit{
+  data: any;
+  private apiUrl = "http://127.0.0.1:5000/json_per_date1_label"
+  private http = inject(HttpClient)
 
   ngOnInit(): void {
-    this.buildChart();
+    this.fetchData()
   }
-  private buildChart(): void {
-    const sampleDates = ['2023-01-01', '2023-01-15', '2023-02-01', '2023-02-15', '2023-03-01'];
-    const trueCounts = [120, 150, 180, 200, 230];
-    const falseCounts = [80, 120, 150, 160, 170];
-    const mixedCounts = [50, 60, 70, 80, 90];
-    const otherCounts = [30, 35, 40, 45, 50];
-    const allCounts = [280, 365, 440, 485, 540];
+  buildChart(data: any): void{
+    console.log(data)
+    const sampleDates: string[] = [];
+    const trueCounts: number[] = [];
+    const falseCounts: number[] = [];
+    const mixedCounts: number[] = [];
+    const otherCounts: number[] = [];
+    const allCounts: number[] = [];
+
+    for (let i = 0; i < data.length; i++){
+      sampleDates.push(data[i]['Date1'])
+      if(data[i]['Label']='True'){
+        trueCounts.push(data[i]['Numbers of claims'])
+      }else if(data[i]['Label']=='False'){
+        trueCounts.push(data[i]['Numbers of claims'])
+      }
+      else if(data[i]['Label']=='Mixture'){
+        trueCounts.push(data[i]['Numbers of claims'])
+      }
+    }
+    console.log(falseCounts)
+    console.log(trueCounts)
     const traces: Data[] = [
       {
         type: 'scatter',
         mode: 'lines',
-        name: 'True',
+        name: 'Trhfghgsdue',
         x: sampleDates,
         y: trueCounts,
         line: { color: '#4CB140' }
@@ -76,5 +95,16 @@ export class Graph1Component implements OnInit{
 
 
     Plotly.newPlot('graph1', traces, layout);
+  }
+  fetchData() {
+    fetch(this.apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        this.buildChart(data)
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
   }
 }

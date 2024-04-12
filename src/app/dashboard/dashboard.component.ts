@@ -1,35 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Graph1Component } from './graph1/graph1.component';
 import { Graph2Component } from './graph2/graph2.component';
 import { Graph3Component } from './graph3/graph3.component';
-import { Graph4Component } from './graph4/graph4.component';
+// import { Graph4Component } from './graph4/graph4.component';
 import { ResumeComponent } from "../resume/resume.component";
 import { ApiService } from '../api.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 @Component({
     selector: 'app-dashboard',
     standalone: true,
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css',
-    imports: [HttpClientModule, Graph1Component, Graph2Component, Graph3Component, Graph4Component, ResumeComponent]
+    imports: [CommonModule,RouterOutlet,FormsModule,ReactiveFormsModule,HttpClientModule, Graph1Component, Graph2Component, Graph3Component, ResumeComponent]
 })
 export class DashboardComponent {
     data: any;
-
-    constructor(private apiService: ApiService) {}
-    ngOnInit(): void {
-        this.loadData();
+    private apiUrl = "http://127.0.0.1:5000/resume"
+    private http = inject(HttpClient)
+    constructor(){
+      this.fetchData()
     }
+    fetchData(){
 
-    
-    loadData() {
-        this.apiService.getData().subscribe({
-          next: (data) => {
-            this.data = data; // Assign the data received from the API to your property
-          },
-          error: (error) => {
-            console.error('There was an error!', error);
-          }
-        });
-      }
-}
+    }
+  }
