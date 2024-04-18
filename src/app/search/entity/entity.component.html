@@ -1,0 +1,13 @@
+
+
+<form (ngSubmit)="submit(inputValue.value)">
+    <div>Please enter the prefered entity</div>
+    <input type="text" placeholder="Enter Entity..." #inputValue>
+    <button type="submit" class="">Search</button>
+  </form>
+
+<div *ngIf="submitted">
+
+    Showing entity graphs here
+
+</div>
