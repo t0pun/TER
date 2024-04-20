@@ -1,5 +1,4 @@
-/* example.component.css */
-/* example.component.css */
+
 form {
     display: flex;
     flex-direction: column;
@@ -40,8 +39,10 @@ button {
     cursor: pointer;
     border-radius: 8px; /* More rounded corners */
     transition: background-color 0.3s;
+    outline: none;
 }
 
 button:hover {
     background-color:  rgb(87, 133, 130);
 }
+

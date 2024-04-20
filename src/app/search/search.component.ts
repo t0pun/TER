@@ -4,6 +4,7 @@ import { TopicComponent } from "./topic/topic.component";
 import { EntityComponent } from "./entity/entity.component";
 import { NgSwitch } from '@angular/common';
 import { NgSwitchCase } from '@angular/common';
+
 @Component({
     selector: 'app-search',
     standalone: true,
