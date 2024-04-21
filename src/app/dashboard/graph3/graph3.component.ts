@@ -15,11 +15,12 @@ export class Graph3Component implements OnInit{
   private http = inject(HttpClient)
   
   ngOnInit(): void {
-    this.buildChart(this.fetchData());
+    this.fetchData();
   }
 
-  private buildChart(data_1: any): void {
+  private buildChart(data_1 : any): void {
 
+  console.log(data_1);
 
   const sourceNames: string[] = [];
   const trueCounts: number[] = [];
@@ -28,64 +29,59 @@ export class Graph3Component implements OnInit{
   const otherCounts: number[] = [];
   const allCounts: number[] = [];
 
-  for (let i = 0; i < data_1.length; i++){
-    sourceNames.push(data_1[i]['Source'])
-    if(data_1[i]['Label']='True'){
-      trueCounts.push(data_1[i]['Numbers of claims'])
-    }else if(data_1[i]['Label']='False'){
-      trueCounts.push(data_1[i]['Numbers of claims'])
+  for (let i = 0; i < data_1.length; i++) {
+    const source = data_1[i]['Source'];
+    if (!sourceNames.includes(source)) {
+      sourceNames.push(source);
     }
+    if (data_1[i]['Label'] === 'TRUE') {
+      trueCounts.push(data_1[i]['Numbers of claims']);
+    } else if (data_1[i]['Label'] === 'FALSE') {
+      falseCounts.push(data_1[i]['Numbers of claims']);
+    } else if (data_1[i]['Label'] === 'MIXTURE') {
+      mixedCounts.push(data_1[i]['Numbers of claims']);
+    } else if (data_1[i]['Label'] === 'OTHER') {
+      otherCounts.push(data_1[i]['Numbers of claims']);
+    }
+
   }
+  console.log(sourceNames)
+  console.log(trueCounts)
 
-    const data : Data[]= [
-      { 
-        x: sourceNames,
-        y: allCounts,
-        name: 'All',
-        type: 'bar',
-        marker: { color: '#002F5D' } 
-      },
-      { 
-        x: sourceNames,
-        y: trueCounts,
-        name: 'True',
-        type: 'bar',
-        marker: { color: '#8BC1F7' } 
-      },
-      { 
-        x: sourceNames,
-        y: falseCounts,
-        name: 'False',
-        type: 'bar',
-        marker: { color: '#004B95' } 
-      },
-      { 
-        x: sourceNames,
-        y: mixedCounts,
-        name: 'Mixed',
-        type: 'bar',
-        marker: { color: '#06C' } 
-      },
-      { 
-        x: sourceNames,
-        y: otherCounts,
-        name: 'Other',
-        type: 'bar',
-        marker: { color: '#519DE9' } 
-      },
+  var data: Data[]= [
+    {
+      name:'True',
+      x: sourceNames,
+      y: trueCounts,
+      type: 'bar'
+    },
+    {
+      name:'False',
+      x: sourceNames,
+      y: falseCounts,
+      type: 'bar'
+    },
+    {
+      name:'Mixture',
+      x: sourceNames,
+      y: mixedCounts,
+      type: 'bar'
+    },
+    {
+      name:'Other',
+      x: sourceNames,
+      y: otherCounts,
+      type: 'bar'
+    }
+  ];
 
-    ];
-
-    const layout: Partial<Layout> = { 
-      barmode: 'group',  // How do you want the bars to be positioned 
-      title: 'Claims Count by Source and Truthfulness',
-      xaxis: { title: 'Source' },
-      yaxis: { title: 'Count of Claims' }
+    const layout = { 
+      barmode: 'stack',  // How do you want the bars to be positioned 
     };
     const config = {
       responsive: true,
     };
-    Plotly.newPlot('graph3', data, layout, config);
+    Plotly.newPlot('graph3', data);
   }
   fetchData() {
     fetch(this.apiUrl)

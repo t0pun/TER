@@ -36,7 +36,7 @@ export class Graph2Component implements OnInit{
       textinfo: 'label+percent',  // Show label and the percentage
       insidetextorientation: 'radial', // Orientation of the text value
       hoverinfo: 'label+value', // Show theme name and count on hover
-      textposition: 'outside',
+      textposition: 'inside',
       automargin: true,
       marker: {
         colors: colors // Custom colors for each slice
@@ -63,6 +63,7 @@ generateRandomColor(): string {
   }
   return color;
 }
+  
 fetchData() {
   fetch(this.apiUrl)
     .then(response => response.json())

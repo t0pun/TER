@@ -18,7 +18,6 @@ export class Graph1Component implements OnInit{
     this.fetchData()
   }
   buildChart(data: any): void{
-    console.log(data)
     const sampleDates: string[] = [];
     const trueCounts: number[] = [];
     const falseCounts: number[] = [];
@@ -27,14 +26,22 @@ export class Graph1Component implements OnInit{
     const allCounts: number[] = [];
 
     for (let i = 0; i < data.length; i++){
-      sampleDates.push(data[i]['Date1'])
-      if(data[i]['Label']='True'){
-        trueCounts.push(data[i]['Numbers of claims'])
-      }else if(data[i]['Label']=='False'){
-        trueCounts.push(data[i]['Numbers of claims'])
-      }
-      else if(data[i]['Label']=='Mixture'){
-        trueCounts.push(data[i]['Numbers of claims'])
+      var current_date = data[i]['Date1'];
+      var year = parseInt(current_date.slice(0, 4))
+      console.log(year)
+        if (year > 2022) {
+          sampleDates.push(current_date)
+          if(data[i]['Label']=='TRUE'){
+            trueCounts.push(data[i]['Numbers of claims'])
+          }else if(data[i]['Label']=='FALSE'){
+            falseCounts.push(data[i]['Numbers of claims'])
+          }
+          else if(data[i]['Label']=='MIXTURE'){
+            mixedCounts.push(data[i]['Numbers of claims'])
+          }
+          else if(data[i]['Label']=='OTHER'){
+            otherCounts.push(data[i]['Numbers of claims'])
+          }
       }
     }
     console.log(falseCounts)
@@ -42,8 +49,8 @@ export class Graph1Component implements OnInit{
     const traces: Data[] = [
       {
         type: 'scatter',
-        mode: 'lines',
-        name: 'Trhfghgsdue',
+        mode: 'lines+markers',
+        name: 'True',
         x: sampleDates,
         y: trueCounts,
         line: { color: '#4CB140' }
@@ -100,7 +107,6 @@ export class Graph1Component implements OnInit{
     fetch(this.apiUrl)
       .then(response => response.json())
       .then(data => {
-        console.log(data)
         this.buildChart(data)
       })
       .catch(error => {

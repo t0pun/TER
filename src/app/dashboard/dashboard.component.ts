@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Graph1Component } from './graph1/graph1.component';
 import { Graph2Component } from './graph2/graph2.component';
 import { Graph3Component } from './graph3/graph3.component';
+import { Graph5Component } from './graph5/graph5.component';
 // import { Graph4Component } from './graph4/graph4.component';
 import { ResumeComponent } from "../resume/resume.component";
 import { ApiService } from '../api.service';
@@ -16,7 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     standalone: true,
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css',
-    imports: [CommonModule,RouterOutlet,FormsModule,ReactiveFormsModule,HttpClientModule, Graph1Component, Graph2Component, Graph3Component, ResumeComponent]
+    imports: [CommonModule,RouterOutlet,FormsModule,ReactiveFormsModule,HttpClientModule, Graph1Component, Graph2Component, Graph3Component,Graph5Component, ResumeComponent]
 })
 export class DashboardComponent {
     data: any;
