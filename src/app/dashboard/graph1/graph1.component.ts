@@ -29,7 +29,7 @@ export class Graph1Component implements OnInit{
       var current_date = data[i]['Date1'];
       var year = parseInt(current_date.slice(0, 4))
       console.log(year)
-        if (year > 2022) {
+        if (year >= 2022) {
           sampleDates.push(current_date)
           if(data[i]['Label']=='TRUE'){
             trueCounts.push(data[i]['Numbers of claims'])
