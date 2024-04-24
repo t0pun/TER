@@ -51,7 +51,6 @@ export class Graph5Component implements OnInit{
         x: trueCounts,
         y: falseCounts,
         text: sourceNames,
-        legend : sourceNames,
         mode: 'markers',
         marker: {
           color: [this.generateRandomColor(),this.generateRandomColor(),this.generateRandomColor(),this.generateRandomColor(),this.generateRandomColor(),this.generateRandomColor(),this.generateRandomColor(),this.generateRandomColor(),this.generateRandomColor(),this.generateRandomColor(),this.generateRandomColor(),this.generateRandomColor()],
