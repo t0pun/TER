@@ -61,13 +61,15 @@ export class Graph5Component implements OnInit{
     ];
     
     var layout = {
-      title: 'Bubble Chart Hover Text',
+      title: 'Bubble rapport True/False Label per Source',
       showlegend: false,
-      height: 600,
-      width: 600
+    };
+
+    const config = {
+      responsive: true,
     };
     
-    Plotly.newPlot('graph5', data, layout);
+    Plotly.newPlot('graph5', data, layout,config);
   }
   generateRandomColor(): string {
     const characters = '0123456789ABCDEF';

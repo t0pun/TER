@@ -11,13 +11,15 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PagePrincipaleComponent } from '../page-principale/page-principale.component';
+import { ClaimsSummaryComponent } from '../claims-summary/claims-summary.component';
 
 @Component({
     selector: 'app-dashboard',
     standalone: true,
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css',
-    imports: [CommonModule,RouterOutlet,FormsModule,ReactiveFormsModule,HttpClientModule, Graph1Component, Graph2Component, Graph3Component,Graph5Component, ResumeComponent]
+    imports: [ClaimsSummaryComponent,CommonModule,RouterOutlet,FormsModule,PagePrincipaleComponent,ReactiveFormsModule,HttpClientModule, Graph1Component, Graph2Component, Graph3Component,Graph5Component, ResumeComponent]
 })
 export class DashboardComponent {
     data: any;

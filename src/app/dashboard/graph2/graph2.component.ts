@@ -23,7 +23,7 @@ export class Graph2Component implements OnInit{
     const labels: string[] = []
     const colors: string[] = []
 
-    for (let i = 0; i < 10; i++){
+    for (let i = 0; i < data1.length; i++){
       labels.push(data1[i]['Entity'])
       values.push(data1[i]['Numbers of claims'])
       colors.push(this.generateRandomColor())
@@ -44,14 +44,14 @@ export class Graph2Component implements OnInit{
     }];
 
   const layout = {
-    title: 'Percentage of Claims by Theme',
-    height: 400,
-    width: 500,
+    title: 'Top 10 - ',
     margin: { "t": 50, "b": 50, "l": 0, "r": 0 },
     showlegend: true
   };
 
-  Plotly.newPlot('graph2', data, layout);
+  var config = {responsive: true}
+
+  Plotly.newPlot('graph2', data, layout,config);
 }
 generateRandomColor(): string {
   const characters = '0123456789ABCDEF';

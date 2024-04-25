@@ -75,13 +75,13 @@ export class Graph3Component implements OnInit{
     }
   ];
 
-    const layout = { 
+    const layout: Partial<Layout> = { 
       barmode: 'stack',  // How do you want the bars to be positioned 
     };
     const config = {
       responsive: true,
     };
-    Plotly.newPlot('graph3', data);
+    Plotly.newPlot('graph3', data,layout,config);
   }
   fetchData() {
     fetch(this.apiUrl)
