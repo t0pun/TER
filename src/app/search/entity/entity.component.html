@@ -1,9 +1,31 @@
 
 
-<form (ngSubmit)="submit(inputValue.value)">
-    <div>Please enter the prefered entity</div>
-    <input type="text" placeholder="Enter Entity..." #inputValue>
+<form (ngSubmit)="submit(inputValue.value,first_date.value,last_date.value)">
+  
+  <div>
+    <label for="entity">Enter the entities:</label>
+    <input name="entity" id = "entity" type="text" placeholder="Paris" [(ngModel)]="searchTerms" #inputValue>
+    <ul *ngIf="!suggestions$ ">
+      <li *ngFor="let suggestion of suggestions$">{{ suggestion }}</li>
+    </ul>
+  </div>
+
+  <div class="date-input-container">  
+
+    <div>
+      <label for="start-date">Enter starting date:</label>
+      <input id="start-date" type="date" placeholder="Enter Start Date..." #first_date>
+    </div>
+
+    <div>
+      <label for="end-date">Enter ending date:</label>
+      <input id="end-date" type="date" placeholder="Enter End Date..." #last_date>
+    </div>
+
+  </div>
+
     <button type="submit" class="">Search</button>
+
   </form>
 
 <div *ngIf="submitted">
