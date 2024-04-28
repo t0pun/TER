@@ -17,7 +17,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
     styleUrl: './entity.component.css',
     imports: [ CommonModule,NgIf, FormsModule, GraphLabelDateComponent,NgFor,MatAutocompleteModule,MatInputModule,MatSelectModule,MatFormFieldModule,ReactiveFormsModule]
 })
-export class EntityComponent implements OnInit{
+export class EntityComponent {
 //tuto
   colorsArray=['Red','Green','Yellow']
   name = new FormControl('');
@@ -31,6 +31,7 @@ export class EntityComponent implements OnInit{
   constructor(private suggestionService: SuggestionService){
     this.suggestions = this.name.valueChanges.pipe(
       startWith(''),
+     // map(value=> this._filter(value|| ''))
       map(value => value || ''), // Ensure the value is never null
       debounceTime(300),
       distinctUntilChanged(),
@@ -42,9 +43,11 @@ export class EntityComponent implements OnInit{
       })
   );
   }
-  ngOnInit(): void {
-    
+  _filter(arg0: string): string[] {
+    const searchvalue=arg0.toLocaleLowerCase();
+    return this.colorsArray.filter(option=>option.toLocaleLowerCase().includes(searchvalue))
   }
+
   submit(entity:string, first_date:string, last_date:string){
     this.submitted=true;
     this.entity=entity;
