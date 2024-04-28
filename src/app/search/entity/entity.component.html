@@ -1,13 +1,18 @@
 
 
-<form (ngSubmit)="submit(inputValue.value,first_date.value,last_date.value)">
+<form (ngSubmit)="submit(inputValue.value,first_date.value,last_date.value)" >
   
   <div>
-    <label for="entity">Enter the entities:</label>
-    <input name="entity" id = "entity" type="text" placeholder="Paris" [(ngModel)]="searchTerms" #inputValue>
-    <ul *ngIf="!suggestions$ ">
-      <li *ngFor="let suggestion of suggestions$">{{ suggestion }}</li>
-    </ul>
+
+    <mat-form-field>
+      <label for="entity">Enter the entities:</label>
+  
+      <input matInput [matAutocomplete]="auto" id = "entity" [formControl]="name" #inputValue >
+      <mat-autocomplete #auto>
+        <mat-option *ngFor="let item of suggestions | async" [value]="item" >{{item}}</mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
   </div>
 
   <div class="date-input-container">  
@@ -28,10 +33,10 @@
 
   </form>
 
-<div *ngIf="submitted">
+<!--div *ngIf="submitted">
 
     Showing entity graphs here
 
     <app-graph-label-date></app-graph-label-date>
 
-</div>
+</div-->

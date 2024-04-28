@@ -10,6 +10,7 @@ export class SuggestionService {
   constructor(private http: HttpClient) { }
 
   getSuggestions(query: string): Observable<string[]> {
+    console.log(this.http.get<string[]>('http://localhost:5000/suggestions', { params: { query } }));
     return this.http.get<string[]>('http://localhost:5000/suggestions', { params: { query } });
   }
 }
