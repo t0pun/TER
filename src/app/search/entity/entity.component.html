@@ -13,6 +13,28 @@
       </mat-autocomplete>
     </mat-form-field>
 
+    
+
+
+    <input [(ngModel)]="entitiesField"
+    (keydown)="addEntryFilterPress($event,'entities', 'entitiesField','filteredEntities', true, false)"
+    id="entities" name="entities" type="text" class="form-control"
+    (input)="searchEntities(entitiesField)" [matAutocomplete]="entities">
+    <mat-autocomplete #entities="matAutocomplete">
+    <mat-option class="entitiesOption"
+              (click)="addEntryFilterClick('entities', 'entitiesField', 'filteredEntities', true, false)"
+              *ngFor="let entity of filteredEntities" [value]="entity"
+              title="{{entity}}">{{entity}}</mat-option>
+    </mat-autocomplete>
+
+
+
+
+
+
+
+
+
   </div>
 
   <div class="date-input-container">  
