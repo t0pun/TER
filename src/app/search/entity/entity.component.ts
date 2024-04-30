@@ -9,27 +9,30 @@ import { MatInputModule } from '@angular/material/input'
 import { MatSelectModule} from '@angular/material/select'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
     selector: 'app-entity',
     standalone: true,
     templateUrl: './entity.component.html',
     styleUrl: './entity.component.css',
-    imports: [ CommonModule,NgIf, FormsModule, GraphLabelDateComponent,NgFor,MatAutocompleteModule,MatInputModule,MatSelectModule,MatFormFieldModule,ReactiveFormsModule]
+    imports: [ MatChipsModule,MatIconModule,CommonModule,NgIf, FormsModule, GraphLabelDateComponent,NgFor,MatAutocompleteModule,MatInputModule,MatSelectModule,MatFormFieldModule,ReactiveFormsModule]
 })
 export class EntityComponent {
-//tuto
-  colorsArray=['Red','Green','Yellow']
-  name = new FormControl('');
+
+  // Suggestions:
+  formEntity= new FormControl('');
   suggestions!: Observable<string[]>;
+  selectedOptions: string[] = [];
+
+
 
   submitted : boolean = false;
-  entity: string ="";
   first_date:string="";
   last_date:string="";
   
   constructor(private suggestionService: SuggestionService){
-    this.suggestions = this.name.valueChanges.pipe(
+    this.suggestions = this.formEntity.valueChanges.pipe(
       startWith(''),
      // map(value=> this._filter(value|| ''))
       map(value => value || ''), // Ensure the value is never null
@@ -43,16 +46,28 @@ export class EntityComponent {
       })
   );
   }
-  _filter(arg0: string): string[] {
-    const searchvalue=arg0.toLocaleLowerCase();
-    return this.colorsArray.filter(option=>option.toLocaleLowerCase().includes(searchvalue))
+
+  optionClicked(event: Event, option: string) {
+    event.stopPropagation(); // Prevents the mat-option click from closing the autocomplete panel
+    this.toggleSelection(option);
+  }
+  // Adds the suggestion after selecting it to the top if the option was aleady chosen or add it at the bottom if not
+  toggleSelection(option: string) {
+    const idx = this.selectedOptions.indexOf(option);
+    if (idx > -1) {
+      this.selectedOptions.splice(idx, 1);
+    } else {
+      this.selectedOptions.push(option);
+    }
+    this.formEntity.setValue('');
   }
 
-  submit(entity:string, first_date:string, last_date:string){
+  submit( first_date:string, last_date:string){
     this.submitted=true;
-    this.entity=entity;
     this.first_date=first_date;
     this.last_date=last_date;
-    console.log('Submitted value:', this.entity,this.first_date,this.last_date);
+    //TODO add a function to call the service with the parameters so it can return us the graphs
+    console.log('Submitted value:', this.selectedOptions,this.first_date,this.last_date);
+
   }
 }

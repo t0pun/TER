@@ -1,19 +1,30 @@
 
 
-<form (ngSubmit)="submit(inputValue.value,first_date.value,last_date.value)" >
+<form (ngSubmit)="submit(first_date.value,last_date.value)" >
   
   <div>
 
     <mat-form-field>
       <label for="entity">Enter the entities:</label>
   
-      <input matInput [matAutocomplete]="auto" id = "entity" [formControl]="name" #inputValue >
+      <input matInput [matAutocomplete]="auto" id = "entity" [formControl]="formEntity" >
       <mat-autocomplete #auto>
-        <mat-option *ngFor="let item of suggestions | async" [value]="item" >{{item}}</mat-option>
+        <mat-option *ngFor="let item of suggestions | async" [value]="item" (click)="optionClicked($event,item)" >{{item}}</mat-option>
       </mat-autocomplete>
     </mat-form-field>
 
-    
+      
+  <div class="selected-items">
+    Selected: 
+    <mat-chip-grid> 
+        <mat-chip-row> 
+          <mat-chip *ngFor="let so of selectedOptions" (removed)="toggleSelection(so)" class="chips">
+            <span class="chips-text">{{ so }} </span>
+              <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-row>
+    </mat-chip-grid> 
+  </div>
 
 
 

@@ -25,10 +25,6 @@ form {
     margin: 10px;
   }
 
-form:focus,
-form:focus-within {
-    outline: none;
-}
 
 input {
     width: 100%;
@@ -58,3 +54,50 @@ button {
 button:hover {
     background-color:  rgb(87, 133, 130);
 }
+
+  /* Container styling */
+.selected-items {
+    margin-top: 20px; /* Space above the container */
+    background-color: #f0f0f0; /* Light grey background for the container */
+    padding: 10px; /* Padding around the content */
+    border-radius: 8px; /* Rounded corners */
+  }
+  
+  /* Chip grid and row styling */
+  mat-chip-grid {
+    display: flex; /* Ensures the chips are laid out horizontally */
+    flex-wrap: wrap; /* Allows chips to wrap onto the next line */
+    gap: 10px; /* Space between chips */
+  }
+  
+  mat-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    background-color: #92c4be
+    
+  }
+  
+  .chips {
+    background-color:  rgb(115, 172, 168) !important;
+    border: none !important;
+    font-size: 16px !important;
+    border-radius: 16px !important;
+    padding: 8px 12px !important;
+  }
+  .chips-text {
+    margin-right: 8px; /* Space between the text and the icon */
+    color: white !important;
+}
+  
+  /* Icon within the chip */
+  mat-icon {
+    color: white; /* White color for the icon */
+    cursor: pointer; /* Cursor indicates clickable */
+  }
+  
+  /* Hover effects for chips */
+  .chips:hover {
+    opacity: 0.87; /* Slight transparency on hover */
+    background-color:  rgb(87, 133, 130); /* Darker background on hover */
+  }
