@@ -1,11 +1,11 @@
 
 
-<form (ngSubmit)="submit(first_date.value,last_date.value)" >
+<form (ngSubmit)="submit(firstDate.value,lastDate.value)" >
   
   <div>
 
     <mat-form-field>
-      <label for="entity">Enter the entities:</label>
+      <label for="entity">About (entities):</label>
   
       <input matInput [matAutocomplete]="auto" id = "entity" [formControl]="formEntity" >
       <mat-autocomplete #auto>
@@ -35,12 +35,12 @@
 
     <div>
       <label for="start-date">Enter starting date:</label>
-      <input id="start-date" type="date" placeholder="Enter Start Date..." #first_date>
+      <input id="start-date" type="date" placeholder="Enter Start Date..." #firstDate>
     </div>
 
     <div>
       <label for="end-date">Enter ending date:</label>
-      <input id="end-date" type="date" placeholder="Enter End Date..." #last_date>
+      <input id="end-date" type="date" placeholder="Enter End Date..." #lastDate>
     </div>
 
   </div>
@@ -49,10 +49,10 @@
 
   </form>
 
-<!--div *ngIf="submitted">
+<div *ngIf="submitted">
 
-    Showing entity graphs here
+    
 
     <app-graph-label-date></app-graph-label-date>
 
-</div-->
+</div>

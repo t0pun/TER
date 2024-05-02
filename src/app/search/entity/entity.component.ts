@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
+import { SearchService } from '../search.service';
 @Component({
     selector: 'app-entity',
     standalone: true,
@@ -20,21 +21,19 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class EntityComponent {
 
-  // Suggestions:
   formEntity= new FormControl('');
   suggestions!: Observable<string[]>;
   selectedOptions: string[] = [];
-
-
-
   submitted : boolean = false;
-  first_date:string="";
-  last_date:string="";
+  firstDate:string="";
+  lastDate:string="";
+
+  //test
+  test: any=[];
   
-  constructor(private suggestionService: SuggestionService){
+  constructor(private suggestionService: SuggestionService, private searchService: SearchService){
     this.suggestions = this.formEntity.valueChanges.pipe(
       startWith(''),
-     // map(value=> this._filter(value|| ''))
       map(value => value || ''), // Ensure the value is never null
       debounceTime(300),
       distinctUntilChanged(),
@@ -64,10 +63,24 @@ export class EntityComponent {
 
   submit( first_date:string, last_date:string){
     this.submitted=true;
-    this.first_date=first_date;
-    this.last_date=last_date;
-    //TODO add a function to call the service with the parameters so it can return us the graphs
-    console.log('Submitted value:', this.selectedOptions,this.first_date,this.last_date);
+    this.firstDate=first_date;
+    this.lastDate=last_date;
+    this.searchService.search(this.selectedOptions, this.firstDate, this.lastDate)
+  .subscribe({
+    next: (result) => {
+      // Handle the data received from the search
+      console.log('Search results:', result);
+      alert(JSON.stringify(result)); // Using JSON.stringify to display the result object in alert
+      this.test = result; // Assigning the result to this.test for other uses
+    },
+    error: (error) => {
+      // Handle any errors that occur during the search
+      console.error('Search failed:', error);
+      alert('Search failed, please try again.');
+    }
+  });
+    //TODO CSS à modifier
+    console.log('Submitted value:', this.selectedOptions,this.firstDate,this.lastDate);
 
   }
 }
