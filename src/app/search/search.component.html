@@ -1,23 +1,23 @@
 
 <div class="button-container">
     <div>
-        <button class="button_title" [class.active]="activeButton === 'source'" (click)="setActive('source')">By Soucre</button>
-        <button class="button_title" [class.active]="activeButton === 'topic'" (click)="setActive('topic')">By Topic</button>
-        <button class="button_title" [class.active]="activeButton === 'entity'" (click)="setActive('entity')">By Entity</button>
+        <button class="button_title" [class.active]="activeButton === 'topic'" (click)="setActive('topic')">Topic Search</button>
+        <button class="button_title" [class.active]="activeButton === 'entity'" (click)="setActive('entity')">Entity Search</button>
+        <button class="button_title" [class.active]="activeButton === 'entity-topic'" (click)="setActive('entity-topic')">Topic-Entity Search</button>
     </div>
 </div>
 
 <div [ngSwitch]="activeButton">
-    <div  *ngSwitchCase="'source'">
-        <app-source></app-source>
-    </div>
-
-    <div *ngSwitchCase="'topic'">
-        <app-topic ></app-topic>
+    <div  *ngSwitchCase="'topic'">
+        <app-by-topic></app-by-topic>
     </div>
 
     <div *ngSwitchCase="'entity'">
-        <app-entity></app-entity>
+        <app-by-entity ></app-by-entity>
+    </div>
+
+    <div *ngSwitchCase="'entity-topic'">
+        <app-by-entity-by-theme></app-by-entity-by-theme>
     </div>
 
 

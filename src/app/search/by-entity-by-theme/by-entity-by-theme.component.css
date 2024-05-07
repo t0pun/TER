@@ -2,6 +2,9 @@
 /* example.component.css */
 form {
     display: flex;
+    width: 100%; /* Use 100% for better responsiveness */
+    max-width: 600px; /* Maximum width of the form */
+    margin: 20px auto; /* Centering the form */
     flex-direction: column;
     align-items: center;
     gap: 10px;
@@ -38,7 +41,18 @@ input {
     appearance: none; 
     cursor:auto;
 }
-
+select {
+  width: 100%;
+  padding: 12px; /* Slightly more padding for more space inside the select */
+  border: 1px solid #aaa; /* Lighter and thinner border */
+  border-radius: 8px; /* More rounded corners */
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  outline: none;
+  appearance: none; 
+  cursor:auto;
+}
 button {
     background-color: rgb(115, 172, 168);
     color: white;

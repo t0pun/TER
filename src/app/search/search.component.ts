@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { SourceComponent } from "./source/source.component";
-import { TopicComponent } from "./topic/topic.component";
-import { EntityComponent } from "./entity/entity.component";
+import { ByTopicComponent } from "./by-topic/by-topic.component";
+import { ByEntityComponent } from "./by-entity/by-entity.component";
+import { ByEntityByThemeComponent } from "./by-entity-by-theme/by-entity-by-theme.component";
 import { NgSwitch } from '@angular/common';
 import { NgSwitchCase } from '@angular/common';
 
@@ -10,10 +10,10 @@ import { NgSwitchCase } from '@angular/common';
     standalone: true,
     templateUrl: './search.component.html',
     styleUrl: './search.component.css',
-    imports: [SourceComponent, TopicComponent, EntityComponent, NgSwitch, NgSwitchCase]
+    imports: [ByTopicComponent, ByEntityComponent, ByEntityByThemeComponent, NgSwitch, NgSwitchCase]
 })
 export class SearchComponent {
-  activeButton: string = 'entity';
+  activeButton: string = 'hybrid';
 
   setActive(buttonId: string): void {
     this.activeButton = buttonId;
