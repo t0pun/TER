@@ -1,0 +1,25 @@
+
+<div class="button-container">
+    <div>
+        <button class="button_title" [class.active]="activeButton === 'source'" (click)="setActive('source')">By Soucre</button>
+        <button class="button_title" [class.active]="activeButton === 'topic'" (click)="setActive('topic')">By Topic</button>
+        <button class="button_title" [class.active]="activeButton === 'entity'" (click)="setActive('entity')">By Entity</button>
+    </div>
+</div>
+
+<div [ngSwitch]="activeButton">
+    <div  *ngSwitchCase="'source'">
+        <app-source></app-source>
+    </div>
+
+    <div *ngSwitchCase="'topic'">
+        <app-topic ></app-topic>
+    </div>
+
+    <div *ngSwitchCase="'entity'">
+        <app-entity></app-entity>
+    </div>
+
+
+</div>
+     

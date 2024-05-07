@@ -1,0 +1,27 @@
+<form (ngSubmit)="submit(selectedFactChecker.value)">
+    <div>Please choose the prefered source</div>
+    <select #selectedFactChecker required>
+        <option value="" disabled selected>Choose a category...</option>
+        <option value="Fullfact">Fullfact</option>
+        <option value="Politifact">Politifact</option>
+        <option value="TruthOrFiction">TruthOrFiction</option>
+        <option value="Checkyourfact">Checkyourfact</option>
+        <option value="Vishvanews">Vishvanews</option>
+        <option value="AFP (French)">AFP (French)</option>
+        <option value="AFP">AFP</option>
+        <option value="Polygraph">Polygraph</option>
+        <option value="EU factcheck">EU factcheck</option>
+        <option value="Factograph">Factograph</option>
+        <option value="Fatabyyano">Fatabyyano</option>
+        <option value="Snopes">Snopes</option>
+        <option value="Africacheck">Africacheck</option>
+    </select>
+    <button type="submit" class="">Search</button>
+  </form>
+
+
+  <div *ngIf="submitted">
+
+    Showing Source graphs here
+
+</div>
