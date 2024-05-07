@@ -15,62 +15,57 @@ export class Graph3Component implements OnInit{
   private http = inject(HttpClient)
   
   ngOnInit(): void {
+
     this.fetchData();
   }
 
   private buildChart(data_1 : any): void {
 
-  console.log(data_1);
+  var sourceNames: string[] = [];
+  var trueCounts: any[] = [];
+  var falseCounts: any[] = [];
+  var mixedCounts: any[] = [];
+  var otherCounts: any[] = [];
+  var allCounts: number[] = [];
 
-  const sourceNames: string[] = [];
-  const trueCounts: number[] = [];
-  const falseCounts: number[] = [];
-  const mixedCounts: number[] = [];
-  const otherCounts: number[] = [];
-  const allCounts: number[] = [];
 
   for (let i = 0; i < data_1.length; i++) {
-    const source = data_1[i]['Source'];
-    if (!sourceNames.includes(source)) {
-      sourceNames.push(source);
+    if(data_1[i]['label']=="TRUE"){
+      trueCounts.push({"source":data_1[i]['source'],"counts":data_1[i]['counts']})
+    }else if(data_1[i]['label']=="FALSE"){
+      falseCounts.push({"source":data_1[i]['source'],"counts":data_1[i]['counts']})
+    }else if(data_1[i]['label']=="MIXTURE"){
+      mixedCounts.push({"source":data_1[i]['source'],"counts":data_1[i]['counts']})
+    }else{
+      otherCounts.push({"source":data_1[i]['source'],"counts":data_1[i]['counts']})
     }
-    if (data_1[i]['Label'] === 'TRUE') {
-      trueCounts.push(data_1[i]['Numbers of claims']);
-    } else if (data_1[i]['Label'] === 'FALSE') {
-      falseCounts.push(data_1[i]['Numbers of claims']);
-    } else if (data_1[i]['Label'] === 'MIXTURE') {
-      mixedCounts.push(data_1[i]['Numbers of claims']);
-    } else if (data_1[i]['Label'] === 'OTHER') {
-      otherCounts.push(data_1[i]['Numbers of claims']);
-    }
-
   }
-  console.log(sourceNames)
-  console.log(trueCounts)
+  
+  sourceNames = trueCounts.map(dictionary => dictionary["source"])
 
   var data: Data[]= [
     {
       name:'True',
-      x: sourceNames,
-      y: trueCounts,
+      x: trueCounts.map(dictionary => dictionary["source"]),
+      y: trueCounts.map(dictionary => dictionary["counts"]),
       type: 'bar'
     },
     {
       name:'False',
-      x: sourceNames,
-      y: falseCounts,
+      x: falseCounts.map(dictionary => dictionary["source"]),
+      y: falseCounts.map(dictionary => dictionary["counts"]),
       type: 'bar'
     },
     {
       name:'Mixture',
-      x: sourceNames,
-      y: mixedCounts,
+      x: mixedCounts.map(dictionary => dictionary["source"]),
+      y: mixedCounts.map(dictionary => dictionary["counts"]),
       type: 'bar'
     },
     {
       name:'Other',
-      x: sourceNames,
-      y: otherCounts,
+      x: otherCounts.map(dictionary => dictionary["source"]),
+      y: otherCounts.map(dictionary => dictionary["counts"]),
       type: 'bar'
     }
   ];

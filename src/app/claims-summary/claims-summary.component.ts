@@ -25,10 +25,11 @@ export class ClaimsSummaryComponent {
   }
 
   private buildSummary(data1: string,data2: string,data3: string,data4: string): void {
-    this.trueNumber = data1+" true claims";
-    this.falseNumber = data2+" false claims";
-    this.mixtureNumber = data3+" mixture claims";
-    this.otherNumber = data4+" other claims";
+    var total = parseInt(data1)+parseInt(data2)+parseInt(data3)+parseInt(data4);
+    this.trueNumber = data1 + " true claims <b> (" + `${Math.round(((parseInt(data1) / total) * 100) * 100) / 100} %` + ")</b>";
+    this.falseNumber = data2+" false claims <b> (" + `${Math.round(((parseInt(data2) / total) * 100) * 100) / 100} %` + ")</b>";
+    this.mixtureNumber = data3+" mixture claims <b> (" + `${Math.round(((parseInt(data3) / total) * 100) * 100) / 100} %` + ")</b>";
+    this.otherNumber = data4+" other claims <b> (" + `${Math.round(((parseInt(data4) / total) * 100) * 100) / 100} %` + ")</b>";
 }
 
   fetchData() {

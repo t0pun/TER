@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Graph5Component } from './graph5.component';
+import { FiltreComponent } from './filtre.component';
 
-describe('Graph5Component', () => {
-  let component: Graph5Component;
-  let fixture: ComponentFixture<Graph5Component>;
+describe('FiltreComponent', () => {
+  let component: FiltreComponent;
+  let fixture: ComponentFixture<FiltreComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Graph5Component]
+      imports: [FiltreComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(Graph5Component);
+    fixture = TestBed.createComponent(FiltreComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
