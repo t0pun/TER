@@ -13,7 +13,7 @@ import { NgSwitchCase } from '@angular/common';
     imports: [SourceComponent, TopicComponent, EntityComponent, NgSwitch, NgSwitchCase]
 })
 export class SearchComponent {
-  activeButton: string = 'source';
+  activeButton: string = 'entity';
 
   setActive(buttonId: string): void {
     this.activeButton = buttonId;
