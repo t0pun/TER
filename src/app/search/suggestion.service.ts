@@ -11,7 +11,6 @@ export class SuggestionService {
 
   getSuggestions(query: string): Observable<string[]> {
     const result= this.http.get<string[]>('http://localhost:5000/suggestions', { params: { query } });
-    console.log(result);
     return result;
   }
 }

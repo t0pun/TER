@@ -3,13 +3,13 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-topic',
+  selector: 'app-by-entity',
   standalone: true,
   imports: [NgIf,FormsModule],
-  templateUrl: './topic.component.html',
-  styleUrl: './topic.component.css'
+  templateUrl: './by-entity.component.html',
+  styleUrl: './by-entity.component.css'
 })
-export class TopicComponent {
+export class ByEntityComponent {
   submitted : boolean = false;
   topic: string = "";
 

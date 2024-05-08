@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SourceComponent } from './source.component';
+import { ByEntityComponent } from './by-entity.component';
 
-describe('SourceComponent', () => {
-  let component: SourceComponent;
-  let fixture: ComponentFixture<SourceComponent>;
+describe('ByEntityComponent', () => {
+  let component: ByEntityComponent;
+  let fixture: ComponentFixture<ByEntityComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SourceComponent]
+      imports: [ByEntityComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(SourceComponent);
+    fixture = TestBed.createComponent(ByEntityComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
