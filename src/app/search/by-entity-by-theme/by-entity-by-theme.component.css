@@ -1,36 +1,62 @@
 /* example.component.css */
 /* example.component.css */
 form {
-    display: flex;
-    width: 100%; /* Use 100% for better responsiveness */
-    max-width: 600px; /* Maximum width of the form */
-    margin: 20px auto; /* Centering the form */
-    flex-direction: column;
+
+    width: 90%; /* Use 100% for better responsiveness */
+    max-width: 700px;
+    margin: auto;
     align-items: center;
     gap: 10px;
+    margin-top: 20px;
     padding: 30px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     background-color: #fff;
-    max-width: 400px;
-    margin: auto;
-    margin-top: 20px;
-    border-radius: 10px;
-    border: none; /* Explicitly removing any border */
 }
 
+.mat-form-field, .selected-items, .topic-container, .date-input-container {
+  margin-bottom: 15px; /* Consistent spacing between sections */
+}
+
+.mat-form-field {
+  width: 100%; /* Ensures the field spans full width of the form */
+}
+
+  /* Container styling */
+  .selected-items {
+    background-color: #f0f0f0; /* Light grey background for the container */
+    padding: 10px; /* Padding around the content */
+    border-radius: 8px; /* Rounded corners */
+  }
+
+    /* Chip grid and row styling */
+    mat-chip-grid {
+      display: flex; /* Ensures the chips are laid out horizontally */
+      flex-wrap: wrap; /* Allows chips to wrap onto the next line */
+      gap: 10px; /* Space between chips */
+    }
+    
+    mat-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
 .date-input-container {
-    display: flex;
+  display:flex;
     justify-content: space-between;
-    padding: 20px;
+    padding: 10px;
   }
   
   .date-input-container > div {
     margin: 10px;
   }
 
-
-input {
+  mat-form-field{
     width: 100%;
+  }
+input {
+    margin:6px;
+    width: 100%  ;
     padding: 12px; /* Slightly more padding for more space inside the select */
     border: 1px solid #aaa; /* Lighter and thinner border */
     border-radius: 8px; /* More rounded corners */
@@ -42,6 +68,7 @@ input {
     cursor:auto;
 }
 select {
+  margin: 5px;
   width: 100%;
   padding: 12px; /* Slightly more padding for more space inside the select */
   border: 1px solid #aaa; /* Lighter and thinner border */
@@ -52,6 +79,12 @@ select {
   outline: none;
   appearance: none; 
   cursor:auto;
+}
+.button-search{
+  display:flex;
+  flex-direction: column;
+  margin-left: 60px;
+  margin-right: 60px;
 }
 button {
     background-color: rgb(115, 172, 168);
@@ -69,28 +102,6 @@ button:hover {
     background-color:  rgb(87, 133, 130);
 }
 
-  /* Container styling */
-.selected-items {
-    margin-top: 20px; /* Space above the container */
-    background-color: #f0f0f0; /* Light grey background for the container */
-    padding: 10px; /* Padding around the content */
-    border-radius: 8px; /* Rounded corners */
-  }
-  
-  /* Chip grid and row styling */
-  mat-chip-grid {
-    display: flex; /* Ensures the chips are laid out horizontally */
-    flex-wrap: wrap; /* Allows chips to wrap onto the next line */
-    gap: 10px; /* Space between chips */
-  }
-  
-  mat-chip-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    background-color: #92c4be
-    
-  }
   
   .chips {
     background-color:  rgb(115, 172, 168) !important;

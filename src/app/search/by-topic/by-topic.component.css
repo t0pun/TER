@@ -1,24 +1,36 @@
-
+/* example.component.css */
+/* example.component.css */
 form {
-    display: flex;
-    flex-direction: column;
+
+    width: 90%; /* Use 100% for better responsiveness */
+    max-width: 700px;
+    margin: auto;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
+    margin-top: 20px;
     padding: 30px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     background-color: #fff;
-    max-width: 350px;
-    margin: auto;
-    margin-top: 20px;
-    border-radius: 10px;
-    border: none; /* Explicitly removing any border */
 }
-form:focus,
-form:focus-within {
-    outline: none;
+
+ .topic-container, .date-input-container {
+  margin-bottom: 15px; /* Consistent spacing between sections */
 }
-select {
-    width: 100%;
+
+
+.date-input-container {
+  display:flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  
+.date-input-container > div {
+    margin: 10px;
+}
+
+input {
+    margin:6px;
+    width: 100%  ;
     padding: 12px; /* Slightly more padding for more space inside the select */
     border: 1px solid #aaa; /* Lighter and thinner border */
     border-radius: 8px; /* More rounded corners */
@@ -26,15 +38,33 @@ select {
     color: #333;
     background-color: #fff;
     outline: none;
-    appearance: none; /* Removes default styling by browsers */
-    cursor: pointer;
+    appearance: none; 
+    cursor:auto;
 }
-
+select {
+  margin: 5px;
+  width: 100%;
+  padding: 12px; /* Slightly more padding for more space inside the select */
+  border: 1px solid #aaa; /* Lighter and thinner border */
+  border-radius: 8px; /* More rounded corners */
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  outline: none;
+  appearance: none; 
+  cursor:auto;
+}
+.button-search{
+  display:flex;
+  flex-direction: column;
+  margin-left: 60px;
+  margin-right: 60px;
+}
 button {
     background-color: rgb(115, 172, 168);
     color: white;
     border: none;
-    padding: 12px 25px; /* More padding for a bigger, easier-to-click button */
+    padding: 12px 30px; /* More padding for a bigger, easier-to-click button */
     font-size: 16px;
     cursor: pointer;
     border-radius: 8px; /* More rounded corners */

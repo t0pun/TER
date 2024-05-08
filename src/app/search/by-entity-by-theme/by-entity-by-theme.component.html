@@ -2,21 +2,19 @@
 
 <form (ngSubmit)="submit(firstDate.value,lastDate.value)" novalidate>
   
-  <div>
+
 
     <mat-form-field>
       <label for="entity">About (entities):</label>
-  
-      <input matInput [matAutocomplete]="auto" id = "entity" [formControl]="formEntity">
+      <input matInput [matAutocomplete]="auto" class="mat-input" id = "entity" [formControl]="formEntity">
       <mat-autocomplete #auto>
         <mat-option *ngFor="let item of suggestions | async" [value]="item" (click)="optionClicked($event,item)" >{{item}}</mat-option>
       </mat-autocomplete>
     </mat-form-field>
-
       
     <div class="selected-items">
       Selected:
-      <div style="overflow-x: auto;"> <!-- Allows horizontal scrolling -->
+      <div > 
           <mat-chip-grid>
               <mat-chip-row>
                   <mat-chip *ngFor="let so of selectedOptions" (removed)="toggleSelection(so)" class="chips">
@@ -27,8 +25,7 @@
           </mat-chip-grid>
       </div>
   </div>
-    
-  </div>
+
   
   <div>
     <label for="topic">Choose a topic:</label>
@@ -49,17 +46,15 @@
     </div>
 
   </div>
+  <div class="button-search">
+    <button type="submit" [disabled]="selectedOptions.length === 0 || !selectedTopic">Search</button>
+  </div>
 
-    <button type="submit" [disabled]="selectedOptions.length === 0 ">Search</button>
+</form>
 
-  </form>
-
-    
 
 <div *ngIf="submitted" >
 
-    
-
-    <app-graph-label-date></app-graph-label-date>
+  Graphs for the topic-entity 
 
 </div>

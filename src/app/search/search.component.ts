@@ -13,10 +13,9 @@ import { NgSwitchCase } from '@angular/common';
     imports: [ByTopicComponent, ByEntityComponent, ByEntityByThemeComponent, NgSwitch, NgSwitchCase]
 })
 export class SearchComponent {
-  activeButton: string = 'hybrid';
+  activeButton: string = 'entity-topic';
 
   setActive(buttonId: string): void {
     this.activeButton = buttonId;
-
   }
 }
