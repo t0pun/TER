@@ -1,0 +1,19 @@
+
+  <div class="sticky-div">
+    <button class="parametres flex justify-center items-center" (click)="displayElement()"><img src="assets/images/icons/parametres.png" height="60%" width="60%"></button>
+  </div>
+  <div class="modal fixed w-full h-full top-0 left-0 flex items-center justify-center" [hidden]="displayDate">
+    <form action="" class="filtre" [formGroup]="applyForm" (submit)="onSubmit()">
+    <div class="inline-block min-w-content modal-container bg-white md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+      <div class="p-4 flex items-center justify-center">
+        <label for="annee">Année : </label>
+        <input [ngModel]="selectedOption" type="radio" id="annee" name="gen" value="Annee">
+        <label for="mois">Mois : </label>
+        <input [ngModel]="selectedOption" type="radio" id="mois" name="gen" value="Mois">
+      </div>
+      {{selectedOption}}
+      <div><input class="m-3" type="date" name="date1" id="date1" formControlName="date2"> - <input class="m-3" type="date" name="date2" id="date2" formControlName="date1"></div>
+      <div class="flex items-center justify-center"><input class="m-3 p-3 bg-[#73aca8] rounded-lg shadow-md" type="submit" value="Submit" (click)="onClick();displayElement()"></div>
+    </div>
+  </form>
+  </div>

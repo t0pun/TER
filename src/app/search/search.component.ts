@@ -1,29 +1,22 @@
-import { Component, NgModule } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { Requester } from '../../models/Requester';
+import { Component } from '@angular/core';
+import { ByTopicComponent } from "./by-topic/by-topic.component";
+import { ByEntityComponent } from "./by-entity/by-entity.component";
+import { ByEntityByThemeComponent } from "./by-entity-by-theme/by-entity-by-theme.component";
+import { NgSwitch } from '@angular/common';
+import { NgSwitchCase } from '@angular/common';
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+    selector: 'app-search',
+    standalone: true,
+    templateUrl: './search.component.html',
+    styleUrl: './search.component.css',
+    imports: [ByTopicComponent, ByEntityComponent, ByEntityByThemeComponent, NgSwitch, NgSwitchCase]
 })
-
 export class SearchComponent {
-  constructor() {}
+  activeButton: string = 'hybrid';
 
-  onSubmit(form: NgForm) {
-    const formValues = form.value;
-    const query = new Requester();
-    query.configureWithQueyParams(formValues);
-    console.log(query.toSPARQL());
+  setActive(buttonId: string): void {
+    this.activeButton = buttonId;
+
   }
 }
-
-@NgModule({
-  imports:      [ BrowserModule, FormsModule ],
-  declarations: [ SearchComponent ],
-  bootstrap:    [ SearchComponent ]
-})
-export class AppModule { }

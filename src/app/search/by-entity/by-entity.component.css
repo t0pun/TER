@@ -1,0 +1,48 @@
+/* example.component.css */
+/* example.component.css */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: #fff;
+    max-width: 350px;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: none; /* Explicitly removing any border */
+}
+form:focus,
+form:focus-within {
+    outline: none;
+}
+select {
+    width: 100%;
+    padding: 12px; /* Slightly more padding for more space inside the select */
+    border: 1px solid #aaa; /* Lighter and thinner border */
+    border-radius: 8px; /* More rounded corners */
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+    outline: none;
+    appearance: none; 
+    cursor: pointer;
+}
+
+button {
+    background-color: rgb(115, 172, 168);
+    color: white;
+    border: none;
+    padding: 12px 25px; /* More padding for a bigger, easier-to-click button */
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px; /* More rounded corners */
+    transition: background-color 0.3s;
+    outline: none;
+}
+
+button:hover {
+    background-color:  rgb(87, 133, 130);
+}

@@ -1,0 +1,13 @@
+.sticky-div {
+    padding: 2rem;
+    background: transparent;
+    position: sticky;
+    bottom: 0;
+  }
+
+.parametres{
+height: 50px;
+width: 50px;
+border-radius: 25px;
+background-color: rgb(115, 172, 168);
+}

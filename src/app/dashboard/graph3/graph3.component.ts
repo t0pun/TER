@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, inject } from '@angular/core';
 import Plotly, { Data, Layout} from 'plotly.js-basic-dist-min';
 
 @Component({
@@ -9,100 +10,82 @@ import Plotly, { Data, Layout} from 'plotly.js-basic-dist-min';
   styleUrl: './graph3.component.css'
 })
 export class Graph3Component implements OnInit{
+  data: any;
+  private apiUrl = "http://127.0.0.1:5000/json_per_source_label"
+  private http = inject(HttpClient)
+  
   ngOnInit(): void {
-    this.buildChart();
+
+    this.fetchData();
   }
 
-  private buildChart(): void {
-    // Names of the sources
-const sourceNames = [
-  'Source 1', 'Source 2', 'Source 3', 'Source 4', 'Source 5',
-  'Source 6', 'Source 7', 'Source 8', 'Source 9', 'Source 10',
-  'Source 11', 'Source 12', 'Source 13'
-];
+  private buildChart(data_1 : any): void {
 
-// Counts of true claims for each source
-const allCounts = [
-  230, 255, 315, 260, 320,
-  300, 330, 360, 390, 420,
-  450, 480, 510
-];
-const trueCounts = [
-  120, 150, 180, 130, 200,
-  160, 170, 180, 190, 200,
-  210, 220, 230
-];
-
-// Counts of false claims for each source
-const falseCounts = [
-  80, 60, 90, 70, 50,
-  60, 70, 80, 90, 100,
-  110, 120, 130
-];
-
-// Counts of mixed claims for each source
-const mixedCounts = [
-  20, 30, 25, 35, 40,
-  45, 50, 55, 60, 65,
-  70, 75, 80
-];
-
-// Counts of other claims for each source
-const otherCounts = [
-  10, 15, 20, 25, 30,
-  35, 40, 45, 50, 55,
-  60, 65, 70
-];
+  var sourceNames: string[] = [];
+  var trueCounts: any[] = [];
+  var falseCounts: any[] = [];
+  var mixedCounts: any[] = [];
+  var otherCounts: any[] = [];
+  var allCounts: number[] = [];
 
 
-    const data : Data[]= [
-      { 
-        x: sourceNames,
-        y: allCounts,
-        name: 'All',
-        type: 'bar',
-        marker: { color: '#002F5D' } 
-      },
-      { 
-        x: sourceNames,
-        y: trueCounts,
-        name: 'True',
-        type: 'bar',
-        marker: { color: '#8BC1F7' } 
-      },
-      { 
-        x: sourceNames,
-        y: falseCounts,
-        name: 'False',
-        type: 'bar',
-        marker: { color: '#004B95' } 
-      },
-      { 
-        x: sourceNames,
-        y: mixedCounts,
-        name: 'Mixed',
-        type: 'bar',
-        marker: { color: '#06C' } 
-      },
-      { 
-        x: sourceNames,
-        y: otherCounts,
-        name: 'Other',
-        type: 'bar',
-        marker: { color: '#519DE9' } 
-      },
+  for (let i = 0; i < data_1.length; i++) {
+    if(data_1[i]['label']=="TRUE"){
+      trueCounts.push({"source":data_1[i]['source'],"counts":data_1[i]['counts']})
+    }else if(data_1[i]['label']=="FALSE"){
+      falseCounts.push({"source":data_1[i]['source'],"counts":data_1[i]['counts']})
+    }else if(data_1[i]['label']=="MIXTURE"){
+      mixedCounts.push({"source":data_1[i]['source'],"counts":data_1[i]['counts']})
+    }else{
+      otherCounts.push({"source":data_1[i]['source'],"counts":data_1[i]['counts']})
+    }
+  }
+  
+  sourceNames = trueCounts.map(dictionary => dictionary["source"])
 
-    ];
+  var data: Data[]= [
+    {
+      name:'True',
+      x: trueCounts.map(dictionary => dictionary["source"]),
+      y: trueCounts.map(dictionary => dictionary["counts"]),
+      type: 'bar'
+    },
+    {
+      name:'False',
+      x: falseCounts.map(dictionary => dictionary["source"]),
+      y: falseCounts.map(dictionary => dictionary["counts"]),
+      type: 'bar'
+    },
+    {
+      name:'Mixture',
+      x: mixedCounts.map(dictionary => dictionary["source"]),
+      y: mixedCounts.map(dictionary => dictionary["counts"]),
+      type: 'bar'
+    },
+    {
+      name:'Other',
+      x: otherCounts.map(dictionary => dictionary["source"]),
+      y: otherCounts.map(dictionary => dictionary["counts"]),
+      type: 'bar'
+    }
+  ];
 
     const layout: Partial<Layout> = { 
-      barmode: 'group',  // How do you want the bars to be positioned 
-      title: 'Claims Count by Source and Truthfulness',
-      xaxis: { title: 'Source' },
-      yaxis: { title: 'Count of Claims' }
+      barmode: 'stack',  // How do you want the bars to be positioned 
     };
     const config = {
       responsive: true,
     };
-    Plotly.newPlot('graph3', data, layout, config);
+    Plotly.newPlot('graph3', data,layout,config);
+  }
+  fetchData() {
+    fetch(this.apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        this.buildChart(data)
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
   }
 }
