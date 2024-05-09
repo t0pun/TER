@@ -4,22 +4,20 @@
 
   <mat-form-field>
     <label for="entity">About (entities):</label>
+    <mat-icon class="icon-entity" matTooltip="Which entities would you like to include? ex: Donald Trump, USA or Paris ..." matTooltipPosition="right">help_outline</mat-icon>
     <input matInput [matAutocomplete]="auto" class="mat-input" id = "entity" [formControl]="formEntity">
     <mat-autocomplete #auto>
       <mat-option *ngFor="let item of suggestions | async" [value]="item" (click)="optionClicked($event,item)" >{{item}}</mat-option>
     </mat-autocomplete>
   </mat-form-field>
     
-  <div class="selected-items">
-    Selected:
+  <div class="selected-items" *ngIf="selectedOptions.length > 0">
     <div > 
         <mat-chip-grid>
-            <mat-chip-row>
                 <mat-chip *ngFor="let so of selectedOptions" (removed)="toggleSelection(so)" class="chips">
                     <span class="chips-text">{{ so }}</span>
                     <mat-icon matChipRemove>cancel</mat-icon>
                 </mat-chip>
-            </mat-chip-row>
         </mat-chip-grid>
     </div>
 </div>
@@ -28,17 +26,19 @@
 
   <div>
     <label for="start-date">Enter starting date:</label>
+    <mat-icon class="icon"  matTooltip="When do you want your search to start?" matTooltipPosition="right">help_outline</mat-icon>
     <input id="start-date" type="date" placeholder="Enter Start Date..." #firstDate>
   </div>
 
   <div>
     <label for="end-date">Enter ending date:</label>
+    <mat-icon class="icon" matTooltip="When do you want your search to end?" matTooltipPosition="right">help_outline</mat-icon>
     <input id="end-date" type="date" placeholder="Enter End Date..." #lastDate>
   </div>
 
 </div>
 <div class="button-search">
-  <button type="submit" [disabled]="selectedOptions.length === 0">Search</button>
+  <button type="submit" [disabled]="selectedOptions.length === 0">SEARCH</button>
 </div>
 
 </form>
@@ -51,54 +51,3 @@
   Graphs for the entity
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--form (ngSubmit)="submit(selectedCategory.value)">
-    <div>Please choose the prefered topic</div>
-    <select #selectedCategory required>
-      <option value="" disabled selected>Choose a category...</option>
-      <option value="Crime">Crime</option>
-      <option value="Science">Science</option>
-      <option value="Food">Food</option>
-      <option value="Politics">Politics</option>
-      <option value="Guns">Guns</option>
-      <option value="Business">Business</option>
-      <option value="Religion">Religion</option>
-      <option value="Terrorism">Terrorism</option>
-      <option value="Election">Election</option>
-      <option value="Health">Health</option>
-      <option value="Economy">Economy</option>
-      <option value="Legal Affairs">Legal Affairs</option>
-      <option value="Military">Military</option>
-      <option value="Sports">Sports</option>
-      <option value="Covid 19/Coronavirus">Covid 19/Coronavirus</option>
-      <option value="Climate & Environment">Climate & Environment</option>
-      <option value="Sex & Gender">Sex & Gender</option>
-      <option value="Race & Ethnicity">Race & Ethnicity</option>
-      <option value="Technology">Technology</option>
-      <option value="Immigration">Immigration</option>
-      <option value="Education">Education</option>
-    </select>
-    <button type="submit" class="">Search</button>
-  </form>
-
-
-  <div *ngIf="submitted">
-
-    Showing topic graphs here
-
-</div-->

@@ -3,10 +3,12 @@ import { NgFor, NgIf,  CommonModule} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SearchService } from '../search.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   selector: 'app-by-topic',
   standalone: true,
-  imports: [CommonModule,NgIf, FormsModule,NgFor, ReactiveFormsModule],
+  imports: [MatTooltipModule, MatIconModule, CommonModule,NgIf, FormsModule,NgFor, ReactiveFormsModule],
   templateUrl: './by-topic.component.html',
   styleUrl: './by-topic.component.css'
 })

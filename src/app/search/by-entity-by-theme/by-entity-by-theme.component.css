@@ -1,5 +1,3 @@
-/* example.component.css */
-/* example.component.css */
 form {
 
     width: 90%; /* Use 100% for better responsiveness */
@@ -34,12 +32,7 @@ form {
       flex-wrap: wrap; /* Allows chips to wrap onto the next line */
       gap: 10px; /* Space between chips */
     }
-    
-    mat-chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+
 
 .date-input-container {
   display:flex;
@@ -126,3 +119,11 @@ button:hover {
     opacity: 0.87; /* Slight transparency on hover */
     background-color:  rgb(87, 133, 130); /* Darker background on hover */
   }
+
+  mat-icon {
+    color: rgb(112, 112, 112);
+    cursor: pointer;
+    font-size: 16px; 
+    margin-left: 10px;
+  }
+  

@@ -11,12 +11,13 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { SearchService } from '../search.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
     selector: 'app-by-entity-by-theme',
     standalone: true,
     templateUrl: './by-entity-by-theme.component.html',
     styleUrl: './by-entity-by-theme.component.css',
-    imports: [ MatChipsModule,MatIconModule,CommonModule,NgIf, FormsModule,NgFor,MatAutocompleteModule,MatInputModule,MatSelectModule,MatFormFieldModule,ReactiveFormsModule]
+    imports: [MatTooltipModule,MatChipsModule,MatIconModule,CommonModule,NgIf, FormsModule,NgFor,MatAutocompleteModule,MatInputModule,MatSelectModule,MatFormFieldModule,ReactiveFormsModule]
 })
 export class ByEntityByThemeComponent {
   topics: string[] = [];
