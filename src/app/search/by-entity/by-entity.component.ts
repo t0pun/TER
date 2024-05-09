@@ -11,10 +11,11 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { SearchService } from '../search.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   selector: 'app-by-entity',
   standalone: true,
-  imports: [ MatChipsModule,MatIconModule,CommonModule,NgIf, FormsModule,NgFor,MatAutocompleteModule,MatInputModule,MatSelectModule,MatFormFieldModule,ReactiveFormsModule],
+  imports: [ MatTooltipModule, MatChipsModule,MatIconModule,CommonModule,NgIf, FormsModule,NgFor,MatAutocompleteModule,MatInputModule,MatSelectModule,MatFormFieldModule,ReactiveFormsModule],
   templateUrl: './by-entity.component.html',
   styleUrl: './by-entity.component.css'
 })
