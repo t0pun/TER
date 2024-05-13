@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { PagePrincipaleComponent } from './page-principale/page-principale.component';
+import { HomePageComponent } from './home-page/home-page.component';
 import { SearchComponent } from './search/search.component';
 import { AboutComponent } from './about/about.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -7,7 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 const routeConfig: Routes = [
     {
       path: '',
-      component: PagePrincipaleComponent,
+      component: HomePageComponent,
       title: 'Home page'
     },
     {
