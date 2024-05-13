@@ -59,7 +59,7 @@ select {
   margin-right: 60px;
 }
 button {
-    background-color: rgb(115, 172, 168);
+    background-color: rgb(47, 56, 92);
     color: white;
     border: none;
     padding: 12px 30px; /* More padding for a bigger, easier-to-click button */
@@ -71,7 +71,7 @@ button {
 }
 
 button:hover {
-    background-color:  rgb(87, 133, 130);
+    background-color: rgb(47, 56, 92);
 }
 
 

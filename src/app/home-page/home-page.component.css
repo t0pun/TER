@@ -20,21 +20,14 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: #1B2030 url('/assets/images/warehouse.webp') center center no-repeat;
+  background: #4f566b ;
   background-size: cover;
   background-attachment: scroll; 
   z-index: -2;
   animation: grow 360s linear 10ms infinite; 
 }
 
-@keyframes grow {
-  0%, 100% { 
-    transform: scale(1) translateY(0); 
-  }
-  50% { 
-    transform: scale(1.2) translateY(-15vh); /* Adjust this value if needed */
-  }
-}
+
 
 .header::after {
   content: "";
@@ -71,9 +64,9 @@ h1 {
 }
 
 /* Media query for medium screens, e.g., tablets */
-@media (max-width: 768px) {
+@media (max-width: 930px) {
   h1 {
-    font-size: 40px; /* Smaller font size for medium screens */
+    font-size: 35px; /* Smaller font size for medium screens */
   }
 }
 
@@ -105,7 +98,7 @@ h1 {
   gap: 4px; /* Adjust the gap as needed */
 }
 
-@media (max-width: 800px) { /* Adjust the breakpoint as needed */
+@media (max-width: 1000px) { /* Adjust the breakpoint as needed */
   .grid {
     grid-template-columns: repeat(2, 1fr); /* Switch to 2 columns when the screen width is 800px or less */
   }
@@ -123,7 +116,7 @@ h1 {
 
 button {
   font-weight: bold;
-  background-color: rgb(115, 172, 168);
+  background-color: rgb(153, 34, 34);
   color: white;
   border: none;
   padding: 12px 30px;  /* More padding for a bigger, easier-to-click button */
@@ -137,5 +130,5 @@ button {
 }
 
 button:hover {
-  background-color: rgb(87, 133, 130);
+  background-color: rgb(134, 40, 40);
 }

@@ -68,7 +68,7 @@ input {
   margin-right: 60px;
 }
 button {
-    background-color: rgb(115, 172, 168);
+    background-color: rgb(47, 56, 92);
     color: white;
     border: none;
     padding: 12px 30px; /* More padding for a bigger, easier-to-click button */
@@ -80,12 +80,12 @@ button {
 }
 
 button:hover {
-    background-color:  rgb(87, 133, 130);
+    background-color: rgb(47, 56, 92);
 }
 
   
   .chips {
-    background-color:  rgb(115, 172, 168) !important;
+    background-color:  rgb(42, 60, 136) !important;
     border: none !important;
     font-size: 16px !important;
     border-radius: 16px !important;
@@ -105,7 +105,7 @@ button:hover {
   /* Hover effects for chips */
   .chips:hover {
     opacity: 0.87; /* Slight transparency on hover */
-    background-color:  rgb(87, 133, 130); /* Darker background on hover */
+    background-color:  rgb(47, 56, 92);/* Darker background on hover */
   }
 
   mat-icon {

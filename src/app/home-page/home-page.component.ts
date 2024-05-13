@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavigationBarComponent } from "../navigation-bar/navigation-bar.component";
 
 @Component({
-  selector: 'app-home-page',
-  standalone: true,
-  imports: [],
-  templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.css'
+    selector: 'app-home-page',
+    standalone: true,
+    templateUrl: './home-page.component.html',
+    styleUrl: './home-page.component.css',
+    imports: [NavigationBarComponent]
 })
 export class HomePageComponent implements OnInit{
   data: any;

@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { NavigationBarComponent } from "../navigation-bar/navigation-bar.component";
 
 @Component({
-    selector: 'app-about',
+    selector: 'app-contact',
     standalone: true,
-    templateUrl: './about.component.html',
-    styleUrl: './about.component.css',
+    templateUrl: './contact.component.html',
+    styleUrl: './contact.component.css',
     imports: [NavigationBarComponent]
 })
-export class AboutComponent {
+export class ContactComponent {
 
 }

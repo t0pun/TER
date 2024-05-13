@@ -1,6 +1,5 @@
-body{
-  background-color: rgb(79, 48, 48);
-}
+
+
 .button_title {
     background-color: rgba(255, 255, 255, 0);
     color: black;
@@ -15,16 +14,19 @@ body{
   }
   
   .button_title:hover {  transition: background-color 0.3s ease;
-    color: rgb(63, 105, 103); /* Slightly visible on hover */
+    color: rgb(170, 39, 39); /* Slightly visible on hover */
   }
   
   .active {
-    color: rgb(87, 133, 130); /* Slightly visible on hover */
-    border-bottom-color: rgb(87, 133, 130); 
+    color: rgb(134, 40, 40); /* Slightly visible on hover */
+    border-bottom-color:  rgb(134, 40, 40); 
   }
   .button-container {
     display: flex;
     justify-content: space-around; /* This will space out the buttons equally */
     align-items: center; /* Aligns buttons vertically */
     padding: 20px; /* Padding around the container */
+  }
+  .container-global{
+    padding-top: 70px;
   }

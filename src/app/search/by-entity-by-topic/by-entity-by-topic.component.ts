@@ -12,14 +12,15 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { SearchService } from '../search.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { NavigationBarComponent } from "../../navigation-bar/navigation-bar.component";
 @Component({
-    selector: 'app-by-entity-by-theme',
+    selector: 'app-by-entity-by-topic',
     standalone: true,
-    templateUrl: './by-entity-by-theme.component.html',
-    styleUrl: './by-entity-by-theme.component.css',
-    imports: [MatTooltipModule,MatChipsModule,MatIconModule,CommonModule,NgIf, FormsModule,NgFor,MatAutocompleteModule,MatInputModule,MatSelectModule,MatFormFieldModule,ReactiveFormsModule]
+    templateUrl: './by-entity-by-topic.component.html',
+    styleUrl: './by-entity-by-topic.component.css',
+    imports: [MatTooltipModule, MatChipsModule, MatIconModule, CommonModule, NgIf, FormsModule, NgFor, MatAutocompleteModule, MatInputModule, MatSelectModule, MatFormFieldModule, ReactiveFormsModule, NavigationBarComponent]
 })
-export class ByEntityByThemeComponent {
+export class ByEntityByTopicComponent {
   topics: string[] = [];
   selectedTopic: string ="";
 

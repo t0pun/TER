@@ -3,6 +3,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { SearchComponent } from './search/search.component';
 import { AboutComponent } from './about/about.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ContactComponent } from './contact/contact.component';
 
 const routeConfig: Routes = [
     {
@@ -11,9 +12,9 @@ const routeConfig: Routes = [
       title: 'Home page'
     },
     {
-      path: 'apropos',
+      path: 'about',
       component: AboutComponent,
-      title: 'A propos'
+      title: 'About'
     },
     {
         path: 'dashboard',
@@ -24,7 +25,12 @@ const routeConfig: Routes = [
         path: 'search',
         component: SearchComponent,
         title: 'Search'
-      }
+    },
+    {
+      path: 'contact',
+      component: ContactComponent,
+      title: 'Contact'
+    }
 
   ];
   

@@ -1,4 +1,16 @@
+
 <form (ngSubmit)="submit(firstDate.value, lastDate.value)" novalidate>
+  
+   <!-- Topic dropdown -->
+   <div class="form-field-wrapper topic">
+    <label for="topic">Choose a topic:</label>
+    <mat-icon class="icon" matTooltip="What topic is relevant to your search?" matTooltipPosition="right">help_outline</mat-icon>
+    <select id="topic" [(ngModel)]="selectedTopic" name="selectedTopic" required>
+        <option *ngFor="let topic of topics" [value]="topic">{{ topic }}</option>
+    </select>
+</div>
+
+  
   <!-- Entities input -->
   <mat-form-field>
       <label for="entity">About (entities):</label>
@@ -23,15 +35,6 @@
               </mat-chip>
           </mat-chip-grid>
       </div>
-  </div>
-
-  <!-- Topic dropdown -->
-  <div class="form-field-wrapper">
-      <label for="topic">Choose a topic:</label>
-      <mat-icon class="icon" matTooltip="What topic is relevant to your search?" matTooltipPosition="right">help_outline</mat-icon>
-      <select id="topic" [(ngModel)]="selectedTopic" name="selectedTopic" required>
-          <option *ngFor="let topic of topics" [value]="topic">{{ topic }}</option>
-      </select>
   </div>
 
   <!-- Date input fields -->

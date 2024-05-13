@@ -6,8 +6,26 @@
   }
 
 .parametres{
-height: 50px;
-width: 50px;
-border-radius: 25px;
-background-color: rgb(115, 172, 168);
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  background-color:  rgb(47, 56, 92); 
+}
+.parametres:hover {
+  background-color: rgb(46, 62, 126);
+}
+.button-sub{
+  background-color:   rgb(47, 56, 92);
+  color: white;
+  border: none;
+  padding: 12px 30px; /* More padding for a bigger, easier-to-click button */
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px; /* More rounded corners */
+  transition: background-color 0.3s;
+  outline: none;
+}
+
+.button-sub:hover {
+  background-color:rgb(46, 62, 126);
 }

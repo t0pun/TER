@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ByEntityByThemeComponent } from './by-entity-by-theme.component';
+import { ByEntityByTopicComponent } from './by-entity-by-topic.component';
 
-describe('ByEntityByThemeComponent', () => {
-  let component: ByEntityByThemeComponent;
-  let fixture: ComponentFixture<ByEntityByThemeComponent>;
+describe('ByEntityByTopicComponent', () => {
+  let component: ByEntityByTopicComponent;
+  let fixture: ComponentFixture<ByEntityByTopicComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ByEntityByThemeComponent]
+      imports: [ByEntityByTopicComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ByEntityByThemeComponent);
+    fixture = TestBed.createComponent(ByEntityByTopicComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
