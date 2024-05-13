@@ -9,7 +9,7 @@ const routeConfig: Routes = [
     {
       path: '',
       component: HomePageComponent,
-      title: 'Home page'
+      title: 'Statistical Observatory'
     },
     {
       path: 'about',
@@ -24,7 +24,7 @@ const routeConfig: Routes = [
     {
         path: 'search',
         component: SearchComponent,
-        title: 'Search'
+        title: 'Search Graphs'
     },
     {
       path: 'contact',
