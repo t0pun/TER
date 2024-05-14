@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import Plotly, { Data } from 'plotly.js-basic-dist-min';
-import { FiltreService } from '../../filtre.service';
 
 @Component({
   selector: 'app-graph2',
@@ -14,18 +13,6 @@ export class Graph2Component implements OnInit{
   data: any;
   private apiUrl = "http://127.0.0.1:5000/json_per_entity"
   private http = inject(HttpClient)
-
-  constructor(private filtreService: FiltreService){
-    this.filtreService.submitTriggeredTopEntity$.subscribe(()=>{
-
-      this.data = this.filtreService.fetchDataTopEntity().subscribe((response) => {
-        this.data = response;
-        console.log(this.data)
-        this.buildChart(this.data)
-      });
-      //this.ngOnResearch();
-    });
-  }
 
   ngOnInit(): void {
     this.fetchData();
@@ -57,7 +44,7 @@ export class Graph2Component implements OnInit{
     }];
 
   const layout = {
-    title: 'Top 50 - Most Used Entity',
+    title: 'Top 10 - ',
     margin: { "t": 50, "b": 50, "l": 0, "r": 0 },
     showlegend: true
   };

@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import Plotly, { Data, Layout } from 'plotly.js-basic-dist-min';
-import { FiltreService } from '../../filtre.service';
 
 @Component({
   selector: 'app-graph1',
@@ -12,20 +11,8 @@ import { FiltreService } from '../../filtre.service';
 })
 export class Graph1Component implements OnInit{
   data: any;
-  private apiUrl = "http://127.0.0.1:5000/json_per_date1_label/1996/2023"
+  private apiUrl = "http://127.0.0.1:5000/json_per_date1_label"
   private http = inject(HttpClient)
-
-  constructor(private filtreService: FiltreService){
-    this.filtreService.submitTriggered$.subscribe(()=>{
-
-      this.data = this.filtreService.fetchDataFirstGraph().subscribe((response) => {
-        this.data = response;
-        console.log(this.data)
-        this.buildChart(this.data)
-      });
-      //this.ngOnResearch();
-    });
-  }
 
   ngOnInit(): void {
     this.fetchData()
@@ -39,41 +26,26 @@ export class Graph1Component implements OnInit{
     const allCounts: number[] = [];
 
     for (let i = 0; i < data.length; i++){
-      console.log("ieme date : "+current_date)
-      var current_date = data[i]['date1'];
-      sampleDates.push(current_date)
-      if(data[i]['label']=='TRUE'){
-        trueCounts.push(data[i]['counts'])
-        falseCounts.push(0)
-        mixedCounts.push(0)
-        otherCounts.push(0)
-      }else if(data[i]['label']=='FALSE'){
-        trueCounts.push(0)
-        mixedCounts.push(0)
-        otherCounts.push(0)
-        falseCounts.push(data[i]['counts'])
-      }
-      else if(data[i]['label']=='MIXTURE'){
-        falseCounts.push(0)
-        trueCounts.push(0)
-        otherCounts.push(0)
-        mixedCounts.push(data[i]['counts'])
-      }
-      else if(data[i]['label']=='OTHER'){
-        falseCounts.push(0)
-        mixedCounts.push(0)
-        trueCounts.push(0)
-        otherCounts.push(data[i]['counts'])
+      var current_date = data[i]['Date1'];
+      var year = parseInt(current_date.slice(0, 4))
+      console.log(year)
+        if (year >= 1996) {
+          sampleDates.push(current_date)
+          if(data[i]['Label']=='TRUE'){
+            trueCounts.push(data[i]['Numbers of claims'])
+          }else if(data[i]['Label']=='FALSE'){
+            falseCounts.push(data[i]['Numbers of claims'])
+          }
+          else if(data[i]['Label']=='MIXTURE'){
+            mixedCounts.push(data[i]['Numbers of claims'])
+          }
+          else if(data[i]['Label']=='OTHER'){
+            otherCounts.push(data[i]['Numbers of claims'])
+          }
       }
     }
-    
-    console.log("size date : "+sampleDates.length)
-    console.log("size true : "+trueCounts.length)
-    console.log("size false : "+falseCounts.length)
-    console.log("size mixed : "+mixedCounts.length)
-    console.log("size other : "+otherCounts.length)
-
-
+    console.log(falseCounts)
+    console.log(trueCounts)
     const traces: Data[] = [
       {
         type: 'scatter',
@@ -128,14 +100,14 @@ export class Graph1Component implements OnInit{
       }
     };
 
-    Plotly.newPlot('graph1', traces, layout);
-    
+    var config = {responsive: true}
+
+    Plotly.newPlot('graph1', traces, layout,config);
   }
   fetchData() {
     fetch(this.apiUrl)
       .then(response => response.json())
       .then(data => {
-        console.log(data)
         this.buildChart(data)
       })
       .catch(error => {
