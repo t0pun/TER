@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GraphLabelDateComponent } from './graph-label-date.component';
+import { ByEntityByTopicComponent } from './by-entity-by-topic.component';
 
-describe('GraphLabelDateComponent', () => {
-  let component: GraphLabelDateComponent;
-  let fixture: ComponentFixture<GraphLabelDateComponent>;
+describe('ByEntityByTopicComponent', () => {
+  let component: ByEntityByTopicComponent;
+  let fixture: ComponentFixture<ByEntityByTopicComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GraphLabelDateComponent]
+      imports: [ByEntityByTopicComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(GraphLabelDateComponent);
+    fixture = TestBed.createComponent(ByEntityByTopicComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

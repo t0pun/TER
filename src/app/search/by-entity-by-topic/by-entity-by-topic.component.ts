@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgFor, NgIf,  CommonModule} from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { GraphLabelDateComponent } from "./graph-label-date/graph-label-date.component";
 import { SuggestionService } from '../suggestion.service';
 import { Observable, catchError, debounceTime, distinctUntilChanged, filter, map, of, startWith, switchMap } from 'rxjs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -12,14 +11,16 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { SearchService } from '../search.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { NavigationBarComponent } from "../../navigation-bar/navigation-bar.component";
 @Component({
-    selector: 'app-by-entity-by-theme',
+    selector: 'app-by-entity-by-topic',
     standalone: true,
-    templateUrl: './by-entity-by-theme.component.html',
-    styleUrl: './by-entity-by-theme.component.css',
-    imports: [ MatChipsModule,MatIconModule,CommonModule,NgIf, FormsModule, GraphLabelDateComponent,NgFor,MatAutocompleteModule,MatInputModule,MatSelectModule,MatFormFieldModule,ReactiveFormsModule]
+    templateUrl: './by-entity-by-topic.component.html',
+    styleUrl: './by-entity-by-topic.component.css',
+    imports: [MatTooltipModule, MatChipsModule, MatIconModule, CommonModule, NgIf, FormsModule, NgFor, MatAutocompleteModule, MatInputModule, MatSelectModule, MatFormFieldModule, ReactiveFormsModule, NavigationBarComponent]
 })
-export class ByEntityByThemeComponent {
+export class ByEntityByTopicComponent {
   topics: string[] = [];
   selectedTopic: string ="";
 

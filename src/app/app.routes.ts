@@ -1,19 +1,20 @@
 import { Routes } from '@angular/router';
-import { PagePrincipaleComponent } from './page-principale/page-principale.component';
+import { HomePageComponent } from './home-page/home-page.component';
 import { SearchComponent } from './search/search.component';
 import { AboutComponent } from './about/about.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ContactComponent } from './contact/contact.component';
 
 const routeConfig: Routes = [
     {
       path: '',
-      component: PagePrincipaleComponent,
-      title: 'Home page'
+      component: HomePageComponent,
+      title: 'Statistical Observatory'
     },
     {
-      path: 'apropos',
+      path: 'about',
       component: AboutComponent,
-      title: 'A propos'
+      title: 'About'
     },
     {
         path: 'dashboard',
@@ -23,8 +24,13 @@ const routeConfig: Routes = [
     {
         path: 'search',
         component: SearchComponent,
-        title: 'Search'
-      }
+        title: 'Search Graphs'
+    },
+    {
+      path: 'contact',
+      component: ContactComponent,
+      title: 'Contact'
+    }
 
   ];
   
