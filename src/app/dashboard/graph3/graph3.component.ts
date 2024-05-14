@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import Plotly, { Data, Layout} from 'plotly.js-basic-dist-min';
+import { FiltreService } from '../../filtre.service';
 
 @Component({
   selector: 'app-graph3',
@@ -13,7 +14,19 @@ export class Graph3Component implements OnInit{
   data: any;
   private apiUrl = "http://127.0.0.1:5000/json_per_source_label"
   private http = inject(HttpClient)
-  
+
+  constructor(private filtreService: FiltreService){
+    this.filtreService.submitTriggeredSourceLabel$.subscribe(()=>{
+
+      this.data = this.filtreService.fetchDataPerSourceLabel().subscribe((response) => {
+        this.data = response;
+        console.log(this.data)
+        this.buildChart(this.data)
+      });
+      //this.ngOnResearch();
+    });
+  }
+
   ngOnInit(): void {
 
     this.fetchData();
@@ -42,6 +55,8 @@ export class Graph3Component implements OnInit{
   }
   
   sourceNames = trueCounts.map(dictionary => dictionary["source"])
+  console.log(sourceNames)
+  console.log(trueCounts)
 
   var data: Data[]= [
     {

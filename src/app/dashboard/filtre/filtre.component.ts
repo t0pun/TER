@@ -14,13 +14,13 @@ import { RouterOutlet } from '@angular/router';
 })
 export class FiltreComponent {
 
-  selectedOption = ''
   filtreService = inject(FiltreService)
   displayDate: boolean = true;
 
   applyForm = new FormGroup({
 
-    granularite: new FormControl(''),
+    mois: new FormControl(''),
+    annee : new FormControl(''),
     date1: new FormControl(''),
     date2: new FormControl(''),
 
@@ -35,10 +35,16 @@ export class FiltreComponent {
   }
 
   onSubmit(){
+    var granularite = ""
+    if(this.applyForm.value.annee=="Annee"){
+      granularite = "/"+"annee"
+    }else if(this.applyForm.value.mois=="Mois"){
+      granularite = "/"+"mois"
+    }
     this.filtreService.onSubmit(
-      this.applyForm.get('selectedOption')?.value ?? 'a',
+      granularite,
       this.applyForm.value.date2 ?? '',
-      this.applyForm.value.date1 ?? '',
+      this.applyForm.value.date1 ?? ''
     )
   }
 
