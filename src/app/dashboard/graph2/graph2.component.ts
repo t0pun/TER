@@ -24,8 +24,8 @@ export class Graph2Component implements OnInit{
     const colors: string[] = []
 
     for (let i = 0; i < data1.length; i++){
-      labels.push(data1[i]['Entity'])
-      values.push(data1[i]['Numbers of claims'])
+      labels.push(data1[i]['entity'])
+      values.push(data1[i]['counts'])
       colors.push(this.generateRandomColor())
     }
 

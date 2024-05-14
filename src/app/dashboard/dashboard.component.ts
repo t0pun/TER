@@ -11,24 +11,20 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Graph4Component } from './graph4/graph4.component';
+import { AppComponent } from '../app.component';
 import { PagePrincipaleComponent } from '../page-principale/page-principale.component';
 import { ClaimsSummaryComponent } from '../claims-summary/claims-summary.component';
+import { FiltreComponent } from './filtre/filtre.component';
+
 
 @Component({
-    selector: 'app-dashboard',
-    standalone: true,
-    templateUrl: './dashboard.component.html',
-    styleUrl: './dashboard.component.css',
-    imports: [ClaimsSummaryComponent,CommonModule,RouterOutlet,FormsModule,PagePrincipaleComponent,ReactiveFormsModule,HttpClientModule, Graph1Component, Graph2Component, Graph3Component,Graph5Component, ResumeComponent]
+  selector: 'app-dashboard',
+  standalone: true,
+  imports: [Graph1Component,Graph2Component,Graph3Component,Graph4Component,AppComponent,PagePrincipaleComponent,ClaimsSummaryComponent,FiltreComponent],
+  templateUrl: './dashboard.component.html',
+  styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
-    data: any;
-    private apiUrl = "http://127.0.0.1:5000/resume"
-    private http = inject(HttpClient)
-    constructor(){
-      this.fetchData()
-    }
-    fetchData(){
 
-    }
-  }
+}
