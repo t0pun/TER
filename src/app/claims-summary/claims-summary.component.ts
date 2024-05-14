@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
+import { FiltreService } from '../filtre.service';
+import { Observable, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-claims-summary',
@@ -9,6 +11,7 @@ import { Component, inject } from '@angular/core';
   styleUrl: './claims-summary.component.css'
 })
 export class ClaimsSummaryComponent {
+
   data: any;
   private apiUrlFalse = "http://127.0.0.1:5000/number_false"
   private apiUrlTrue = "http://127.0.0.1:5000/number_true"
@@ -19,6 +22,39 @@ export class ClaimsSummaryComponent {
   mixtureNumber: any;
   falseNumber: any;
   otherNumber: any;
+  divColor = "white";
+
+  constructor(private filtreService: FiltreService){
+    this.filtreService.submitTriggeredLabel$.subscribe(()=>{
+
+      const observables: Observable<any[]>[] = this.filtreService.fetchDataSummary();
+
+      forkJoin(observables).subscribe(
+        (responses: any[][]) => {
+
+          this.data = responses;
+          const true_counts = this.data[0]["counts"]
+          const false_counts = this.data[1]["counts"]
+          const mixture_counts = this.data[2]["counts"]
+          const other_counts = this.data[3]["counts"]
+
+          console.log(true_counts)
+          console.log(false_counts)
+          console.log(mixture_counts)
+          console.log(other_counts)
+
+          this.buildSummary(
+            true_counts,
+            false_counts,
+            mixture_counts,
+            other_counts
+          );
+        },
+        (error: any) => {
+        }
+      );
+    });
+  }
 
   ngOnInit(): void {
     this.fetchData();
@@ -55,4 +91,21 @@ export class ClaimsSummaryComponent {
         console.error('Error fetching data:', error);
       });
   }
+
+  changeColor(event: any) {
+    alert(event.innerHTML)
+    // Get the current background color of the clicked div
+    var clickedDiv = event.target;
+    var currentColor = clickedDiv.style.background;
+
+    // Check if the current background color is red
+    if (currentColor === 'white') {
+        // Change the background color to another color
+        clickedDiv.style.background = 'red';
+    } else {
+        // Change the background color to red
+        clickedDiv.style.background = 'white';
+    }
+}
+
 }
