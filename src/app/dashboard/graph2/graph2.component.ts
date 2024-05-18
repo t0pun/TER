@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import Plotly, { Data } from 'plotly.js-basic-dist-min';
-import { FiltreService } from '../../filtre.service';
+import { FiltreService } from '../filtre.service';
+import { ListeentityService } from '../listeentity.service';
 
 @Component({
   selector: 'app-graph2',
@@ -15,7 +16,7 @@ export class Graph2Component implements OnInit{
   private apiUrl = "http://127.0.0.1:5000/json_per_entity"
   private http = inject(HttpClient)
 
-  constructor(private filtreService: FiltreService){
+  constructor(private filtreService: FiltreService,private listeEntityService : ListeentityService){
     this.filtreService.submitTriggeredTopEntity$.subscribe(()=>{
 
       this.data = this.filtreService.fetchDataTopEntity().subscribe((response) => {
@@ -41,6 +42,8 @@ export class Graph2Component implements OnInit{
       values.push(data1[i]['counts'])
       colors.push(this.generateRandomColor())
     }
+
+    this.listeEntityService.updateData(labels)
 
     const data: Data[]= [{
       type: 'pie',

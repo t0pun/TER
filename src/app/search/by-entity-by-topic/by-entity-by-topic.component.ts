@@ -75,22 +75,7 @@ this.suggestions = this.formEntity.valueChanges.pipe(
     this.submitted=true;
     this.firstDate=first_date;
     this.lastDate=last_date;
-    if(this.selectedOptions && !this.selectedTopic){
-      console.log("Entity service called");
-      this.searchService.searchEntity(this.selectedOptions, this.firstDate, this.lastDate)
-    .subscribe({
-    next: (result) => {
-      // Handle the data received from the search
-      console.log('Search results:', result);
-      alert(JSON.stringify(result)); // Using JSON.stringify to display the result object in alert
-    },
-    error: (error) => {
-      // Handle any errors that occur during the search
-      console.error('Search failed:', error);
-      alert('Search failed, please try again.');
-    }
-  });}
-    else if(this.selectedTopic && this.selectedOptions){
+       if(this.selectedTopic && this.selectedOptions){
       console.log("Entity-Topic service called");
       this.searchService.searchEntityTopic(this.selectedOptions, this.firstDate, this.lastDate,this.selectedTopic)
       .subscribe({

@@ -11,8 +11,19 @@
         <label for="mois">Mois : </label>
         <input type="radio" id="mois" name="gen" value="Mois" formControlName="mois">
       </div>
+      
       <div><input class="m-3" type="date" name="date1" id="date1" formControlName="date2"> - <input class="m-3" type="date" name="date2" id="date2" formControlName="date1"></div>
+
+      <div>
+        <div id="datalist">
+          <label for="entities">
+            Choisir les entités à filtrer
+          </label>
+        </div>
+      </div>
+      <div id="selected_entity"></div>
       <div class="flex items-center justify-center"><input class="m-3 p-3 bg-[#73aca8] rounded-lg shadow-md" type="submit" value="Submit" (click)="onClick();displayElement()"></div>
     </div>
   </form>
+  <div><button (click)="selectOption()">Add</button></div>
   </div>

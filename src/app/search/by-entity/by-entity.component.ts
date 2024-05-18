@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgFor, NgIf,  CommonModule} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SuggestionService } from '../suggestion.service';
@@ -12,12 +12,16 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { SearchService } from '../search.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { Graph1Component } from "./graph1/graph1.component";
+import { Graph2Component } from "./graph2/graph2.component";
+import { Graph3Component } from "./graph3/graph3.component";
+import { Graph4Component } from "./graph4/graph4.component";
 @Component({
-  selector: 'app-by-entity',
-  standalone: true,
-  imports: [ MatTooltipModule, MatChipsModule,MatIconModule,CommonModule,NgIf, FormsModule,NgFor,MatAutocompleteModule,MatInputModule,MatSelectModule,MatFormFieldModule,ReactiveFormsModule],
-  templateUrl: './by-entity.component.html',
-  styleUrl: './by-entity.component.css'
+    selector: 'app-by-entity',
+    standalone: true,
+    templateUrl: './by-entity.component.html',
+    styleUrl: './by-entity.component.css',
+    imports: [MatTooltipModule, MatChipsModule, MatIconModule, CommonModule, NgIf, FormsModule, NgFor, MatAutocompleteModule, MatInputModule, MatSelectModule, MatFormFieldModule, ReactiveFormsModule, Graph1Component, Graph2Component, Graph3Component, Graph4Component]
 })
 export class ByEntityComponent {
   formEntity= new FormControl('');
@@ -26,6 +30,11 @@ export class ByEntityComponent {
   submitted : boolean = false;
   firstDate:string="";
   lastDate:string="";
+  entityData: any;
+  entityData2: any;
+  entityData3: any;
+  entityData4: any;
+  
   
   constructor(private suggestionService: SuggestionService, private searchService: SearchService){
 
@@ -68,20 +77,71 @@ export class ByEntityComponent {
     this.lastDate=last_date;
     if(this.selectedOptions){
       console.log("Entity service called");
-      this.searchService.searchEntity(this.selectedOptions, this.firstDate, this.lastDate)
+      this.searchService.searchEntity1(this.selectedOptions, this.firstDate, this.lastDate)
     .subscribe({
     next: (result) => {
       // Handle the data received from the search
       console.log('Search results:', result);
-      alert(JSON.stringify(result)); // Using JSON.stringify to display the result object in alert
+      //alert(JSON.stringify(result));
+      
+      this.entityData=result; // Emit the result to parent component
     },
     error: (error) => {
       // Handle any errors that occur during the search
       console.error('Search failed:', error);
       alert('Search failed, please try again.');
     }
-  });}
-    console.log('Submitted values:', this.selectedOptions,this.firstDate,this.lastDate);
+  });
+
+  this.searchService.searchEntity2(this.selectedOptions, this.firstDate, this.lastDate)
+  .subscribe({
+  next: (result2) => {
+    // Handle the data received from the search
+    console.log('Search results:', result2);
+    //alert(JSON.stringify(result));
+    
+    this.entityData2=result2; // Emit the result to parent component
+  },
+  error: (error) => {
+    // Handle any errors that occur during the search
+    console.error('Search failed:', error);
+    alert('Search failed, please try again.');
+  }
+});
+
+this.searchService.searchEntity3(this.selectedOptions, this.firstDate, this.lastDate)
+.subscribe({
+next: (result3) => {
+  // Handle the data received from the search
+  console.log('Search results:', result3);
+  //alert(JSON.stringify(result));
+  
+  this.entityData3=result3; // Emit the result to parent component
+},
+error: (error) => {
+  // Handle any errors that occur during the search
+  console.error('Search failed:', error);
+  alert('Search failed, please try again.');
+}
+});
+
+this.searchService.searchEntity4(this.selectedOptions, this.firstDate, this.lastDate)
+.subscribe({
+next: (result4) => {
+  // Handle the data received from the search
+  console.log('Search results:', result4);
+  //alert(JSON.stringify(result));
+  
+  this.entityData4=result4; // Emit the result to parent component
+},
+error: (error) => {
+  // Handle any errors that occur during the search
+  console.error('Search failed:', error);
+  alert('Search failed, please try again.');
+}
+});
+
+}
 
   }
 

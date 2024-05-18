@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { FiltreService } from '../filtre.service';
+import { FiltreService } from '../dashboard/filtre.service';
 import { Observable, forkJoin } from 'rxjs';
 
 @Component({

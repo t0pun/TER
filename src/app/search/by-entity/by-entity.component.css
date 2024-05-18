@@ -9,6 +9,7 @@ form {
     padding: 30px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     background-color: #fff;
+    margin-bottom: 20px;
 }
 
 .mat-form-field, .selected-items, .topic-container, .date-input-container {
@@ -115,3 +116,6 @@ button:hover {
     margin-left: 10px;
   }
   
+  .graphs {
+    padding:20px;
+  }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import Plotly, { Data, Layout} from 'plotly.js-basic-dist-min';
-import { FiltreService } from '../../filtre.service';
+import { FiltreService } from '../filtre.service';
 
 @Component({
   selector: 'app-graph3',

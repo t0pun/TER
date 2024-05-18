@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import Plotly, { Data, Layout} from 'plotly.js-basic-dist-min';
-import { FiltreService } from '../../filtre.service';
+import { FiltreService } from '../filtre.service';
 
 @Component({
   selector: 'app-graph4',
@@ -46,15 +46,27 @@ export class Graph4Component implements OnInit{
 
   for (let i = 0; i < data_1.length; i++) {
     if(data_1[i]['label']=="TRUE"){
-      trueCounts.push({"langue":data_1[i]['headlineLang'],"counts":data_1[i]['counts']})
+      trueCounts.push({"langue":data_1[i]['reviewBodyLang'],"counts":data_1[i]['counts']})
     }else if(data_1[i]['label']=="FALSE"){
-      falseCounts.push({"langue":data_1[i]['headlineLang'],"counts":data_1[i]['counts']})
+      falseCounts.push({"langue":data_1[i]['reviewBodyLang'],"counts":data_1[i]['counts']})
     }else if(data_1[i]['label']=="MIXTURE"){
-      mixedCounts.push({"langue":data_1[i]['headlineLang'],"counts":data_1[i]['counts']})
+      mixedCounts.push({"langue":data_1[i]['reviewBodyLang'],"counts":data_1[i]['counts']})
     }else{
-      otherCounts.push({"langue":data_1[i]['headlineLang'],"counts":data_1[i]['counts']})
+      otherCounts.push({"langue":data_1[i]['reviewBodyLang'],"counts":data_1[i]['counts']})
     }
   }
+
+      // Trier les listes de manière décroissante
+    trueCounts.sort((a, b) => b.counts - a.counts);
+    falseCounts.sort((a, b) => b.counts - a.counts);
+    mixedCounts.sort((a, b) => b.counts - a.counts);
+    otherCounts.sort((a, b) => b.counts - a.counts);
+
+    // Ne garder que les 10 premières valeurs de chaque liste
+    trueCounts = trueCounts.slice(0, 5);
+    falseCounts = falseCounts.slice(0, 5);
+    mixedCounts = mixedCounts.slice(0, 5);
+    otherCounts = otherCounts.slice(0, 5);
   
   sourceNames = trueCounts.map(dictionary => dictionary["langue"])
   console.log(sourceNames)
@@ -63,32 +75,34 @@ export class Graph4Component implements OnInit{
   var data: Data[]= [
     {
       name:'True',
-      x: trueCounts.map(dictionary => dictionary["langue"]),
-      y: trueCounts.map(dictionary => dictionary["counts"]),
-      type: 'bar'
-    },
+      y: trueCounts.map(dictionary => dictionary["langue"]),
+      x: trueCounts.map(dictionary => dictionary["counts"]),
+      type: 'bar',
+      orientation: 'h',    },
     {
       name:'False',
-      x: falseCounts.map(dictionary => dictionary["langue"]),
-      y: falseCounts.map(dictionary => dictionary["counts"]),
-      type: 'bar'
-    },
+      y: falseCounts.map(dictionary => dictionary["langue"]),
+      x: falseCounts.map(dictionary => dictionary["counts"]),
+      type: 'bar',
+      orientation: 'h',    },
     {
       name:'Mixture',
-      x: mixedCounts.map(dictionary => dictionary["langue"]),
-      y: mixedCounts.map(dictionary => dictionary["counts"]),
-      type: 'bar'
-    },
+      y: mixedCounts.map(dictionary => dictionary["langue"]),
+      x: mixedCounts.map(dictionary => dictionary["counts"]),
+      type: 'bar',
+      orientation: 'h',    },
     {
       name:'Other',
-      x: otherCounts.map(dictionary => dictionary["langue"]),
-      y: otherCounts.map(dictionary => dictionary["counts"]),
-      type: 'bar'
+      y: otherCounts.map(dictionary => dictionary["langue"]),
+      x: otherCounts.map(dictionary => dictionary["counts"]),
+      type: 'bar',
+      orientation: 'h',
     }
   ];
 
     const layout: Partial<Layout> = { 
       barmode: 'stack',  // How do you want the bars to be positioned 
+      
     };
     const config = {
       responsive: true,
