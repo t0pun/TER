@@ -31,8 +31,8 @@ export class FiltreComponent {
 
   applyForm = new FormGroup({
 
-    mois: new FormControl(''),
-    annee : new FormControl(''),
+    month: new FormControl(''),
+    year : new FormControl(''),
     date1: new FormControl(''),
     date2: new FormControl(''),
     selectedOption : new FormControl(''),
@@ -83,9 +83,9 @@ export class FiltreComponent {
 
   onSubmit(){
     var granularite = ""
-    if(this.applyForm.value.annee=="Annee"){
+    if(this.applyForm.value.year=="Year"){
       granularite = "/"+"annee"
-    }else if(this.applyForm.value.mois=="Mois"){
+    }else if(this.applyForm.value.month=="Month"){
       granularite = "/"+"mois"
     }
     this.filtreService.onSubmit(
@@ -96,7 +96,7 @@ export class FiltreComponent {
   }
 
   isOption1Checked() {
-    return this.applyForm.get('selectedOption')?.value === 'Annee';
+    return this.applyForm.get('selectedOption')?.value === 'Year';
   }
 
   onClick(){

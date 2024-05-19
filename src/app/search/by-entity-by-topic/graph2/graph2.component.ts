@@ -9,7 +9,7 @@ import Plotly, { Data, Layout } from 'plotly.js-basic-dist-min';
   templateUrl: './graph2.component.html',
   styleUrl: './graph2.component.css'
 })
-export class Graph2Component implements OnChanges {
+export class Graph2Component {
   @Input() entityData: any;
 
   ngOnChanges(changes: SimpleChanges) {
@@ -53,14 +53,13 @@ export class Graph2Component implements OnChanges {
 
     const layout = {
         title: 'Percentage of labels',
-        margin: { "t": 50, "b": 50, "l": 50, "r": 200 },
+        margin: { "t": 50, "b": 50, "l": 0, "r": 0 },
         showlegend: true
-        
     };
 
     var config = { responsive: true }
 
-    Plotly.newPlot('graph2', data, layout, config);
+    Plotly.newPlot('graphTopicEntity2', data, layout, config);
 }
 
 }

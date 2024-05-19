@@ -105,6 +105,14 @@ export class Graph1Component implements OnInit{
       },
       yaxis: {
         title: 'Number of Claims'
+      },
+      margin: { t: 50, b: 50, l: 50, r: 200 }, 
+      legend: {
+          x: 5.1,
+          y: 1,
+          bgcolor: 'rgba(255, 255, 255, 0.5)', 
+          bordercolor: 'rgba(0, 0, 0, 0.5)', 
+          borderwidth: 1 
       }
     };
 

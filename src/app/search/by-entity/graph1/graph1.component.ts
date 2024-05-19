@@ -7,7 +7,7 @@ import Plotly, { Data, Layout } from 'plotly.js-basic-dist-min';
   standalone: true,
   imports: [NgIf],
   templateUrl: './graph1.component.html',
-  styleUrl: './graph1.component.css'
+  styleUrls: ['./graph1.component.css']
 })
 export class Graph1Component implements OnChanges {
   @Input() entityData: any;
@@ -17,7 +17,8 @@ export class Graph1Component implements OnChanges {
       this.buildChart(this.entityData);
     }
   }
-  buildChart(data: any): void{
+
+  buildChart(data: any): void {
     const sampleDates: string[] = [];
     const trueCounts: any[] = [];
     const falseCounts: any[] = [];
@@ -25,22 +26,37 @@ export class Graph1Component implements OnChanges {
     const otherCounts: any[] = [];
     const allCounts: any[] = [];
 
-    for (let i = 0; i < data.length; i++){
-      var current_date = data[i]['date1'];
-      sampleDates.push(current_date)
-      if(data[i]['label']=='TRUE'){
-        trueCounts.push({"date1":data[i]['date1'],"counts":data[i]['counts']})
-      }else if(data[i]['label']=='FALSE'){
-        falseCounts.push({"date1":data[i]['date1'],"counts":data[i]['counts']})
+    // Create a map to track total counts by date
+    const totalCountsMap: { [date: string]: number } = {};
+
+    for (let i = 0; i < data.length; i++) {
+      const current_date = data[i]['date1'];
+      const counts = data[i]['counts'];
+      
+      sampleDates.push(current_date);
+      
+      if (data[i]['label'] === 'TRUE') {
+        trueCounts.push({ "date1": current_date, "counts": counts });
+      } else if (data[i]['label'] === 'FALSE') {
+        falseCounts.push({ "date1": current_date, "counts": counts });
+      } else if (data[i]['label'] === 'MIXTURE') {
+        mixedCounts.push({ "date1": current_date, "counts": counts });
+      } else if (data[i]['label'] === 'OTHER') {
+        otherCounts.push({ "date1": current_date, "counts": counts });
       }
-      else if(data[i]['label']=='MIXTURE'){
-        mixedCounts.push({"date1":data[i]['date1'],"counts":data[i]['counts']})
-      }
-      else if(data[i]['label']=='OTHER'){
-        otherCounts.push({"date1":data[i]['date1'],"counts":data[i]['counts']})
+
+      // Update total counts for the date
+      if (totalCountsMap[current_date]) {
+        totalCountsMap[current_date] += counts;
+      } else {
+        totalCountsMap[current_date] = counts;
       }
     }
 
+    // Convert totalCountsMap to allCounts array
+    for (const [date, counts] of Object.entries(totalCountsMap)) {
+      allCounts.push({ "date1": date, "counts": counts });
+    }
 
     const traces: Data[] = [
       {
@@ -61,7 +77,7 @@ export class Graph1Component implements OnChanges {
       },
       {
         type: 'scatter',
-        mode: 'lines', 
+        mode: 'lines',
         name: 'Mixed',
         x: mixedCounts.map(dictionary => dictionary["date1"]),
         y: mixedCounts.map(dictionary => dictionary["counts"]),
@@ -78,7 +94,7 @@ export class Graph1Component implements OnChanges {
       {
         type: 'scatter',
         mode: 'lines',
-        name: 'All',
+        name: 'Total',
         x: allCounts.map(dictionary => dictionary["date1"]),
         y: allCounts.map(dictionary => dictionary["counts"]),
         line: { color: '#009596', dash: 'dash' }
@@ -93,11 +109,17 @@ export class Graph1Component implements OnChanges {
       },
       yaxis: {
         title: 'Number of Claims'
+      },
+      margin: { t: 50, b: 50, l: 50, r: 200 },
+      legend: {
+        x: 5.1,
+        y: 1,
+        bgcolor: 'rgba(255, 255, 255, 0.5)',
+        bordercolor: 'rgba(0, 0, 0, 0.5)',
+        borderwidth: 1
       }
     };
 
     Plotly.newPlot('graph1', traces, layout);
-    
   }
-
 }

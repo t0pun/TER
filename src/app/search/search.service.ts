@@ -100,9 +100,52 @@ export class SearchService {
   }
 
 
+  searchTopic4(firstDate: string, lastDate: string, topic: string) :Observable<string[]>{
+    let params = new HttpParams()
+    .set('firstDate', firstDate)
+    .set('lastDate', lastDate)
+    .set('topic', topic);
+    return this.http.get<string[]>('http://localhost:5000/search-topic4', { params });
+  }
 
-
-
+    /**** Service to get the informations for the topic-entity search ****/
+    searchTopicEntity1(selectedEntities: string[], firstDate: string, lastDate: string, topic: string) :Observable<string[]>{
+      let params = new HttpParams()
+      .set('firstDate', firstDate)
+      .set('lastDate', lastDate)
+      .set('topic', topic);
+  
+    // Append each `selectedEntity` as a separate query parameter
+      selectedEntities.forEach((entity) => {
+        params = params.append('selectedEntities', entity);
+      });
+      return this.http.get<string[]>('http://localhost:5000/search-topic-entity1', { params });
+    }
+  
+    searchTopicEntity2(selectedEntities: string[], firstDate: string, lastDate: string, topic: string) :Observable<string[]>{
+      let params = new HttpParams()
+      .set('firstDate', firstDate)
+      .set('lastDate', lastDate)
+      .set('topic', topic);
+  
+    // Append each `selectedEntity` as a separate query parameter
+      selectedEntities.forEach((entity) => {
+        params = params.append('selectedEntities', entity);
+      });
+    return this.http.get<string[]>('http://localhost:5000/search-topic-entity2', { params });
+    }
+    searchTopicEntity3(selectedEntities: string[], firstDate: string, lastDate: string, topic: string) :Observable<string[]>{
+      let params = new HttpParams()
+      .set('firstDate', firstDate)
+      .set('lastDate', lastDate)
+      .set('topic', topic);
+  
+    // Append each `selectedEntity` as a separate query parameter
+      selectedEntities.forEach((entity) => {
+        params = params.append('selectedEntities', entity);
+      });
+      return this.http.get<string[]>('http://localhost:5000/search-topic-entity3', { params });
+    }
 
 
   getTopics(): Observable<string[]> {

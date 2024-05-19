@@ -120,6 +120,6 @@ export class Graph1Component implements OnChanges {
       }
     };
 
-    Plotly.newPlot('graphTopic1', traces, layout);
+    Plotly.newPlot('graphTopicEntity1', traces, layout);
   }
 }

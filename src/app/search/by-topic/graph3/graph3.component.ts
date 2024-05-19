@@ -69,7 +69,15 @@ export class Graph3Component {
     ];
   
       const layout: Partial<Layout> = { 
-        barmode: 'stack',  // How do you want the bars to be positioned 
+        barmode: 'stack',
+        margin: { t: 50, b: 50, l: 50, r: 200 }, 
+        legend: {
+            x: 5.1,
+            y: 1,
+            bgcolor: 'rgba(255, 255, 255, 0.5)', 
+            bordercolor: 'rgba(0, 0, 0, 0.5)', 
+            borderwidth: 1 
+        }
       };
       const config = {
         responsive: true,

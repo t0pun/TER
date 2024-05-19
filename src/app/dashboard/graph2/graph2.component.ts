@@ -61,7 +61,7 @@ export class Graph2Component implements OnInit{
 
   const layout = {
     title: 'Top 50 - Most Used Entity',
-    margin: { "t": 50, "b": 50, "l": 0, "r": 0 },
+    margin: { "t": 50, "b": 50, "l": 50, "r": 200 },
     showlegend: true
   };
 

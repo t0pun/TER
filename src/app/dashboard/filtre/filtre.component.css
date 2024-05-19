@@ -29,3 +29,11 @@
 .button-sub:hover {
   background-color:rgb(46, 62, 126);
 }
+
+
+.button-search{
+  display:flex;
+  flex-direction: column;
+  margin-left: 60px;
+  margin-right: 60px;
+}
