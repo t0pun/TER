@@ -3,13 +3,13 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import Plotly, { Data, Layout } from 'plotly.js-basic-dist-min';
 
 @Component({
-  selector: 'app-graph4',
+  selector: 'app-graph5',
   standalone: true,
   imports: [NgIf],
-  templateUrl: './graph4.component.html',
-  styleUrl: './graph4.component.css'
+  templateUrl: './graph5.component.html',
+  styleUrl: './graph5.component.css'
 })
-export class Graph4Component {
+export class Graph5Component {
   @Input() entityData: any;
 
   ngOnChanges(changes: SimpleChanges) {

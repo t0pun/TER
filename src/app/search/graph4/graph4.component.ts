@@ -3,7 +3,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import Plotly, { Data, Layout } from 'plotly.js-basic-dist-min';
 
 @Component({
-  selector: 'app-graph4',
+  selector: 'app-graph5',
   standalone: true,
   imports: [NgIf],
   templateUrl: './graph4.component.html',

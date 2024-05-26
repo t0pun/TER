@@ -5,16 +5,17 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SearchService } from '../search.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Graph1Component } from "./graph1/graph1.component";
-import { Graph3Component } from "./graph3/graph3.component";
-import { Graph2Component } from "./graph2/graph2.component";
-import { Graph4Component } from "./graph4/graph4.component";
+import { Graph1Component } from "../graph1/graph1.component";
+import { Graph2Component } from "../graph2/graph2.component";
+import { Graph3Component } from "../graph3/graph3.component";
+import { Graph5Component } from "../graph5/graph5.component";
+
 @Component({
     selector: 'app-by-topic',
     standalone: true,
     templateUrl: './by-topic.component.html',
     styleUrl: './by-topic.component.css',
-    imports: [MatTooltipModule, MatIconModule, CommonModule, NgIf, FormsModule, NgFor, ReactiveFormsModule, Graph1Component, Graph3Component, Graph2Component, Graph4Component]
+    imports: [MatTooltipModule, MatIconModule, CommonModule, NgIf, FormsModule, NgFor, ReactiveFormsModule, Graph1Component, Graph3Component, Graph2Component, Graph5Component]
 })
 export class ByTopicComponent {
   topics: string[] = [];

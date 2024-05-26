@@ -9,7 +9,7 @@ import Plotly, { Data, Layout } from 'plotly.js-basic-dist-min';
   templateUrl: './graph2.component.html',
   styleUrl: './graph2.component.css'
 })
-export class Graph2Component {
+export class Graph2Component implements OnChanges {
   @Input() entityData: any;
 
   ngOnChanges(changes: SimpleChanges) {
@@ -50,16 +50,30 @@ export class Graph2Component {
             colors: colors // Custom colors for each slice
         }
     }];
-
-    const layout = {
-        title: 'Percentage of labels',
-        margin: { "t": 50, "b": 50, "l": 0, "r": 0 },
-        showlegend: true
+    const layout: Partial<Layout> = {
+      title: 'Percentage of labels',
+      showlegend: true,
+      xaxis: {
+        type: 'date',
+        title: 'Date'
+      },
+      yaxis: {
+        title: 'Number of Claims'
+      },
+      margin: { t: 50, b: 50, l: 50, r: 200 },
+      legend: {
+        x: 5.1,
+        y: 1,
+        bgcolor: 'rgba(255, 255, 255, 0.5)',
+        bordercolor: 'rgba(0, 0, 0, 0.5)',
+        borderwidth: 1
+      }
     };
+
 
     var config = { responsive: true }
 
-    Plotly.newPlot('graphTopic2', data, layout, config);
+    Plotly.newPlot('graph2', data, layout, config);
 }
 
 }

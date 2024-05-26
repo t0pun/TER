@@ -13,9 +13,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { SearchService } from '../search.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NavigationBarComponent } from "../../navigation-bar/navigation-bar.component";
-import { Graph3Component } from "./graph3/graph3.component";
-import { Graph2Component } from "./graph2/graph2.component";
-import { Graph1Component } from "./graph1/graph1.component";
+import { Graph1Component } from "../graph1/graph1.component";
+import { Graph2Component } from "../graph2/graph2.component";
+import { Graph3Component } from "../graph3/graph3.component";
+import { Graph4Component } from "../graph4/graph4.component";
 @Component({
     selector: 'app-by-entity-by-topic',
     standalone: true,

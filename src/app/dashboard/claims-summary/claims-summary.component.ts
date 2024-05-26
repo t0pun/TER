@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { FiltreService } from '../dashboard/filtre.service';
+
 import { Observable, forkJoin } from 'rxjs';
+import { FiltreService } from '../filtre.service';
 
 @Component({
   selector: 'app-claims-summary',
