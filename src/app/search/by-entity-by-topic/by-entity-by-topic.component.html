@@ -14,7 +14,7 @@
       <mat-icon class="icon-entity" matTooltip="Which entities would you like to include? ex: Donald Trump, USA or Paris ..." matTooltipPosition="right">help_outline</mat-icon>
       <div class="form-field-wrapper">
         <input matInput [matAutocomplete]="auto" class="mat-input" id="entity" [formControl]="formEntity">
-        <span class="tip">Tip: Try to include the maximum number of entities that describe your needs for better accuracy</span>
+        <span class="tip">Tip: Include the maximum number of entities that describe your needs for better accuracy</span>
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngFor="let item of suggestions | async" [value]="item" (click)="optionClicked($event, item)">
             {{ item }}
