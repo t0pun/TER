@@ -1,42 +1,45 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, inject } from '@angular/core';
-import Plotly, { Data, Layout} from 'plotly.js-basic-dist-min';
-declare var cytoscape: any;
+import { Component, AfterViewInit, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+
+import { DataSet, Network, Edge, Node } from 'vis-network/standalone/esm/vis-network';
+
+interface GraphData {
+  nodes: Node[];
+  edges: Edge[];
+}
+
+
 
 @Component({
   selector: 'app-graph5',
   standalone: true,
-  imports: [],
   templateUrl: './graph5.component.html',
   styleUrls: ['./graph5.component.css']
 })
-export class Graph5Component implements OnInit {
+export class Graph5Component implements OnInit, AfterViewInit {
 
-  data: any
-  
-  ngOnInit() {
- 
+  constructor(private http: HttpClient) { }
+
+
+  ngOnInit(): void { }
+
+  ngAfterViewInit(): void {
+    this.createGraph();
   }
 
+  createGraph(): void {
+    this.http.get<GraphData>('http://localhost:5000/graph-data').subscribe(data => {
+      const nodes = new DataSet<Node>(data.nodes);
+      const edges = new DataSet<Edge>(data.edges);
 
+      const container = document.getElementById('vis-graph') as HTMLElement;
+      const graphData = { nodes, edges };
+      const options = {};
 
-  downloadTSV(): void {
-    const data = this.data;
-    let tsvContent = "data:text/tab-separated-values;charset=utf-8,";
-
-    data.forEach((row: any) => {
-      const rowArray = [row['entity'], row['counts']];
-      tsvContent += rowArray.join("\t") + "\n";
+      new Network(container, graphData, options);
     });
 
-    const encodedUri = encodeURI(tsvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "data.tsv");
-    document.body.appendChild(link);
-
-    link.click();
-    document.body.removeChild(link);
   }
-
+  
 }
+

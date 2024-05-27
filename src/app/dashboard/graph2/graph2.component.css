@@ -11,8 +11,7 @@
 }
 #download-tsv:focus {
     outline: none; /* Remove the focus outline */
-  }
-  
+}
 .body{
     border-radius: 25px;
     background-color: white; 
