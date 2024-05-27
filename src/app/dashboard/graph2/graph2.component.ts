@@ -96,7 +96,7 @@ downloadTSV(): void {
   let tsvContent = "data:text/tab-separated-values;charset=utf-8,";
 
   data.forEach((row: any) => {
-    const rowArray = [row['label'], row['counts']];
+    const rowArray = [row['entity'], row['counts']];
     tsvContent += rowArray.join("\t") + "\n";
   });
 
