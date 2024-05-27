@@ -1,0 +1,16 @@
+#graph4 {
+    width: 100%;
+     height: 100%;
+  }
+#download-tsv {
+    color:rgb(47, 56, 92) ;
+    padding: 10px;
+}
+#download-tsv:hover {
+    color: rgb(134, 40, 40);
+}
+
+.body{
+    border-radius: 25px;
+    background-color: white; 
+}

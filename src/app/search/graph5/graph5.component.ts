@@ -45,7 +45,7 @@ export class Graph5Component {
 
   const layout = {
     title: 'Top 50 - Most Common Entities',
-    margin: { "t": 50, "b": 50, "l": 50, "r": 200 },
+    margin: { "t": 50, "b": 50, "l": 50, "r": 50 },
     showlegend: true
   };
 
@@ -62,5 +62,23 @@ generateRandomColor(): string {
     color += characters[randomIndex];
   }
   return color;
+}
+downloadTSV(): void {
+  const data = this.entityData;
+  let tsvContent = "data:text/tab-separated-values;charset=utf-8,";
+
+  data.forEach((row: any) => {
+    const rowArray = [row['entity'], row['counts']];
+    tsvContent += rowArray.join("\t") + "\n";
+  });
+
+  const encodedUri = encodeURI(tsvContent);
+  const link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", "data.tsv");
+  document.body.appendChild(link);
+
+  link.click();
+  document.body.removeChild(link);
 }
 }

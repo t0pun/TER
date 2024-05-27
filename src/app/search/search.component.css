@@ -14,7 +14,7 @@
   }
   
   .button_title:hover {  transition: background-color 0.3s ease;
-    color: rgb(170, 39, 39); /* Slightly visible on hover */
+    color: rgb(187, 43, 43); /* Slightly visible on hover */
   }
   
   .active {

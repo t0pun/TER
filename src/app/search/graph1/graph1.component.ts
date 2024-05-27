@@ -122,4 +122,22 @@ export class Graph1Component implements OnChanges {
 
     Plotly.newPlot('graph1', traces, layout);
   }
+  downloadTSV(): void {
+    const data = this.entityData;
+    let tsvContent = "data:text/tab-separated-values;charset=utf-8,";
+
+    data.forEach((row: any) => {
+      const rowArray = [row['date1'], row['label'], row['counts']];
+      tsvContent += rowArray.join("\t") + "\n";
+    });
+
+    const encodedUri = encodeURI(tsvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "data.tsv");
+    document.body.appendChild(link);
+
+    link.click();
+    document.body.removeChild(link);
+  }
 }
