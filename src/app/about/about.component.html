@@ -1,83 +1,27 @@
-
 <app-navigation-bar></app-navigation-bar>
-<div class="container-global">
+<div style="width: 70%; margin: 0 auto; text-align: justify;">
+    <div class="about-section">
+        <h1>ClaimsKG Statistical Observatory</h1>
+        <p>The ClaimsKG Statistical Observatory is a complementary tool to the ClaimsKG search engine. It generates
+            graphs and statistics from the data in the ClaimsKG knowledge graph.</p>
+        <p>This statistical observatory allows for the visual exploration of various metrics and trends related to
+            claims and their verification across the different fact-checking websites included in ClaimsKG.</p>
+        <h2>Key Features:</h2>
+        <ul>
+            <li>Visualization of the total number of claims and fact-checking reviews over time</li>
+            <li>Distribution of truth evaluations (true, false, misleading, etc.)</li>
+            <li>Analysis of the frequency of appearance of different entities (people, organizations, locations, etc.)
+                associated with the claims</li>
+            <li>Evolution of the number of claims by thematic category (politics, health, economy, etc.)</li>
+            <li>Comparison of the performance of different fact-checking websites in terms of coverage volume and
+                results</li>
+        </ul>
 
-    <div class="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
-        <div class="flex flex-col lg:flex-row justify-between gap-8">
-            <div class="w-full lg:w-5/12 flex flex-col justify-center">
-                <h1 class="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 dark:text-white pb-4">What is ClaimsKG Statistical Repository?</h1>
-
-                    <p>This is an exploratory search engine operating over ClaimsKG, a knowledge graph of fact-checked annotated claims, extracted from fact-checking web-sites.
-                    ClaimsKG facilitates structured queries about claims, their truth values, authors, dates and other kinds of metadata.
-                    It is generated through a (semi-)automated pipeline, which harvests data from popular fact-checking sites on a regular basis, lifts these data into an RDF/S model, which exploits established vocabularies such as schema.org and NIF, and annotates claims with related entities from DBpedia.
-                    This is the result of the work of 2 French research teams — LIRMM (Montpellier) and LGI2P (Ales) — in cooperation with 2 research teams from Germany — GESIS (Cologne) and L3S (Hannover).
-                    For more information, please visit https://data.gesis.org/claimskg/site/.
-                    <b> </b>
-                    Our data harvesting and publication process is in alignment with the copyright restrictions of the respective fact-checking websites.
-                    www.africacheck.org , www.checkyourfact.com , www.factscan.ca , www.politifact.com , www.snopes.com , www.truthorfiction.com
-                    We would like to thank all these websites for producing such a quality work.
-                    
-                    The dataset is published under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 license.
-                    
-                    ClaimsKG does NOT contain the text of the reviews, it only contains structured metadata information, and links to the original review.
-                    ClaimsKG can be used ONLY for research purposes.</p>
-            </div>
-            <div class="w-full lg:w-8/12">
-                <img class="w-full h-full" src="https://i.ibb.co/FhgPJt8/Rectangle-116.png" alt="A group of People" />
-            </div>
-        </div>
-
-        <div class="flex lg:flex-row flex-col justify-between gap-8 pt-12">
-            <div class="w-full lg:w-5/12 flex flex-col justify-center">
-                <h1 class="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 dark:text-white pb-4">The meaning of the search tools</h1>
-                <p class="font-normal text-base leading-6 text-gray-600 dark:text-white">
-                    Entities:
-                    This search bar allow you to type any entities in it. It can be human beings such as Donald Trump, Vladimir Putin for instance or things like White House, Mont-Blanc. If any of the things you typed appears in the claim then the claim will be in the results pages.
-                    
-                    Keywords:
-                    This is where you can type some words, which are being used to tag the claim. For example if a claim is about the US collusion probe then it might get tagged Trump.
-
-                    Truth rating:
-                    This criteria refers to the credibility given to the claims according to the website from where it got extracted. Every website has its own ranking but in this interface only 4 types of truth ratings are possible (taken from the normalised rating scheme of ClaimsKG): True, Mixte when the sources are split about the truth of this claim, False and Other when we can't get any data about the truthfulness.
-
-                    Author:
-                    Here you can fill in the author of the claims you want to look at.
-
-                    Time period:
-                    You can select a start date and an end date which will define the time period of the claims you're looking for.
-
-                    Languages:
-                    You can check a box to get only the claim in a certain language.
-
-                    Sources:
-                    If you choose a fact-checking website on this research bar (e.g.,Snopes) you will only get the claims coming originally from the selected website.
-                </p>
-            </div>
-            <div class="w-full lg:w-8/12 lg:pt-8">
-                <div class="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 lg:gap-4 shadow-lg rounded-md">
-                    <div class="p-4 pb-6 flex justify-center flex-col items-center">
-                        <img class="md:block hidden" src="https://i.ibb.co/FYTKDG6/Rectangle-118-2.png" alt="Alexa featured Image" />
-                        <img class="md:hidden block" src="https://i.ibb.co/zHjXqg4/Rectangle-118.png" alt="Alexa featured Image" />
-                        <p class="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">Alexa</p>
-                    </div>
-                    <div class="p-4 pb-6 flex justify-center flex-col items-center">
-                        <img class="md:block hidden" src="https://i.ibb.co/fGmxhVy/Rectangle-119.png" alt="Olivia featured Image" />
-                        <img class="md:hidden block" src="https://i.ibb.co/NrWKJ1M/Rectangle-119.png" alt="Olivia featured Image" />
-                        <p class="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">Olivia</p>
-                    </div>
-                    <div class="p-4 pb-6 flex justify-center flex-col items-center">
-                        <img class="md:block hidden" src="https://i.ibb.co/Pc6XVVC/Rectangle-120.png" alt="Liam featued Image" />
-                        <img class="md:hidden block" src="https://i.ibb.co/C5MMBcs/Rectangle-120.png" alt="Liam featued Image" />
-                        <p class="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">Liam</p>
-                    </div>
-                    <div class="p-4 pb-6 flex justify-center flex-col items-center">
-                        <img class="md:block hidden" src="https://i.ibb.co/7nSJPXQ/Rectangle-121.png" alt="Elijah featured image" />
-                        <img class="md:hidden block" src="https://i.ibb.co/ThZBWxH/Rectangle-121.png" alt="Elijah featured image" />
-                        <p class="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">Elijah</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <h2>About the Project</h2>
+        <p>This statistical analysis tool aims to facilitate the understanding of large-scale fact-checking dynamics and
+            trends, relying on the structured and enriched data from the ClaimsKG project.</p>
+        <p>Just like the ClaimsKG search engine, the statistical observatory is the result of a collaborative effort
+            between French and German research teams. It is made available to the public for research purposes, while
+            respecting the copyrights of the source fact-checking websites.</p>
     </div>
 </div>
-
