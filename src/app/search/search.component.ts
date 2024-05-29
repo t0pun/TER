@@ -14,7 +14,7 @@ import { NavigationBarComponent } from "../navigation-bar/navigation-bar.compone
     imports: [ByTopicComponent, ByEntityComponent, ByEntityByTopicComponent, NgSwitch, NgSwitchCase, NavigationBarComponent]
 })
 export class SearchComponent {
-  activeButton: string = 'entity-topic';
+  activeButton: string = 'entity';
 
   setActive(buttonId: string): void {
     this.activeButton = buttonId;

@@ -61,7 +61,7 @@ export class Graph1Component implements OnChanges {
     const traces: Data[] = [
       {
         type: 'scatter',
-        mode: 'lines+markers',
+        mode: 'lines',
         name: 'True',
         x: trueCounts.map(dictionary => dictionary["date1"]),
         y: trueCounts.map(dictionary => dictionary["counts"]),
@@ -93,7 +93,7 @@ export class Graph1Component implements OnChanges {
       },
       {
         type: 'scatter',
-        mode: 'lines',
+        mode: 'lines+markers',
         name: 'Total',
         x: allCounts.map(dictionary => dictionary["date1"]),
         y: allCounts.map(dictionary => dictionary["counts"]),
