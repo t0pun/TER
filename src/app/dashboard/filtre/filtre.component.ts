@@ -1,12 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { FormControl,FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FiltreService } from '../filtre.service';
-import { NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatInputModule } from '@angular/material/input'
-import { MatSelectModule} from '@angular/material/select'
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,90 +16,105 @@ import { ListeentityService } from '../listeentity.service';
 @Component({
   selector: 'app-filtre',
   standalone: true,
-  imports: [ReactiveFormsModule,FormsModule,CommonModule,RouterOutlet,MatTooltipModule, MatChipsModule,MatIconModule,MatAutocompleteModule,MatInputModule,MatSelectModule,MatFormFieldModule],
+  imports: [
+    ReactiveFormsModule,
+    FormsModule,
+    CommonModule,
+    RouterOutlet,
+    MatTooltipModule,
+    MatChipsModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatSelectModule,
+    MatFormFieldModule
+  ],
   templateUrl: './filtre.component.html',
-  styleUrl: './filtre.component.css'
+  styleUrls: ['./filtre.component.css']
 })
 export class FiltreComponent {
-
-  filtreService = inject(FiltreService)
+  filtreService = inject(FiltreService);
   displayDate: boolean = true;
   suggestions!: Observable<string[]>;
   listeEntity: string[] = [];
-  selectedEntity : string[] = [];
+  selectedEntity: string[] = [];
 
   applyForm = new FormGroup({
-
-    mois: new FormControl(''),
-    annee : new FormControl(''),
+    granularite: new FormControl(''),
     date1: new FormControl(''),
     date2: new FormControl(''),
-    selectedOption : new FormControl(''),
-
+    selectedOption: new FormControl(''),
   });
 
-  constructor(private listeEntityService : ListeentityService){
+  constructor(private listeEntityService: ListeentityService) {
     this.listeEntityService.data$.subscribe((data) => {
       this.listeEntity = data;
-      
-      // Créer l'élément <input>
-      var inputElement = document.createElement('input');
-      inputElement.id = "liste_entity";
+      this.updateDatalist();
+    });
+  }
 
-      // Créer l'élément <datalist>
+  updateDatalist() {
+    // Check if the datalist element already exists
+    var datalist = document.getElementById('liste_entity');
+    if (datalist) {
+      datalist.innerHTML = ''; // Clear existing options
+    } else {
+      datalist = document.createElement('select');
+      datalist.id = 'liste_entity';
       var div = document.getElementById('datalist');
-      var datalist = document.createElement('select')
-      datalist.id = "liste_entity"
-      this.listeEntity.forEach(option => {
+      div?.appendChild(datalist);
+    }
+
+    // Add new options to the datalist
+    this.listeEntity.forEach((option) => {
       const optionElement = document.createElement('option');
       optionElement.value = option;
       optionElement.innerHTML = option;
-
-      datalist.appendChild(optionElement);
-
-  });
-
-  // Ajouter le <datalist> à l'<input>
-      div?.appendChild(datalist)
+      datalist?.appendChild(optionElement);
     });
-
-  }
-  selectOption(): any {
-    var inputElement = <HTMLInputElement>document.getElementById("liste_entity")
-      this.selectedEntity.push(inputElement.value)
-      var div = <HTMLDivElement>document.getElementById("selected_entity")
-      div.innerHTML = this.selectedEntity.toString()
   }
 
+  selectOption() {
+    var inputElement = <HTMLInputElement>document.getElementById('liste_entity');
+    var selectedValue = inputElement.value;
+
+    if (selectedValue && !this.selectedEntity.includes(selectedValue)) {
+      this.selectedEntity.push(selectedValue);
+
+      var divContainer = <HTMLDivElement>document.getElementById('selected_entity');
+      var newDiv = document.createElement('div');
+      newDiv.className = 'selected-entity-item';
+      newDiv.innerText = selectedValue;
+      divContainer.appendChild(newDiv);
+    }
+  }
 
   displayElement(): void {
-    if(this.displayDate==true){
-      this.displayDate = false;
-    }else{
-      this.displayDate = true;
-    }
+    this.displayDate = !this.displayDate;
   }
 
-  onSubmit(){
-    var granularite = ""
-    if(this.applyForm.value.annee=="Annee"){
-      granularite = "/"+"annee"
-    }else if(this.applyForm.value.mois=="Mois"){
-      granularite = "/"+"mois"
+  onSubmit() {
+    var granularite = '';
+    
+    if (this.applyForm.value.granularite === 'Annee') {
+      granularite = 'annee';
+    } else if (this.applyForm.value.granularite === 'Mois') {
+      granularite = 'mois';
     }
+    console.log("Granularité : "+granularite)
     this.filtreService.onSubmit(
+      this.selectedEntity,
       granularite,
       this.applyForm.value.date2 ?? '',
       this.applyForm.value.date1 ?? ''
-    )
+    );
   }
 
   isOption1Checked() {
     return this.applyForm.get('selectedOption')?.value === 'Annee';
   }
 
-  onClick(){
-    // console.log(this.data)
+  onClick() {
+    // Custom logic on click
   }
-
 }

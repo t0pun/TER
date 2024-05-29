@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, inject } from '@angular/core';
 import Plotly, { Data, Layout } from 'plotly.js-basic-dist-min';
 import { FiltreService } from '../filtre.service';
 
@@ -12,8 +12,9 @@ import { FiltreService } from '../filtre.service';
 })
 export class Graph1Component implements OnInit{
   data: any;
-  private apiUrl = "http://127.0.0.1:5000/json_per_date1_label/1996/2023"
+  private apiUrl = "http://127.0.0.1:5000/json_per_date1_label?date1=1996&date2=2024&granularite=mois"
   private http = inject(HttpClient)
+  @Input() isloaded = true
 
   constructor(private filtreService: FiltreService){
     this.filtreService.submitTriggered$.subscribe(()=>{
@@ -36,20 +37,53 @@ export class Graph1Component implements OnInit{
     const mixedCounts: any[] = [];
     const otherCounts: any[] = [];
     const allCounts: any[] = [];
-
-    for (let i = 0; i < data.length; i++){
-      var current_date = data[i]['date1'];
-      sampleDates.push(current_date)
-      if(data[i]['label']=='TRUE'){
-        trueCounts.push({"date1":data[i]['date1'],"counts":data[i]['counts']})
-      }else if(data[i]['label']=='FALSE'){
-        falseCounts.push({"date1":data[i]['date1'],"counts":data[i]['counts']})
+    
+    for (let i = 0; i < data.length; i++) {
+      const currentDate = data[i]['date1'];
+      if (!sampleDates.includes(currentDate)) {
+        sampleDates.push(currentDate);
+        trueCounts.push({ date1: currentDate, counts: 0 });
+        falseCounts.push({ date1: currentDate, counts: 0 });
+        mixedCounts.push({ date1: currentDate, counts: 0 });
+        otherCounts.push({ date1: currentDate, counts: 0 });
+        allCounts.push({ date1: currentDate, counts: 0 });
       }
-      else if(data[i]['label']=='MIXTURE'){
-        mixedCounts.push({"date1":data[i]['date1'],"counts":data[i]['counts']})
+    
+      if (data[i]['label'] == 'TRUE') {
+        for (let j = 0; j < trueCounts.length; j++) {
+          if (trueCounts[j].date1 === currentDate) {
+            trueCounts[j].counts += data[i]['counts'];
+            break;
+          }
+        }
+      } else if (data[i]['label'] == 'FALSE') {
+        for (let j = 0; j < falseCounts.length; j++) {
+          if (falseCounts[j].date1 === currentDate) {
+            falseCounts[j].counts += data[i]['counts'];
+            break;
+          }
+        }
+      } else if (data[i]['label'] == 'MIXTURE') {
+        for (let j = 0; j < mixedCounts.length; j++) {
+          if (mixedCounts[j].date1 === currentDate) {
+            mixedCounts[j].counts += data[i]['counts'];
+            break;
+          }
+        }
+      } else if (data[i]['label'] == 'OTHER') {
+        for (let j = 0; j < otherCounts.length; j++) {
+          if (otherCounts[j].date1 === currentDate) {
+            otherCounts[j].counts += data[i]['counts'];
+            break;
+          }
+        }
       }
-      else if(data[i]['label']=='OTHER'){
-        otherCounts.push({"date1":data[i]['date1'],"counts":data[i]['counts']})
+    
+      for (let j = 0; j < allCounts.length; j++) {
+        if (allCounts[j].date1 === currentDate) {
+          allCounts[j].counts += data[i]['counts'];
+          break;
+        }
       }
     }
 
@@ -57,7 +91,7 @@ export class Graph1Component implements OnInit{
     const traces: Data[] = [
       {
         type: 'scatter',
-        mode: 'lines+markers',
+        mode: 'lines',
         name: 'True',
         x: trueCounts.map(dictionary => dictionary["date1"]),
         y: trueCounts.map(dictionary => dictionary["counts"]),
