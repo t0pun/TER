@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { DataSet, Network, Node, Edge } from 'vis-network/standalone/esm/vis-network';
-
+import { MatIconModule } from '@angular/material/icon';
 interface GraphData {
   nodes: Node[];
   edges: Edge[];
@@ -11,6 +11,7 @@ interface GraphData {
   selector: 'app-graph5',
   standalone: true,
   templateUrl: './graph5.component.html',
+  imports: [MatIconModule],
   styleUrls: ['./graph5.component.css']
 })
 export class Graph5Component implements OnInit, AfterViewInit {
