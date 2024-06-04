@@ -103,7 +103,7 @@ export class Graph1Component implements OnInit{
         name: 'False',
         x: falseCounts.map(dictionary => dictionary["date1"]),
         y: falseCounts.map(dictionary => dictionary["counts"]),
-        line: { color: '#A30000' }
+        line: { color: '#cc0000' }
       },
       {
         type: 'scatter',

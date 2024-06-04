@@ -38,31 +38,42 @@ export class Graph3Component implements OnChanges {
     }
     
     sourceNames = trueCounts.map(dictionary => dictionary["source"])
-  
+      /*     
+      marker: { color: '#4CB140' } 
+      marker: { color: '#A30000' } 
+      marker: { color: '#519DE9' } 
+      marker: { color: '#F4C145' }  
+      */
     var data: Data[]= [
       {
         name:'True',
         x: trueCounts.map(dictionary => dictionary["source"]),
         y: trueCounts.map(dictionary => dictionary["counts"]),
-        type: 'bar'
+        type: 'bar',
+        marker: { color: '#4CB140' } 
       },
       {
         name:'False',
         x: falseCounts.map(dictionary => dictionary["source"]),
         y: falseCounts.map(dictionary => dictionary["counts"]),
-        type: 'bar'
+        type: 'bar',
+        marker: { color: '#cc0000' } 
       },
       {
         name:'Mixture',
         x: mixedCounts.map(dictionary => dictionary["source"]),
         y: mixedCounts.map(dictionary => dictionary["counts"]),
-        type: 'bar'
+        type: 'bar',
+        marker: { color: '#519DE9' } 
       },
       {
         name:'Other',
         x: otherCounts.map(dictionary => dictionary["source"]),
         y: otherCounts.map(dictionary => dictionary["counts"]),
-        type: 'bar'
+        type: 'bar',
+        marker: { color: '#F4C145' } 
+
+        
       }
     ];
   

@@ -78,25 +78,34 @@ export class Graph4Component implements OnInit{
       y: trueCounts.map(dictionary => dictionary["langue"]),
       x: trueCounts.map(dictionary => dictionary["counts"]),
       type: 'bar',
-      orientation: 'h',    },
+      orientation: 'h',    
+      marker: { color: '#4CB140' } 
+    },
+
     {
       name:'False',
       y: falseCounts.map(dictionary => dictionary["langue"]),
       x: falseCounts.map(dictionary => dictionary["counts"]),
       type: 'bar',
-      orientation: 'h',    },
+      orientation: 'h', 
+      marker: { color: '#cc0000' } 
+       },
+      
     {
       name:'Mixture',
       y: mixedCounts.map(dictionary => dictionary["langue"]),
       x: mixedCounts.map(dictionary => dictionary["counts"]),
       type: 'bar',
-      orientation: 'h',    },
+      orientation: 'h',
+      marker: { color: '#519DE9' } 
+        },
     {
       name:'Other',
       y: otherCounts.map(dictionary => dictionary["langue"]),
       x: otherCounts.map(dictionary => dictionary["counts"]),
       type: 'bar',
       orientation: 'h',
+      marker: { color: '#F4C145' },
     }
   ];
 

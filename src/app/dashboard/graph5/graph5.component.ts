@@ -1,14 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, AfterViewInit, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-
-import { DataSet, Network, Edge, Node } from 'vis-network/standalone/esm/vis-network';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { DataSet, Network, Node, Edge } from 'vis-network/standalone/esm/vis-network';
 
 interface GraphData {
   nodes: Node[];
   edges: Edge[];
 }
-
-
 
 @Component({
   selector: 'app-graph5',
@@ -19,7 +16,6 @@ interface GraphData {
 export class Graph5Component implements OnInit, AfterViewInit {
 
   constructor(private http: HttpClient) { }
-
 
   ngOnInit(): void { }
 
@@ -34,12 +30,36 @@ export class Graph5Component implements OnInit, AfterViewInit {
 
       const container = document.getElementById('vis-graph') as HTMLElement;
       const graphData = { nodes, edges };
-      const options = {};
-
+      const options = {
+        nodes: {
+          shape: "dot",
+          font: {
+            color: 'black',
+            size: 18,
+            
+          },
+          shadow: true,
+          scaling: {
+            customScalingFunction: function (min: any, max: any, total: number, value: number) {
+              return value / total;
+            },
+            min: 15,
+            max: 110,
+          },
+          
+        },
+        interaction: {
+          zoomView: true,
+          dragView: true,
+          dragNodes: true,
+          zoomSpeed: 0.4,
+          minZoom: 0.5, // Minimum zoom level
+          maxZoom: 2.0, // Maximum zoom level
+        }
+        
+      };
       new Network(container, graphData, options);
     });
-
   }
-  
-}
 
+}

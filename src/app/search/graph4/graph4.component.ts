@@ -48,28 +48,32 @@ export class Graph4Component implements OnChanges {
             x: trueCounts.map(dictionary => dictionary["counts"]),
             y: trueCounts.map(dictionary => dictionary["language"]),
             type: 'bar',
-            orientation: 'h'
+            orientation: 'h',
+            marker: { color: '#4CB140' } 
         },
         {
             name: 'False',
             x: falseCounts.map(dictionary => dictionary["counts"]),
             y: falseCounts.map(dictionary => dictionary["language"]),
             type: 'bar',
-            orientation: 'h'
+            orientation: 'h',
+            marker: { color: '#cc0000' } 
         },
         {
             name: 'Mixture',
             x: mixedCounts.map(dictionary => dictionary["counts"]),
             y: mixedCounts.map(dictionary => dictionary["language"]),
             type: 'bar',
-            orientation: 'h'
+            orientation: 'h',
+            marker: { color: '#519DE9' } 
         },
         {
             name: 'Other',
             x: otherCounts.map(dictionary => dictionary["counts"]),
             y: otherCounts.map(dictionary => dictionary["language"]),
             type: 'bar',
-            orientation: 'h'
+            orientation: 'h',
+            marker: { color: '#F4C145' } 
         }
     ];
 
