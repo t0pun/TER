@@ -41,7 +41,6 @@ export class Graph4Component implements OnInit{
   var falseCounts: any[] = [];
   var mixedCounts: any[] = [];
   var otherCounts: any[] = [];
-  var allCounts: number[] = [];
 
 
   for (let i = 0; i < data_1.length; i++) {
@@ -110,6 +109,7 @@ export class Graph4Component implements OnInit{
   ];
 
     const layout: Partial<Layout> = { 
+      title: 'The languages of our claims',
       barmode: 'stack',  // How do you want the bars to be positioned 
       margin: { t: 50, b: 50, l: 100, r: 200 }, 
       legend: {

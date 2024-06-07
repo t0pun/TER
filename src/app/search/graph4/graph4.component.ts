@@ -78,6 +78,7 @@ export class Graph4Component implements OnChanges {
     ];
 
     const layout: Partial<Layout> = {
+        title: 'The languages of the claims',
         barmode: 'stack',
         margin: { t: 50, b: 50, l: 50, r: 200 }, 
         legend: {

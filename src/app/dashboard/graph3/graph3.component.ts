@@ -89,8 +89,8 @@ export class Graph3Component implements OnInit{
       marker: { color: '#F4C145' } 
     }
   ];
-
     const layout: Partial<Layout> = { 
+      title: 'The sources of our claims',
       barmode: 'stack',  // How do you want the bars to be positioned 
       margin: { t: 50, b: 50, l: 50, r: 200 }, 
       legend: {
