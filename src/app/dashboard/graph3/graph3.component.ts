@@ -13,8 +13,6 @@ import { FiltreService } from '../filtre.service';
 export class Graph3Component implements OnInit{
   data: any;
   private apiUrl = "http://127.0.0.1:5000/json_per_source_label"
-  private http = inject(HttpClient)
-
   constructor(private filtreService: FiltreService){
     this.filtreService.submitTriggeredSourceLabel$.subscribe(()=>{
 
@@ -117,7 +115,7 @@ export class Graph3Component implements OnInit{
   downloadTSV(): void {
     const data = this.data;
     let tsvContent = "data:text/tab-separated-values;charset=utf-8,";
-
+    tsvContent += "Source\tLabel\tQuantity\n";
     data.forEach((row: any) => {
       const rowArray = [row['source'], row['label'], row['counts']];
       tsvContent += rowArray.join("\t") + "\n";

@@ -78,7 +78,7 @@ export class Graph2Component implements OnChanges {
 downloadTSV(): void {
   const data = this.entityData;
   let tsvContent = "data:text/tab-separated-values;charset=utf-8,";
-
+  tsvContent += "Entity\tQuantity\n";
   data.forEach((row: any) => {
     const rowArray = [row['label'], row['counts']];
     tsvContent += rowArray.join("\t") + "\n";

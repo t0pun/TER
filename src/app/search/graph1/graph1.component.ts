@@ -125,7 +125,7 @@ export class Graph1Component implements OnChanges {
   downloadTSV(): void {
     const data = this.entityData;
     let tsvContent = "data:text/tab-separated-values;charset=utf-8,";
-
+    tsvContent += "Date\tLabel\tQuantity\n";
     data.forEach((row: any) => {
       const rowArray = [row['date1'], row['label'], row['counts']];
       tsvContent += rowArray.join("\t") + "\n";
@@ -139,5 +139,6 @@ export class Graph1Component implements OnChanges {
 
     link.click();
     document.body.removeChild(link);
+    
   }
 }

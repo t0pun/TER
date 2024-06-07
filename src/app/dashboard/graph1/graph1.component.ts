@@ -13,7 +13,6 @@ import { FiltreService } from '../filtre.service';
 export class Graph1Component implements OnInit{
   data: any;
   private apiUrl = "http://127.0.0.1:5000/json_per_date1_label?date1=1996&date2=2024&granularite=mois"
-  private http = inject(HttpClient)
   @Input() isloaded = true
 
   constructor(private filtreService: FiltreService){
@@ -168,6 +167,8 @@ export class Graph1Component implements OnInit{
     const data = this.data;
     let tsvContent = "data:text/tab-separated-values;charset=utf-8,";
 
+    // Add headers to TSV content
+    tsvContent += "Date\tLabel\tQuantity\n";
     data.forEach((row: any) => {
       const rowArray = [row['date1'], row['label'], row['counts']];
       tsvContent += rowArray.join("\t") + "\n";

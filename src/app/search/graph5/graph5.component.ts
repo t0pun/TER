@@ -66,7 +66,7 @@ generateRandomColor(): string {
 downloadTSV(): void {
   const data = this.entityData;
   let tsvContent = "data:text/tab-separated-values;charset=utf-8,";
-
+  tsvContent += "Entity\tQuantity\n";
   data.forEach((row: any) => {
     const rowArray = [row['entity'], row['counts']];
     tsvContent += rowArray.join("\t") + "\n";
