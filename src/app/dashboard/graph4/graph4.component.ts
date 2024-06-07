@@ -16,9 +16,7 @@ export class Graph4Component implements OnInit{
 
   constructor(private filtreService: FiltreService){
     this.filtreService.submitTriggeredPerLangue$.subscribe(()=>{
-
       this.data = this.filtreService.fetchDataPerLangue().subscribe((response) => {
-
         this.data = response;
         this.buildChart(this.data)
 
