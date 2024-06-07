@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, inject } from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
 import Plotly, { Data, Layout} from 'plotly.js-basic-dist-min';
 import { FiltreService } from '../filtre.service';
 
@@ -13,7 +13,6 @@ import { FiltreService } from '../filtre.service';
 export class Graph4Component implements OnInit{
   data: any;
   private apiUrl = "http://127.0.0.1:5000/json_per_langue_label"
-  private http = inject(HttpClient)
 
   constructor(private filtreService: FiltreService){
     this.filtreService.submitTriggeredPerLangue$.subscribe(()=>{
@@ -21,7 +20,6 @@ export class Graph4Component implements OnInit{
       this.data = this.filtreService.fetchDataPerLangue().subscribe((response) => {
 
         this.data = response;
-        console.log(this.data)
         this.buildChart(this.data)
 
       });
@@ -68,8 +66,6 @@ export class Graph4Component implements OnInit{
     otherCounts = otherCounts.slice(0, 5);
   
   sourceNames = trueCounts.map(dictionary => dictionary["langue"])
-  console.log(sourceNames)
-  console.log(trueCounts)
 
   var data: Data[]= [
     {

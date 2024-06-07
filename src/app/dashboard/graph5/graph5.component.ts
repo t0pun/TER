@@ -33,7 +33,6 @@ export class Graph5Component implements OnInit, AfterViewInit {
       const graphData = { nodes, edges };
       const options = {
         nodes: {
-          shape: "dot",
           font: {
             color: 'black',
             size: 18,
@@ -54,8 +53,6 @@ export class Graph5Component implements OnInit, AfterViewInit {
           dragView: true,
           dragNodes: true,
           zoomSpeed: 0.4,
-          minZoom: 0.5, // Minimum zoom level
-          maxZoom: 2.0, // Maximum zoom level
         }
         
       };

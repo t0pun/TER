@@ -7,10 +7,12 @@ import { Observable, Subject } from 'rxjs';
 })
 export class FiltreService {
 
+
   private apiUrl_first_graph = "";
   private apiUrl_top_entity_graph = "";
   private apiUrl_per_source_label = "";
   private apiUrl_per_langue = "";
+  private apiUrl_per_topic_label = ""
   private apiUrl_per_label_true = ""
   private apiUrl_per_label_false = ""
   private apiUrl_per_label_mixture = ""
@@ -47,7 +49,7 @@ export class FiltreService {
       }else{
         this.apiUrl_first_graph = "http://127.0.0.1:5000/json_per_date1_label?date1=1996&date2=2024&granularite="+granularite
       }
-  
+      this.apiUrl_per_topic_label="http://127.0.0.1:5000/json_born_per_topics/"+debut+"/"+fin
       this.apiUrl_top_entity_graph = "http://127.0.0.1:5000/json_per_entity_date1_date2/"+debut+"/"+fin
       this.apiUrl_per_source_label = "http://127.0.0.1:5000/json_born_per_source_label/"+debut+"/"+fin
       this.apiUrl_per_langue = "http://127.0.0.1:5000/json_per_langue_label/"+debut+"/"+fin
@@ -62,7 +64,8 @@ export class FiltreService {
       }else{
         this.apiUrl_first_graph = "http://127.0.0.1:5000/json_per_date1_label?entity="+selectedOption.toString()+"&date1=1996&date2=2024&granularite="+granularite
       }
-  
+      
+      this.apiUrl_per_topic_label="http://127.0.0.1:5000/json_born_per_topics/"+selectedOption.toString()+debut+"/"+fin
       this.apiUrl_top_entity_graph = "http://127.0.0.1:5000/json_per_entity_date1_date2/"+selectedOption.toString()+"/"+debut+"/"+fin
       this.apiUrl_per_source_label = "http://127.0.0.1:5000/json_born_per_source_label/"+selectedOption.toString()+"/"+debut+"/"+fin
       this.apiUrl_per_langue = "http://127.0.0.1:5000/json_per_langue_label/"+selectedOption.toString()+"/"+debut+"/"+fin
@@ -99,7 +102,10 @@ fetchDataPerLangue() :Observable<any[]>{
   var results = this.http.get<any>(this.apiUrl_per_langue)
   return results;
 }
-
+fetchDataPerTopic() {
+  var results = this.http.get<any>(this.apiUrl_per_topic_label)
+  return results;
+}
 fetchDataSummary() : Observable<any[]>[]{
   console.log(this.apiUrl_per_label_true)
   return [this.http.get<any>(this.apiUrl_per_label_true),this.http.get<any>(this.apiUrl_per_label_false),this.http.get<any>(this.apiUrl_per_label_mixture),this.http.get<any>(this.apiUrl_per_label_other)]

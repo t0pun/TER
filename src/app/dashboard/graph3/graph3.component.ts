@@ -20,7 +20,6 @@ export class Graph3Component implements OnInit{
 
       this.data = this.filtreService.fetchDataPerSourceLabel().subscribe((response) => {
         this.data = response;
-        console.log(this.data)
         this.buildChart(this.data)
       });
       //this.ngOnResearch();
@@ -55,8 +54,6 @@ export class Graph3Component implements OnInit{
   }
   
   sourceNames = trueCounts.map(dictionary => dictionary["source"])
-  console.log(sourceNames)
-  console.log(trueCounts)
 
   var data: Data[]= [
     {

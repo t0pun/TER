@@ -9,14 +9,15 @@ import { NavigationBarComponent } from '../navigation-bar/navigation-bar.compone
 import { AppComponent } from '../app.component';
 import { ClaimsSummaryComponent } from './claims-summary/claims-summary.component';
 import { FiltreComponent } from './filtre/filtre.component';
+import { Graph6Component } from "./graph6/graph6.component";
 
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [Graph1Component,Graph2Component,Graph3Component,Graph4Component,Graph5Component,AppComponent,FiltreComponent,NavigationBarComponent,ClaimsSummaryComponent],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+    selector: 'app-dashboard',
+    standalone: true,
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.css',
+    imports: [Graph1Component, Graph2Component, Graph3Component, Graph4Component, Graph5Component, AppComponent, FiltreComponent, NavigationBarComponent, ClaimsSummaryComponent, Graph6Component]
 })
 export class DashboardComponent {
 

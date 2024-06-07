@@ -21,7 +21,6 @@ export class Graph2Component implements OnInit{
 
       this.data = this.filtreService.fetchDataTopEntity().subscribe((response) => {
         this.data = response;
-        console.log(this.data)
         this.buildChart(this.data)
       });
       //this.ngOnResearch();
@@ -62,7 +61,8 @@ export class Graph2Component implements OnInit{
   const layout = {
     title: 'Top 50 - Most Used Entity',
     margin: { "t": 50, "b": 50, "l": 50, "r": 200 },
-    showlegend: true
+    showlegend: true,
+    height: 900,
   };
 
   var config = {responsive: true}

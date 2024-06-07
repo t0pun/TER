@@ -18,7 +18,6 @@ export class ClaimsSummaryComponent {
   private apiUrlTrue = "http://127.0.0.1:5000/number_true"
   private apiUrlMixture = "http://127.0.0.1:5000/number_mixture"
   private apiUrlOther = "http://127.0.0.1:5000/number_other"
-  private http = inject(HttpClient)
   trueNumber: any;
   mixtureNumber: any;
   falseNumber: any;
@@ -38,11 +37,6 @@ export class ClaimsSummaryComponent {
           const false_counts = this.data[1]["counts"]
           const mixture_counts = this.data[2]["counts"]
           const other_counts = this.data[3]["counts"]
-
-          console.log(true_counts)
-          console.log(false_counts)
-          console.log(mixture_counts)
-          console.log(other_counts)
 
           this.buildSummary(
             true_counts,
