@@ -2,14 +2,14 @@
     width: 100%;
      height: 100%;
   }
-#download-tsv {
+#download {
     color:rgb(47, 56, 92) ;
     padding: 10px;
 }
-#download-tsv:hover {
+#download:hover {
     color: rgb(134, 40, 40);
 }
-#download-tsv:focus {
+#download:focus {
     outline: none; /* Remove the focus outline */
   }
   

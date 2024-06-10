@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import * as XLSX from 'xlsx';
 import { Component, OnInit, inject } from '@angular/core';
 import Plotly, { Data, Layout} from 'plotly.js-basic-dist-min';
 import { FiltreService } from '../filtre.service';
@@ -130,4 +130,44 @@ export class Graph3Component implements OnInit{
     link.click();
     document.body.removeChild(link);
   }
+  downloadCSV(): void {
+    const data = this.data;
+    let csvContent = "data:text/csv;charset=utf-8,";
+
+    // Ajouter les en-têtes au contenu CSV
+    csvContent += "Source,Label,Quantity\n";
+    data.forEach((row: any) => {
+      const rowArray = [row['source'], row['label'], row['counts']];
+      csvContent += rowArray.join(",") + "\n";
+    });
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "data.csv");
+    document.body.appendChild(link);
+
+    link.click();
+    document.body.removeChild(link);
+}
+downloadExcel(): void {
+  const data = this.data.map((row: any) => ({
+      Source: row['source'],
+      Label: row['label'],
+      Quantity: row['counts']
+  }));
+
+  const worksheet = XLSX.utils.json_to_sheet(data);
+  const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+  const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+  const blob = new Blob([excelBuffer], { type: "application/octet-stream" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.setAttribute("download", "data.xlsx");
+  document.body.appendChild(link);
+
+  link.click();
+  document.body.removeChild(link);
+}
 }
