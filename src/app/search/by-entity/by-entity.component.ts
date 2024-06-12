@@ -76,20 +76,14 @@ export class ByEntityComponent {
     this.firstDate=first_date;
     this.lastDate=last_date;
     if(this.selectedOptions){
-      console.log("Entity service called");
       this.searchService.searchEntity1(this.selectedOptions, this.firstDate, this.lastDate)
     .subscribe({
     next: (result) => {
-      // Handle the data received from the search
-      console.log('Search results:', result);
-      //alert(JSON.stringify(result));
-      
       this.entityData=result; // Emit the result to parent component
     },
     error: (error) => {
       // Handle any errors that occur during the search
       console.error('Search failed:', error);
-      alert('Search failed, please try again.');
     }
   });
 
@@ -97,15 +91,11 @@ export class ByEntityComponent {
   .subscribe({
   next: (result2) => {
     // Handle the data received from the search
-    console.log('Search results:', result2);
-    //alert(JSON.stringify(result));
-    
     this.entityData2=result2; // Emit the result to parent component
   },
   error: (error) => {
     // Handle any errors that occur during the search
     console.error('Search failed:', error);
-    alert('Search failed, please try again.');
   }
 });
 
@@ -113,31 +103,22 @@ this.searchService.searchEntity3(this.selectedOptions, this.firstDate, this.last
 .subscribe({
 next: (result3) => {
   // Handle the data received from the search
-  console.log('Search results:', result3);
-  //alert(JSON.stringify(result));
-  
   this.entityData3=result3; // Emit the result to parent component
 },
 error: (error) => {
   // Handle any errors that occur during the search
   console.error('Search failed:', error);
-  alert('Search failed, please try again.');
 }
 });
 
 this.searchService.searchEntity4(this.selectedOptions, this.firstDate, this.lastDate)
 .subscribe({
 next: (result4) => {
-  // Handle the data received from the search
-  console.log('Search results:', result4);
-  //alert(JSON.stringify(result));
-  
   this.entityData4=result4; // Emit the result to parent component
 },
 error: (error) => {
   // Handle any errors that occur during the search
   console.error('Search failed:', error);
-  alert('Search failed, please try again.');
 }
 });
 

@@ -41,21 +41,17 @@ export class ByTopicComponent {
     this.firstDate=first_date;
     this.lastDate=last_date;
     if(this.selectedTopic){
-      console.log("Topic service called");
 
       //First graph
       this.searchService.searchTopic1(this.firstDate, this.lastDate,this.selectedTopic)
     .subscribe({
     next: (result) => {
-      // Handle the data received from the search
-      console.log('Search results first graph:', result);
       this.entityData=result;
      
     },
     error: (error) => {
       // Handle any errors that occur during the search
       console.error('Search failed:', error);
-      alert('Search failed, please try again.');
     }
   });
 
@@ -63,15 +59,12 @@ export class ByTopicComponent {
     this.searchService.searchTopic2(this.firstDate, this.lastDate,this.selectedTopic)
     .subscribe({
     next: (result2) => {
-      // Handle the data received from the search
-      console.log('Search results second graph:', result2);
       this.entityData2=result2;
      
     },
     error: (error) => {
       // Handle any errors that occur during the search
       console.error('Search failed:', error);
-      alert('Search failed, please try again.');
     }
   });
 
@@ -79,15 +72,12 @@ export class ByTopicComponent {
   this.searchService.searchTopic3(this.firstDate, this.lastDate,this.selectedTopic)
   .subscribe({
   next: (result3) => {
-    // Handle the data received from the search
-    console.log('Search results theird graph:', result3);
     this.entityData3=result3;
    
   },
   error: (error) => {
     // Handle any errors that occur during the search
     console.error('Search failed:', error);
-    alert('Search failed, please try again.');
   }
 });
 
@@ -95,20 +85,15 @@ export class ByTopicComponent {
   this.searchService.searchTopic4(this.firstDate, this.lastDate,this.selectedTopic)
   .subscribe({
   next: (result4) => {
-    // Handle the data received from the search
-    console.log('Search results forth graph:', result4);
     this.entityData4=result4;
    
   },
   error: (error) => {
     // Handle any errors that occur during the search
     console.error('Search failed:', error);
-    alert('Search failed, please try again.');
   }
 });
 }
-
-    console.log('Submitted values:', this.firstDate,this.lastDate, this.selectedTopic);
 
   }
 

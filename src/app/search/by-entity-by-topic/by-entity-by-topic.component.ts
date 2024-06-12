@@ -61,7 +61,6 @@ this.suggestions = this.formEntity.valueChanges.pipe(
   });
   }
   onTopicChange() {
-    console.log("changein");
     if (this.selectedTopic) {
       this.formEntity.enable();
     } else {
@@ -89,18 +88,15 @@ this.suggestions = this.formEntity.valueChanges.pipe(
     this.firstDate=first_date;
     this.lastDate=last_date;
        if(this.selectedTopic && this.selectedOptions){
-      console.log("Entity-Topic service called");
       this.searchService.searchTopicEntity1(this.selectedOptions, this.firstDate, this.lastDate,this.selectedTopic)
       .subscribe({
         next: (result1) => {
           // Handle the data received from the search
-          console.log('Search results dates:', result1);
           this.entityData=result1; // Emit the result to parent component
         },
         error: (error1) => {
           // Handle any errors that occur during the search
           console.error('Search failed:', error1);
-          alert('Search failed, please try again.');
         }
       });
     
@@ -109,13 +105,11 @@ this.suggestions = this.formEntity.valueChanges.pipe(
       .subscribe({
         next: (result2) => {
           // Handle the data received from the search
-          console.log('Search results labels:', result2);
           this.entityData2=result2;
         },
         error: (error2) => {
           // Handle any errors that occur during the search
           console.error('Search failed:', error2);
-          alert('Search failed, please try again.');
         }
       });
     
@@ -123,18 +117,14 @@ this.suggestions = this.formEntity.valueChanges.pipe(
       .subscribe({
         next: (result3) => {
           // Handle the data received from the search
-          console.log('Search results sources:', result3);
           this.entityData3=result3;
         },
         error: (error3) => {
           // Handle any errors that occur during the search
           console.error('Search failed:', error3);
-          alert('Search failed, please try again.');
         }
       });
     }
-  
-    console.log('Submitted values:', this.selectedOptions,this.firstDate,this.lastDate, this.selectedTopic);
 
   }
 
