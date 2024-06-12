@@ -4,7 +4,6 @@ import { Graph2Component } from './graph2/graph2.component';
 import { Graph3Component } from './graph3/graph3.component';
 import { Graph4Component } from './graph4/graph4.component';
 import { Graph5Component } from './graph5/graph5.component';
-// import { Graph5Component } from '../graph5/graph5.component';
 import { NavigationBarComponent } from '../navigation-bar/navigation-bar.component';
 import { AppComponent } from '../app.component';
 import { ClaimsSummaryComponent } from './claims-summary/claims-summary.component';
