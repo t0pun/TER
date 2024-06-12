@@ -30,14 +30,11 @@ export class Graph3Component implements OnInit{
   }
 
   private buildChart(data_1 : any): void {
-
   var sourceNames: string[] = [];
   var trueCounts: any[] = [];
   var falseCounts: any[] = [];
   var mixedCounts: any[] = [];
   var otherCounts: any[] = [];
-  var allCounts: number[] = [];
-
 
   for (let i = 0; i < data_1.length; i++) {
     if(data_1[i]['label']=="TRUE"){

@@ -46,7 +46,8 @@ export class Graph5Component {
   const layout = {
     title: 'Top 50 - Most Common Entities',
     margin: { "t": 50, "b": 50, "l": 50, "r": 50 },
-    showlegend: true
+    showlegend: true,
+    height: 900,
   };
 
   var config = {responsive: true}
