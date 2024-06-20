@@ -11,10 +11,10 @@
     <!-- Entities input -->
     <mat-form-field>
       <label for="entity">About (entities):</label>
-      <mat-icon class="icon-entity" matTooltip="Which entities would you like to include? ex: Donald Trump, USA or Paris ..." matTooltipPosition="right">help_outline</mat-icon>
+      <mat-icon class="icon-entity" matTooltip="Entites are physical unites that are ment to descirble a location, a person an organisations an event, etc.. . ex: Paris, Donald Trump." matTooltipPosition="right">help_outline</mat-icon>
       <div class="form-field-wrapper">
         <input matInput [matAutocomplete]="auto" class="mat-input" id="entity" [formControl]="formEntity">
-        <span class="tip">Tip: Include the maximum number of entities that describe your needs for better accuracy</span>
+        <span class="tip">Tip: Include top 5 suggestions or more that describe your needs for the best accuracy</span>
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngFor="let item of suggestions | async" [value]="item" (click)="optionClicked($event, item)">
             {{ item }}

@@ -12,8 +12,11 @@ form {
     margin-bottom: 10px;
 }
 
+.topic{
+  margin-bottom: 15px;
+}
 .mat-form-field, .selected-items, .topic-container, .date-input-container {
-  margin-bottom: 10px; /* Consistent spacing between sections */
+  margin-bottom: 15px; /* Consistent spacing between sections */
 }
 
 .mat-form-field {
@@ -33,19 +36,21 @@ form {
       flex-wrap: wrap; /* Allows chips to wrap onto the next line */
       gap: 10px; /* Space between chips */
     }
-    
 
-.date-input-container {
-  display:flex;
-    justify-content: space-between;
-    padding: 10px;
-  }
-  
-  .date-input-container > div {
+    .container-comparision-element{
+      width:50%
+    }
+
+    .date-input-container, .container-comparision {
+      display: flex;
+      justify-content: center; /* Aligns items to the start, use 'center' to align them to the center */
+      padding: 10px;
+      gap: 10px; /* Adjust this value as needed */
+    }
+
+  .date-input-container > div, .container-comparision > div {
     margin: 10px;
   }
-
-
 
   mat-form-field{
     width: 100%;
@@ -63,7 +68,19 @@ input {
     appearance: none; 
     cursor:auto;
 }
-
+select {
+  margin: 5px;
+  width: 100%;
+  padding: 12px; /* Slightly more padding for more space inside the select */
+  border: 1px solid #aaa; /* Lighter and thinner border */
+  border-radius: 8px; /* More rounded corners */
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  outline: none;
+  appearance: none; 
+  cursor:auto;
+}
 .button-search{
   display:flex;
   flex-direction: column;
@@ -71,7 +88,7 @@ input {
   margin-right: 60px;
 }
 button {
-    background-color: rgb(47, 56, 92);
+    background-color:rgb(47, 56, 92);
     color: white;
     border: none;
     padding: 12px 30px; /* More padding for a bigger, easier-to-click button */
@@ -81,19 +98,14 @@ button {
     transition: background-color 0.3s;
     outline: none;
 }
-.tip {
-  display: block;
-  margin-top: 8px;
-  font-size: 12px;
-  color: #888;
-}
+
 button:hover {
-    background-color: rgb(47, 56, 92);
+    background-color:  rgb(42, 60, 136);
 }
 
   
   .chips {
-    background-color:  rgb(42, 60, 136) !important;
+    background-color:    rgb(42, 60, 136) !important;
     border: none !important;
     font-size: 16px !important;
     border-radius: 16px !important;
@@ -113,7 +125,8 @@ button:hover {
   /* Hover effects for chips */
   .chips:hover {
     opacity: 0.87; /* Slight transparency on hover */
-    background-color:  rgb(47, 56, 92);/* Darker background on hover */
+    background-color:  rgb(47, 56, 92); 
+
   }
 
   mat-icon {
@@ -122,7 +135,13 @@ button:hover {
     font-size: 16px; 
     margin-left: 10px;
   }
-  
   .graphs {
     padding:20px;
+  }
+
+  .tip {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #888;
   }

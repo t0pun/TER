@@ -1,7 +1,7 @@
 form {
 
     width: 90%; /* Use 100% for better responsiveness */
-    max-width: 700px;
+    max-width: 900px;
     margin: auto;
     align-items: center;
     gap: 10px;
@@ -12,7 +12,7 @@ form {
     margin-bottom: 10px;
 }
 
-.mat-form-field, .selected-items, .topic-container, .date-input-container {
+.mat-form-field, .selected-items, .topic-container, .date-input-container{
   margin-bottom: 10px; /* Consistent spacing between sections */
 }
 
@@ -33,19 +33,20 @@ form {
       flex-wrap: wrap; /* Allows chips to wrap onto the next line */
       gap: 10px; /* Space between chips */
     }
-    
+    .container-comparision-element{
+      width:50%
+    }
 
-.date-input-container {
-  display:flex;
-    justify-content: space-between;
-    padding: 10px;
-  }
-  
-  .date-input-container > div {
+    .date-input-container, .container-comparision {
+      display: flex;
+      justify-content: center; /* Aligns items to the start, use 'center' to align them to the center */
+      padding: 10px;
+      gap: 10px; /* Adjust this value as needed */
+    }
+
+  .date-input-container > div, .container-comparision > div {
     margin: 10px;
   }
-
-
 
   mat-form-field{
     width: 100%;

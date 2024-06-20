@@ -16,7 +16,6 @@ import { NavigationBarComponent } from "../../navigation-bar/navigation-bar.comp
 import { Graph1Component } from "../graph1/graph1.component";
 import { Graph2Component } from "../graph2/graph2.component";
 import { Graph3Component } from "../graph3/graph3.component";
-
 @Component({
     selector: 'app-by-entity-by-topic',
     standalone: true,
@@ -26,11 +25,18 @@ import { Graph3Component } from "../graph3/graph3.component";
 })
 export class ByEntityByTopicComponent  {
   topics: string[] = [];
-  selectedTopic: string ="";
-  formEntity = new FormControl({ value: '', disabled: true });
 
-  suggestions!: Observable<string[]>;
-  selectedOptions: string[]=[] ;
+  selectedTopic1: string ="";
+  selectedTopic2: string ="";
+
+  formEntity1 = new FormControl({ value: '', disabled: true });
+  formEntity2 = new FormControl({ value: '', disabled: true });
+
+  suggestions1!: Observable<string[]>;
+  suggestions2!: Observable<string[]>;
+
+  selectedOptions1: string[]=[] ;
+  selectedOptions2: string[]=[] ;
   submitted : boolean = false;
   firstDate:string="";
   lastDate:string="";
@@ -41,54 +47,88 @@ export class ByEntityByTopicComponent  {
   
   constructor(private suggestionService: SuggestionService, private searchService: SearchService){
 
-this.suggestions = this.formEntity.valueChanges.pipe(
-    startWith(''),
-    map(value => value || ''), // Ensure the value is never null
-    debounceTime(300), // Add a delay to prevent calling API on each keystroke
-    distinctUntilChanged(), // Skip consecutive duplicate values
-    filter(term => term.trim().length >= 2), // Check that the term is at least two characters long
-    switchMap((term: string) =>
-        this.suggestionService.getSuggestionsTopic(term,this.selectedTopic) || of([]) // Call your service only if the above filter passes
-    ),
-    catchError(error => {
-        console.error(error);
-        return of([]);
-    })
-);
+    this.suggestions1 = this.formEntity1.valueChanges.pipe(
+        startWith(''),
+        map(value => value || ''), // Ensure the value is never null
+        debounceTime(300), // Add a delay to prevent calling API on each keystroke
+        distinctUntilChanged(), // Skip consecutive duplicate values
+        filter(term => term.trim().length >= 2), // Check that the term is at least two characters long
+        switchMap((term: string) =>
+            this.suggestionService.getSuggestionsTopic(term,this.selectedTopic1) || of([]) // Call your service only if the above filter passes
+        ), 
+        catchError(error => {
+            console.error(error);
+            return of([]);
+        })
+    );
 
-  this.searchService.getTopics().subscribe((data) => {
-    this.topics = data;
-  });
+    this.suggestions2 = this.formEntity2.valueChanges.pipe(
+      startWith(''),
+      map(value => value || ''), // Ensure the value is never null
+      debounceTime(300), // Add a delay to prevent calling API on each keystroke
+      distinctUntilChanged(), // Skip consecutive duplicate values
+      filter(term => term.trim().length >= 2), // Check that the term is at least two characters long
+      switchMap((term: string) =>
+          this.suggestionService.getSuggestionsTopic(term,this.selectedTopic2) || of([]) // Call your service only if the above filter passes
+      ),
+      catchError(error => {
+          console.error(error);
+          return of([]);
+      })
+  );
+    this.searchService.getTopics().subscribe((data) => {
+      this.topics = data;
+    });
   }
   onTopicChange() {
-    if (this.selectedTopic) {
-      this.formEntity.enable();
-    } else {
-      this.formEntity.disable();
+    if (this.selectedTopic1) {
+      this.formEntity1.enable();
+    } 
+    else {
+      this.formEntity1.disable();
+    }
+    if (this.selectedTopic2) {
+      this.formEntity2.enable();
+    } 
+    else {
+      this.formEntity2.disable();
     }
   }
-  optionClicked(event: Event, option: string) {
+  optionClicked(event: Event, option: string, number: number) {
     event.stopPropagation(); // Prevents the mat-option click from closing the autocomplete panel
-    this.toggleSelection(option);
+    this.toggleSelection(option, number);
   }
   // Adds the suggestion after selecting it to the top if the option was aleady chosen or add it at the bottom if not
-  toggleSelection(option: string) {
-    if(this.selectedOptions){
-    const idx = this.selectedOptions.indexOf(option);
-    if (idx > -1) {
-      this.selectedOptions.splice(idx, 1);
-    } else {
-      this.selectedOptions.push(option);
+  toggleSelection(option: string, number: number) {
+    if (number==1){
+      if(this.selectedOptions1){
+        const idx = this.selectedOptions1.indexOf(option);
+        if (idx > -1) {
+          this.selectedOptions1.splice(idx, 1);
+        } else {
+          this.selectedOptions1.push(option);
+        }
+        this.formEntity1.setValue('');}
     }
-    this.formEntity.setValue('');}
+    if (number==2){
+      if(this.selectedOptions2){
+        const idx = this.selectedOptions2.indexOf(option);
+        if (idx > -1) {
+          this.selectedOptions2.splice(idx, 1);
+        } else {
+          this.selectedOptions2.push(option);
+        }
+        this.formEntity2.setValue('');}
+    }
   }
+
 
   submit( first_date:string, last_date:string){
     this.submitted=true;
     this.firstDate=first_date;
     this.lastDate=last_date;
-       if(this.selectedTopic && this.selectedOptions){
-      this.searchService.searchTopicEntity1(this.selectedOptions, this.firstDate, this.lastDate,this.selectedTopic)
+       if(this.selectedTopic1 && this.selectedOptions1){
+      this.searchService.searchTopicEntity1(this.selectedOptions1, this.firstDate, this.lastDate,this.selectedTopic1)
       .subscribe({
         next: (result1) => {
           // Handle the data received from the search
@@ -101,7 +141,7 @@ this.suggestions = this.formEntity.valueChanges.pipe(
       });
     
     
-    this.searchService.searchTopicEntity2(this.selectedOptions, this.firstDate, this.lastDate,this.selectedTopic)
+    this.searchService.searchTopicEntity2(this.selectedOptions1, this.firstDate, this.lastDate,this.selectedTopic1)
       .subscribe({
         next: (result2) => {
           // Handle the data received from the search
@@ -113,7 +153,7 @@ this.suggestions = this.formEntity.valueChanges.pipe(
         }
       });
     
-    this.searchService.searchTopicEntity3(this.selectedOptions, this.firstDate, this.lastDate,this.selectedTopic)
+    this.searchService.searchTopicEntity3(this.selectedOptions1, this.firstDate, this.lastDate,this.selectedTopic1)
       .subscribe({
         next: (result3) => {
           // Handle the data received from the search

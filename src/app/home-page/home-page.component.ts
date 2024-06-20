@@ -14,7 +14,6 @@ export class HomePageComponent implements OnInit{
   data: any;
   private resume = "http://127.0.0.1:5000/resume"
 
-  private http = inject(HttpClient)
   numberClaims: any;
   numberClaimsReview: any;
   since: any;

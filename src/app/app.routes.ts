@@ -4,6 +4,7 @@ import { SearchComponent } from './search/search.component';
 import { AboutComponent } from './about/about.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ContactComponent } from './contact/contact.component';
+import { CompareComponent } from './compare/compare.component';
 
 const routeConfig: Routes = [
     {
@@ -30,6 +31,11 @@ const routeConfig: Routes = [
       path: 'contact',
       component: ContactComponent,
       title: 'Contact'
+    },
+    {
+      path:'compare',
+      component: CompareComponent,
+      title: 'Compare'
     }
 
   ];

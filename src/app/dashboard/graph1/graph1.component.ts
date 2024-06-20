@@ -24,7 +24,7 @@ export class Graph1Component implements OnInit{
         this.data = response;
         this.buildChart(this.data)
       });
-      //this.ngOnResearch();
+
     });
   }
 
@@ -43,17 +43,19 @@ export class Graph1Component implements OnInit{
       const currentDate = data[i]['date1'];
       if (!sampleDates.includes(currentDate)) {
         sampleDates.push(currentDate);
-        trueCounts.push({ date1: currentDate, counts: 0 });
-        falseCounts.push({ date1: currentDate, counts: 0 });
-        mixedCounts.push({ date1: currentDate, counts: 0 });
-        otherCounts.push({ date1: currentDate, counts: 0 });
-        allCounts.push({ date1: currentDate, counts: 0 });
+        trueCounts.push({ date1: currentDate, counts: 0, keywords:"N/A", keywords_count: 0, });
+        falseCounts.push({ date1: currentDate, counts: 0, keywords:"N/A", keywords_count: 0, });
+        mixedCounts.push({ date1: currentDate, counts: 0, keywords:"N/A", keywords_count: 0, });
+        otherCounts.push({ date1: currentDate, counts: 0, keywords:"N/A", keywords_count: 0, });
+        allCounts.push({ date1: currentDate, counts: 0, keywords:"N/A", keywords_count: 0, });
       }
     
       if (data[i]['label'] == 'TRUE') {
         for (let j = 0; j < trueCounts.length; j++) {
           if (trueCounts[j].date1 === currentDate) {
             trueCounts[j].counts += data[i]['counts'];
+            trueCounts[j].keywords= data[i]['keywords'];
+            trueCounts[j].keywords_count= data[i]['popularity_percentage'];
             break;
           }
         }
@@ -61,6 +63,8 @@ export class Graph1Component implements OnInit{
         for (let j = 0; j < falseCounts.length; j++) {
           if (falseCounts[j].date1 === currentDate) {
             falseCounts[j].counts += data[i]['counts'];
+            falseCounts[j].keywords= data[i]['keywords'];
+            falseCounts[j].keywords_count= data[i]['popularity_percentage'];
             break;
           }
         }
@@ -68,6 +72,8 @@ export class Graph1Component implements OnInit{
         for (let j = 0; j < mixedCounts.length; j++) {
           if (mixedCounts[j].date1 === currentDate) {
             mixedCounts[j].counts += data[i]['counts'];
+            mixedCounts[j].keywords= data[i]['keywords'];
+            mixedCounts[j].keywords_count= data[i]['popularity_percentage'];
             break;
           }
         }
@@ -75,62 +81,75 @@ export class Graph1Component implements OnInit{
         for (let j = 0; j < otherCounts.length; j++) {
           if (otherCounts[j].date1 === currentDate) {
             otherCounts[j].counts += data[i]['counts'];
+            otherCounts[j].keywords= data[i]['keywords'];
+            otherCounts[j].keywords_count= data[i]['popularity_percentage'];
             break;
           }
         }
-      }
-    
-      for (let j = 0; j < allCounts.length; j++) {
-        if (allCounts[j].date1 === currentDate) {
-          allCounts[j].counts += data[i]['counts'];
-          break;
+      } else if (data[i]['label'] == 'ALL') {
+        for (let j = 0; j < allCounts.length; j++) {
+          if (allCounts[j].date1 === currentDate) {
+            allCounts[j].counts += data[i]['counts'];
+            allCounts[j].keywords= data[i]['keywords'];
+            allCounts[j].keywords_count= data[i]['popularity_percentage'];
+            break;
         }
       }
     }
+  }
+  const traces: Data[] = [
+    {
+      type: 'scatter',
+      mode: 'lines',
+      name: 'True',
+      x: trueCounts.map(dictionary => dictionary["date1"]),
+      y: trueCounts.map(dictionary => dictionary["counts"]),
+      line: { color: '#4CB140' },
+      hovertemplate: '%{x}<br>True Claims: %{y}<br>Popular keyword: %{customdata[0]}<br>Popularity percentage: %{customdata[1]}% <extra></extra>',
+      customdata: trueCounts.map(dictionary => [dictionary["keywords"], dictionary["keywords_count"]])
+    },
+    {
+      type: 'scatter',
+      mode: 'lines',
+      name: 'False',
+      x: falseCounts.map(dictionary => dictionary["date1"]),
+      y: falseCounts.map(dictionary => dictionary["counts"]),
+      line: { color: '#cc0000' },
+      hovertemplate: '%{x}<br>False Claims: %{y}<br>Popular keyword: %{customdata[0]}<br>Popularity percentage: %{customdata[1]}%<extra></extra>',
+      customdata: falseCounts.map(dictionary => [dictionary["keywords"], dictionary["keywords_count"]])
+    },
+    {
+      type: 'scatter',
+      mode: 'lines',
+      name: 'Mixed',
+      x: mixedCounts.map(dictionary => dictionary["date1"]),
+      y: mixedCounts.map(dictionary => dictionary["counts"]),
+      line: { color: '#519DE9' },
+      hovertemplate: '%{x}<br>Mixed Claims: %{y}<br>Popular keyword: %{customdata[0]}<br>Popularity percentage: %{customdata[1]}%<extra></extra>',
+      customdata: mixedCounts.map(dictionary => [dictionary["keywords"], dictionary["keywords_count"]])
+    },
+    {
+      type: 'scatter',
+      mode: 'lines',
+      name: 'Others',
+      x: otherCounts.map(dictionary => dictionary["date1"]),
+      y: otherCounts.map(dictionary => dictionary["counts"]),
+      line: { color: '#F4C145' },
+      hovertemplate: '%{x}<br>Other Claims: %{y}<br>Popular keyword: %{customdata[0]}<br>Popularity percentage: %{customdata[1]}%<extra></extra>',
+      customdata: otherCounts.map(dictionary => [dictionary["keywords"], dictionary["keywords_count"]])
+    },
+    {
+      type: 'scatter',
+      mode: 'lines',
+      name: 'All',
+      x: allCounts.map(dictionary => dictionary["date1"]),
+      y: allCounts.map(dictionary => dictionary["counts"]),
+      line: { color: '#009596', dash: 'dash' },
+      hovertemplate: '%{x}<br>All Claims: %{y}<br>Popular keyword: %{customdata[0]}<br>Popularity percentage: %{customdata[1]}%<extra></extra>',
+      customdata: allCounts.map(dictionary => [dictionary["keywords"], dictionary["keywords_count"]])
+    }
+  ];
 
-
-    const traces: Data[] = [
-      {
-        type: 'scatter',
-        mode: 'lines',
-        name: 'True',
-        x: trueCounts.map(dictionary => dictionary["date1"]),
-        y: trueCounts.map(dictionary => dictionary["counts"]),
-        line: { color: '#4CB140' }
-      },
-      {
-        type: 'scatter',
-        mode: 'lines',
-        name: 'False',
-        x: falseCounts.map(dictionary => dictionary["date1"]),
-        y: falseCounts.map(dictionary => dictionary["counts"]),
-        line: { color: '#cc0000' }
-      },
-      {
-        type: 'scatter',
-        mode: 'lines', 
-        name: 'Mixed',
-        x: mixedCounts.map(dictionary => dictionary["date1"]),
-        y: mixedCounts.map(dictionary => dictionary["counts"]),
-        line: { color: '#519DE9' }
-      },
-      {
-        type: 'scatter',
-        mode: 'lines',
-        name: 'Others',
-        x: otherCounts.map(dictionary => dictionary["date1"]),
-        y: otherCounts.map(dictionary => dictionary["counts"]),
-        line: { color: '#F4C145' }
-      },
-      {
-        type: 'scatter',
-        mode: 'lines',
-        name: 'All',
-        x: allCounts.map(dictionary => dictionary["date1"]),
-        y: allCounts.map(dictionary => dictionary["counts"]),
-        line: { color: '#009596', dash: 'dash' }
-      }
-    ];
 
     const layout: Partial<Layout> = {
       title: 'Number of Claims Over Time',
@@ -159,6 +178,7 @@ export class Graph1Component implements OnInit{
       .then(response => response.json())
       .then(data => {
         this.data=data;
+        console.log(data); // Debug
         this.buildChart(data)
       })
       .catch(error => {
@@ -170,9 +190,9 @@ export class Graph1Component implements OnInit{
     let tsvContent = "data:text/tab-separated-values;charset=utf-8,";
 
     // Add headers to TSV content
-    tsvContent += "Date\tLabel\tQuantity\n";
+    tsvContent += "Date\tLabel\tQuantity\tPopular_keyword\tPopularity_percentage\n";
     data.forEach((row: any) => {
-      const rowArray = [row['date1'], row['label'], row['counts']];
+      const rowArray = [row['date1'], row['label'], row['counts'], row['keywords'], row['popularity_percentage']];
       tsvContent += rowArray.join("\t") + "\n";
     });
 
@@ -190,9 +210,9 @@ export class Graph1Component implements OnInit{
     let csvContent = "data:text/csv;charset=utf-8,";
 
     // Add headers to CSV content
-    csvContent += "Date,Label,Quantity\n";
+    csvContent += "Date,Label,Quantity,Popular_keyword,Popularity_percentage\n";
     data.forEach((row: any) => {
-      const rowArray = [row['date1'], row['label'], row['counts']];
+      const rowArray = [row['date1'], row['label'], row['counts'], row['keywords'], row['popularity_percentage']];
       csvContent += rowArray.join(",") + "\n";
     });
 
@@ -210,7 +230,9 @@ downloadExcel(): void {
   const data = this.data.map((row: any) => ({
       Date: row['date1'],
       Label: row['label'],
-      Quantity: row['counts']
+      Quantity: row['counts'],
+      Popular_keyword: row['keywords'],
+      Popularity_percentage: row['popularity_percentage']
   }));
 
   const worksheet = XLSX.utils.json_to_sheet(data);

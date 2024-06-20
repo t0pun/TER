@@ -34,7 +34,7 @@
 .info {
   z-index: 1; /* Ensure content is above the background */
   width: 100%;
-  padding: 2% 10%; /* Adjust padding as needed */
+  padding: 2% 15%; /* Adjust padding as needed */
   text-align: center;
   text-shadow: 0 2px 3px rgba(0,0,0,0.2);
 }
@@ -104,22 +104,39 @@ h1 {
   gap:30px;            /* This adds space between the buttons */
   margin: 20px;         /* This adds margin around the container itself */
 }
-
-button {
+.main-button-container {
+  display: flex;         /* This makes the child elements (buttons) align in a row */
+  justify-content: center; /* This will center the buttons in the container */      
+  margin: 20px;         /* This adds margin around the container itself */
+}
+.button-container > button{
   font-weight: bold;
   background-color: rgb(153, 34, 34);
   color: white;
   border: none;
-  padding: 12px 30px;  /* More padding for a bigger, easier-to-click button */
+  padding: 12px 30px;  
   font-size: 16px;
   cursor: pointer;
-  border-radius: 8px;  /* More rounded corners */
+  border-radius: 8px;  
   transition: background-color 0.3s;
   outline: none;
-  min-width: 220px;    /* Ensures each button has at least 180px width */
-  min-height: 80px;    /* Ensures each button has at least 50px height */
+  min-width: 220px;  
+  min-height: 80px;    
 }
-
-button:hover {
+.main-button-container > button{
+  font-weight: bold;
+  background-color: rgb(153, 34, 34);
+  color: white;
+  border: none;
+  padding: 12px 30px; 
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px; 
+  transition: background-color 0.3s;
+  outline: none;
+  min-width: 470px;    
+  min-height: 80px;    
+}
+.button-container > button:hover, .main-button-container > button:hover {
   background-color: rgb(187, 43, 43);
 }

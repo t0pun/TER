@@ -19,7 +19,9 @@ import { Graph5Component } from "../graph5/graph5.component";
 })
 export class ByTopicComponent {
   topics: string[] = [];
-  selectedTopic: string ="";
+
+  selectedTopic1: string ="";
+  selectedTopic2: string ="";
 
   formEntity= new FormControl('');
 
@@ -40,10 +42,11 @@ export class ByTopicComponent {
     this.submitted=true;
     this.firstDate=first_date;
     this.lastDate=last_date;
-    if(this.selectedTopic){
+    if(this.selectedTopic1 && this.selectedTopic2){
+      //TODO Add second graphs
 
       //First graph
-      this.searchService.searchTopic1(this.firstDate, this.lastDate,this.selectedTopic)
+      this.searchService.searchTopic1(this.firstDate, this.lastDate,this.selectedTopic1)
     .subscribe({
     next: (result) => {
       this.entityData=result;
@@ -56,7 +59,7 @@ export class ByTopicComponent {
   });
 
     // Second Graph
-    this.searchService.searchTopic2(this.firstDate, this.lastDate,this.selectedTopic)
+    this.searchService.searchTopic2(this.firstDate, this.lastDate,this.selectedTopic1)
     .subscribe({
     next: (result2) => {
       this.entityData2=result2;
@@ -69,7 +72,7 @@ export class ByTopicComponent {
   });
 
   //Theird graph
-  this.searchService.searchTopic3(this.firstDate, this.lastDate,this.selectedTopic)
+  this.searchService.searchTopic3(this.firstDate, this.lastDate,this.selectedTopic1)
   .subscribe({
   next: (result3) => {
     this.entityData3=result3;
@@ -82,7 +85,7 @@ export class ByTopicComponent {
 });
 
   //Forth graph
-  this.searchService.searchTopic4(this.firstDate, this.lastDate,this.selectedTopic)
+  this.searchService.searchTopic4(this.firstDate, this.lastDate,this.selectedTopic1)
   .subscribe({
   next: (result4) => {
     this.entityData4=result4;

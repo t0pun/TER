@@ -9,11 +9,11 @@ import { NavigationBarComponent } from "../navigation-bar/navigation-bar.compone
 @Component({
     selector: 'app-compare',
     standalone: true,
-    templateUrl: './search.component.html',
-    styleUrl: './search.component.css',
+    templateUrl: './compare.component.html',
+    styleUrl: './compare.component.css',
     imports: [ByTopicComponent, ByEntityComponent, ByEntityByTopicComponent, NgSwitch, NgSwitchCase, NavigationBarComponent]
 })
-export class SearchComponent {
+export class CompareComponent {
   activeButton: string = 'entity';
 
   setActive(buttonId: string): void {

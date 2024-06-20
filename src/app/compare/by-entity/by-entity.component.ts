@@ -24,9 +24,12 @@ import { Graph4Component } from "../graph4/graph4.component";
     imports: [MatTooltipModule, MatChipsModule, MatIconModule, CommonModule, NgIf, FormsModule, NgFor, MatAutocompleteModule, MatInputModule, MatSelectModule, MatFormFieldModule, ReactiveFormsModule, Graph1Component, Graph2Component, Graph3Component, Graph4Component]
 })
 export class ByEntityComponent {
-  formEntity= new FormControl('');
-  suggestions!: Observable<string[]>;
-  selectedOptions: string[]=[] ;
+  formEntity1= new FormControl('');
+  formEntity2= new FormControl('');
+  suggestions1!: Observable<string[]>;
+  suggestions2!: Observable<string[]>;
+  selectedOptionsFirst: string[]=[] ;
+  selectedOptionsSecond: string[]=[] ;
   submitted : boolean = false;
   firstDate:string="";
   lastDate:string="";
@@ -36,9 +39,10 @@ export class ByEntityComponent {
   entityData4: any;
   
   
+  
   constructor(private suggestionService: SuggestionService, private searchService: SearchService){
 
-  this.suggestions = this.formEntity.valueChanges.pipe(
+  this.suggestions1 = this.formEntity1.valueChanges.pipe(
     startWith(''),
     map(value => value || ''), // Ensure the value is never null
     debounceTime(300), // Add a delay to prevent calling API on each keystroke
@@ -53,30 +57,56 @@ export class ByEntityComponent {
       })
     );
 
+    this.suggestions2 = this.formEntity2.valueChanges.pipe(
+      startWith(''),
+      map(value => value || ''), // Ensure the value is never null
+      debounceTime(300), // Add a delay to prevent calling API on each keystroke
+      distinctUntilChanged(), // Skip consecutive duplicate values
+      filter(term => term.trim().length >= 2), // Check that the term is at least two characters long
+      switchMap((term: string) =>
+          this.suggestionService.getSuggestions(term) || of([]) // Call your service only if the above filter passes
+      ),
+      catchError(error => {
+          console.error(error);
+          return of([]);
+        })
+      );
   }
 
-  optionClicked(event: Event, option: string) {
+  optionClicked(event: Event, option: string, number: number) {
     event.stopPropagation(); // Prevents the mat-option click from closing the autocomplete panel
-    this.toggleSelection(option);
+    this.toggleSelection(option, number);
   }
   // Adds the suggestion after selecting it to the top if the option was aleady chosen or add it at the bottom if not
-  toggleSelection(option: string) {
-    if(this.selectedOptions){
-    const idx = this.selectedOptions.indexOf(option);
-    if (idx > -1) {
-      this.selectedOptions.splice(idx, 1);
-    } else {
-      this.selectedOptions.push(option);
+  toggleSelection(option: string, number: number) {
+    if (number==1){
+      if(this.selectedOptionsFirst){
+        const idx = this.selectedOptionsFirst.indexOf(option);
+        if (idx > -1) {
+          this.selectedOptionsFirst.splice(idx, 1);
+        } else {
+          this.selectedOptionsFirst.push(option);
+        }
+        this.formEntity1.setValue('');}
     }
-    this.formEntity.setValue('');}
+    if (number==2){
+      if(this.selectedOptionsSecond){
+        const idx = this.selectedOptionsSecond.indexOf(option);
+        if (idx > -1) {
+          this.selectedOptionsSecond.splice(idx, 1);
+        } else {
+          this.selectedOptionsSecond.push(option);
+        }
+        this.formEntity2.setValue('');}
+    }
   }
 
   submit( first_date:string, last_date:string){
     this.submitted=true;
     this.firstDate=first_date;
     this.lastDate=last_date;
-    if(this.selectedOptions){
-      this.searchService.searchEntity1(this.selectedOptions, this.firstDate, this.lastDate)
+    if(this.selectedOptionsFirst && this.selectedOptionsSecond){
+      this.searchService.searchEntity1(this.selectedOptionsFirst, this.firstDate, this.lastDate)
     .subscribe({
     next: (result) => {
       this.entityData=result; // Emit the result to parent component
@@ -85,9 +115,11 @@ export class ByEntityComponent {
       // Handle any errors that occur during the search
       console.error('Search failed:', error);
     }
+
+    //TODO add the second services
   });
 
-  this.searchService.searchEntity2(this.selectedOptions, this.firstDate, this.lastDate)
+  this.searchService.searchEntity2(this.selectedOptionsFirst, this.firstDate, this.lastDate)
   .subscribe({
   next: (result2) => {
     // Handle the data received from the search
@@ -99,7 +131,7 @@ export class ByEntityComponent {
   }
 });
 
-this.searchService.searchEntity3(this.selectedOptions, this.firstDate, this.lastDate)
+this.searchService.searchEntity3(this.selectedOptionsFirst, this.firstDate, this.lastDate)
 .subscribe({
 next: (result3) => {
   // Handle the data received from the search
@@ -111,7 +143,7 @@ error: (error) => {
 }
 });
 
-this.searchService.searchEntity4(this.selectedOptions, this.firstDate, this.lastDate)
+this.searchService.searchEntity4(this.selectedOptionsFirst, this.firstDate, this.lastDate)
 .subscribe({
 next: (result4) => {
   this.entityData4=result4; // Emit the result to parent component
