@@ -152,7 +152,7 @@ export class Graph1Component implements OnInit{
 
 
     const layout: Partial<Layout> = {
-      title: 'Number of Claims Over Time',
+      title: 'Number of Claims Over Time with the major subjects*',
       xaxis: {
         type: 'date',
         title: 'Date'

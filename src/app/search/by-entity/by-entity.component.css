@@ -41,15 +41,22 @@ form {
     padding: 10px;
   }
   
-  .date-input-container > div {
+.date-input-container > div {
     margin: 10px;
-  }
+    
+}
 
+.span-guide {
+    cursor: help; 
+    text-decoration: underline; 
+    color: rgb(134, 40, 40); 
+    padding: 40px;
+}
 
-
-  mat-form-field{
+mat-form-field{
     width: 100%;
-  }
+}
+
 input {
     margin:6px;
     width: 100%  ;
@@ -70,6 +77,7 @@ input {
   margin-left: 60px;
   margin-right: 60px;
 }
+
 button {
     background-color: rgb(47, 56, 92);
     color: white;
@@ -81,12 +89,14 @@ button {
     transition: background-color 0.3s;
     outline: none;
 }
+
 .tip {
   display: block;
   margin-top: 8px;
   font-size: 12px;
   color: #888;
 }
+
 button:hover {
     background-color: rgb(47, 56, 92);
 }

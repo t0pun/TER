@@ -30,3 +30,9 @@
   .container-global{
     padding-top: 70px;
   }
+  .span-guide {
+    cursor: help; 
+    text-decoration: underline; 
+    color: rgb(134, 40, 40); 
+    padding: 40px;
+}
