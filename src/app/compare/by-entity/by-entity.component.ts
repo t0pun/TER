@@ -105,6 +105,13 @@ export class ByEntityComponent {
     this.submitted=true;
     this.firstDate=first_date;
     this.lastDate=last_date;
+    console.log('First date' + first_date)
+    console.log('First date' + first_date)
+
+    console.log('entities 1:' + this.selectedOptionsFirst)
+    console.log('entities 2:' + this.selectedOptionsSecond)
+
+    
     if(this.selectedOptionsFirst && this.selectedOptionsSecond){
       this.searchService.searchEntity1(this.selectedOptionsFirst, this.firstDate, this.lastDate)
     .subscribe({
