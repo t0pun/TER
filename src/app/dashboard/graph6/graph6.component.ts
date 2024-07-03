@@ -47,7 +47,7 @@ export class Graph6Component implements OnInit {
       title: 'Number of claims by topic',
       barmode: 'stack',
       xaxis: { title: 'Topics' },
-      yaxis: { title: 'Counts' },
+      yaxis: { title: 'Claims Count' },
       margin: { t: 50, b: 100, l: 50, r: 200 }, 
       legend: {
           x: 5.1, 

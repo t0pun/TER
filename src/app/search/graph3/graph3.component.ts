@@ -79,7 +79,11 @@ export class Graph3Component implements OnChanges {
   
       const layout: Partial<Layout> = { 
         title: 'The sources of the claims',
-        barmode: 'stack',  // How do you want the bars to be positioned 
+        barmode: 'stack', 
+        yaxis:{
+          title: "Claims Count"
+        },
+
         margin: { t: 50, b: 50, l: 50, r: 200 }, 
         legend: {
             x: 5.1, 
@@ -87,7 +91,9 @@ export class Graph3Component implements OnChanges {
             bgcolor: 'rgba(255, 255, 255, 0.5)', 
             bordercolor: 'rgba(0, 0, 0, 0.5)', 
             borderwidth: 1 
-        }
+        },
+        bargap: 0.4,  // Increase gap between dataset groups
+        bargroupgap: 0.3,
       };
       const config = {
         responsive: true,

@@ -80,14 +80,20 @@ export class Graph4Component implements OnChanges {
     const layout: Partial<Layout> = {
         title: 'The languages of the claims',
         barmode: 'stack',
+        xaxis:{
+          title: "Claims Count"
+        },
+
         margin: { t: 50, b: 50, l: 100, r: 200 }, 
         legend: {
             x: 5.1, 
             y: 1,
             bgcolor: 'rgba(255, 255, 255, 0.5)', 
             bordercolor: 'rgba(0, 0, 0, 0.5)', 
-            borderwidth: 1 
-        }
+            borderwidth: 1 ,
+        },
+        bargap: 0.4,  // Increase gap between dataset groups
+        bargroupgap: 0.3,
     };
 
     const config = {

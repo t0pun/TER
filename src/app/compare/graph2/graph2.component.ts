@@ -21,7 +21,6 @@ export class Graph2Component implements OnChanges {
   }
 
   private buildChart(data_1: any): void {
-    console.log(data_1)
     const values: number[] = [];
     const labels: string[] = ["TRUE", "FALSE", "MIXTURE", "OTHER"];
     const colors: string[] = ['#4CB140', '#cc0000', '#519DE9', '#F4C145'];

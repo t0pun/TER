@@ -149,6 +149,16 @@ export class SearchService {
 
 
   getTopics(): Observable<string[]> {
-    return this.http.get<string[]>('http://127.0.0.1:5000/topics');
+    return this.http.get<string[]>('http://localhost:5000/topics');
   }
+
+  compareTopic_entityGraph(topic1: string, topic2: string, firstDate: string, lastDate: string) :Observable<string[]>{
+    let params = new HttpParams()
+    .set('topic1', topic1)
+    .set('topic2', topic2)
+    .set('firstDate', firstDate)
+    .set('lastDate', lastDate);
+    return this.http.get<string[]>('http://localhost:5000/compare-topic-entities-common', { params });
+  }
+
 }

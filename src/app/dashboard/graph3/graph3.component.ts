@@ -91,7 +91,10 @@ export class Graph3Component implements OnInit{
           bgcolor: 'rgba(255, 255, 255, 0.5)', 
           bordercolor: 'rgba(0, 0, 0, 0.5)', 
           borderwidth: 1 
-      }
+      },
+      yaxis:{
+        title: "Claims Count"
+      },
     };
     const config = {
       responsive: true,

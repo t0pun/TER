@@ -11,22 +11,21 @@ import * as XLSX from 'xlsx';
 })
 export class Graph5Component {
   @Input() entityData1: any;
-  @Input() entityData2: any;
 
   ngOnChanges(changes: SimpleChanges) {
-    if ((changes['entityData1'] || changes['entityData2']) && this.entityData1 && this.entityData2) {
-
-      this.buildChart(this.entityData1, this.entityData2);
+    if (changes['entityData1'] && this.entityData1) {
+      this.buildChart(this.entityData1);
     }
   }
-  private buildChart(data_1: any,data_2: any): void {
+  
+  private buildChart(data_1: any): void {
     const values: number[] = []
     const labels: string[] = []
     const colors: string[] = []
 
     for (let i = 0; i < data_1.length; i++){
       labels.push(data_1[i]['entity'])
-      values.push(data_1[i]['counts'])
+      values.push(data_1[i]['total_counts'])
       colors.push(this.generateRandomColor())
     }
 
@@ -45,7 +44,7 @@ export class Graph5Component {
     }];
 
   const layout = {
-    title: 'Top 50 - Most Common Entities',
+    title: 'Top 50 Entities Shared Between Both Topics',
     margin: { "t": 50, "b": 50, "l": 50, "r": 50 },
     showlegend: true,
     height: 900,

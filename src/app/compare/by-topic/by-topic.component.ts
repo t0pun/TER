@@ -32,12 +32,12 @@ export class ByTopicComponent {
   entityData11: any;
   entityData21: any;
   entityData31: any;
-  entityData41: any;
 
   entityData12: any;
   entityData22: any;
   entityData32: any;
-  entityData42: any;
+
+  entityData4: any;
   
   constructor(private searchService: SearchService){
     this.searchService.getTopics().subscribe((data) => {
@@ -90,18 +90,6 @@ export class ByTopicComponent {
   }
 });
 
-  //Forth graph
-  this.searchService.searchTopic4(this.firstDate, this.lastDate,this.selectedTopic1)
-  .subscribe({
-  next: (result4) => {
-    this.entityData41=result4;
-   
-  },
-  error: (error) => {
-    // Handle any errors that occur during the search
-    console.error('Search failed:', error);
-  }
-});
 
 /*********************************  Retreiving Data For Second Comparision Group ************************************/
    //First graph
@@ -143,12 +131,13 @@ export class ByTopicComponent {
  }
 });
 
+/*********************************  Retreiving Data For Entities In Common  ************************************/
+
  //Forth graph
- this.searchService.searchTopic4(this.firstDate, this.lastDate,this.selectedTopic2)
+ this.searchService.compareTopic_entityGraph(this.selectedTopic1,this.selectedTopic2,this.firstDate, this.lastDate)
  .subscribe({
  next: (result4) => {
-   this.entityData42=result4;
-  
+   this.entityData4=result4;
  },
  error: (error) => {
    // Handle any errors that occur during the search

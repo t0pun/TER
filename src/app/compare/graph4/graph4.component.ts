@@ -69,7 +69,6 @@ export class Graph4Component implements OnChanges {
         zeroline: true
       },
       yaxis: {
-        title: 'Languages',
         type: 'category',
         categoryorder: 'total ascending',
       },

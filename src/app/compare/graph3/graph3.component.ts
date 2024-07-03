@@ -61,7 +61,6 @@ export class Graph3Component implements OnChanges {
       barmode: 'group',  // Group bars side by side
       margin: { t: 50, b: 50, l: 50, r: 200 }, 
       xaxis: {
-        title: 'Sources',
         type: 'category',
         categoryorder: 'total descending'
       },
