@@ -12,10 +12,6 @@ form {
     margin-bottom: 10px;
 }
 
-.mat-form-field, .selected-items, .topic-container, .date-input-container{
-  margin-bottom: 10px; /* Consistent spacing between sections */
-}
-
 .mat-form-field {
   width: 100%; /* Ensures the field spans full width of the form */
 }
@@ -81,6 +77,7 @@ button {
     border-radius: 8px; /* More rounded corners */
     transition: background-color 0.3s;
     outline: none;
+    margin-top: 10px;
 }
 .tip {
   display: block;
@@ -126,4 +123,12 @@ button:hover {
   
   .graphs {
     padding:20px;
+  }
+
+  .span-guide {
+    cursor: help; 
+    text-decoration: underline; 
+    color: rgb(134, 40, 40); 
+    margin: 15px; /* Consistent spacing between sections */
+    
   }

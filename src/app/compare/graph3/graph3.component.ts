@@ -10,147 +10,80 @@ import * as XLSX from 'xlsx';
   styleUrl: './graph3.component.css'
 })
 export class Graph3Component implements OnChanges {
-  @Input() entityData: any;
+  @Input() entityData1: any;
+  @Input() entityData2: any;
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['entityData'] && this.entityData) {
-      this.buildChart(this.entityData);
+    if ((changes['entityData1'] || changes['entityData2']) && this.entityData1 && this.entityData2) {
+      this.buildChart(this.entityData1,this.entityData2);
     }
   }
-  private buildChart(data_1 : any): void {
-
-    var sourceNames: string[] = [];
-    var trueCounts: any[] = [];
-    var falseCounts: any[] = [];
-    var mixedCounts: any[] = [];
-    var otherCounts: any[] = [];
+  private buildChart(data_1: any, data_2: any): void {
+    const sourceNames: Set<string> = new Set();
   
-    for (let i = 0; i < data_1.length; i++) {
-      if(data_1[i]['label']=="TRUE"){
-        trueCounts.push({"source":data_1[i]['source'],"counts":data_1[i]['counts']})
-      }else if(data_1[i]['label']=="FALSE"){
-        falseCounts.push({"source":data_1[i]['source'],"counts":data_1[i]['counts']})
-      }else if(data_1[i]['label']=="MIXTURE"){
-        mixedCounts.push({"source":data_1[i]['source'],"counts":data_1[i]['counts']})
-      }else{
-        otherCounts.push({"source":data_1[i]['source'],"counts":data_1[i]['counts']})
+    const sourceCountsG1: { [source: string]: number } = {};
+    const sourceCountsG2: { [source: string]: number } = {};
+  
+    const aggregateCounts = (data: any, sourceCounts: { [source: string]: number }) => {
+      for (let i = 0; i < data.length; i++) {
+        const source = data[i]['source'];
+        sourceNames.add(source);
+        if (!sourceCounts[source]) {
+          sourceCounts[source] = 0;
+        }
+        sourceCounts[source] += data[i]['counts'];
       }
-    }
-    
-    sourceNames = trueCounts.map(dictionary => dictionary["source"])
-      /*     
-      marker: { color: '#4CB140' } 
-      marker: { color: '#A30000' } 
-      marker: { color: '#519DE9' } 
-      marker: { color: '#F4C145' }  
-      */
-    var data: Data[]= [
-      {
-        name:'True',
-        x: trueCounts.map(dictionary => dictionary["source"]),
-        y: trueCounts.map(dictionary => dictionary["counts"]),
+    };
+  
+    // Process both datasets
+    aggregateCounts(data_1, sourceCountsG1);
+    aggregateCounts(data_2, sourceCountsG2);
+  
+    const createTrace = (name: string, sourceCounts: { [source: string]: number }, color: string, offset: string): Data => {
+      const sources = Array.from(sourceNames);
+      return {
+        name: name,
+        x: sources,
+        y: sources.map(source => sourceCounts[source] || 0),
         type: 'bar',
-        marker: { color: '#4CB140' } 
-      },
-      {
-        name:'False',
-        x: falseCounts.map(dictionary => dictionary["source"]),
-        y: falseCounts.map(dictionary => dictionary["counts"]),
-        type: 'bar',
-        marker: { color: '#cc0000' } 
-      },
-      {
-        name:'Mixture',
-        x: mixedCounts.map(dictionary => dictionary["source"]),
-        y: mixedCounts.map(dictionary => dictionary["counts"]),
-        type: 'bar',
-        marker: { color: '#519DE9' } 
-      },
-      {
-        name:'Other',
-        x: otherCounts.map(dictionary => dictionary["source"]),
-        y: otherCounts.map(dictionary => dictionary["counts"]),
-        type: 'bar',
-        marker: { color: '#F4C145' } 
-
-        
-      }
+        marker: { color: color },
+        offsetgroup: offset,
+      } as Data;
+    };
+  
+    const data: Data[] = [
+      createTrace('Group 1', sourceCountsG1, '#148080', '1'),
+      createTrace('Group 2', sourceCountsG2, '#01c9c9', '2')
     ];
   
-      const layout: Partial<Layout> = { 
-        title: 'The sources of the claims',
-        barmode: 'stack',  // How do you want the bars to be positioned 
-        margin: { t: 50, b: 50, l: 50, r: 200 }, 
-        legend: {
-            x: 5.1, 
-            y: 1,
-            bgcolor: 'rgba(255, 255, 255, 0.5)', 
-            bordercolor: 'rgba(0, 0, 0, 0.5)', 
-            borderwidth: 1 
-        }
-      };
-      const config = {
-        responsive: true,
-      };
-      Plotly.newPlot('graph3', data,layout,config);
-    }
-    downloadTSV(): void {
-      const data = this.entityData;
-      let tsvContent = "data:text/tab-separated-values;charset=utf-8,";
-      tsvContent += "Source\tLabel\tQuantity\n";
-      data.forEach((row: any) => {
-        const rowArray = [row['source'], row['label'], row['counts']];
-        tsvContent += rowArray.join("\t") + "\n";
-      });
+    const layout: Partial<Layout> = {
+      title: 'The sources of the claims',
+      barmode: 'group',  // Group bars side by side
+      margin: { t: 50, b: 50, l: 50, r: 200 }, 
+      xaxis: {
+        title: 'Sources',
+        type: 'category',
+        categoryorder: 'total descending'
+      },
+      yaxis:{
+        title: 'Claims Count'
+      },
+      legend: {
+        x: 5.1, 
+        y: 1,
+        bgcolor: 'rgba(255, 255, 255, 0.5)',
+        bordercolor: 'rgba(0, 0, 0, 0.5)',
+        borderwidth: 1
+      },
+      bargap: 0.4,  // Increase gap between dataset groups
+      bargroupgap: 0.3,
+    };
+
+    const config = {
+      responsive: true,
+    };
+
+    Plotly.newPlot('graph3', data, layout, config);
   
-      const encodedUri = encodeURI(tsvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "data.tsv");
-      document.body.appendChild(link);
-  
-      link.click();
-      document.body.removeChild(link);
-    }
-    downloadCSV(): void {
-      const data = this.entityData;
-      let csvContent = "data:text/csv;charset=utf-8,";
-    
-      // Add headers to CSV content
-      csvContent +=  "Source\tLabel\tQuantity\n";
-      data.forEach((row: any) => {
-        const rowArray = [row['source'], row['label'], row['counts']];
-        csvContent += rowArray.join(",") + "\n";
-      });
-    
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "data.csv");
-      document.body.appendChild(link);
-    
-      link.click();
-      document.body.removeChild(link);
-    }
-    
-    downloadExcel(): void {
-    const data = this.entityData.map((row: any) => ({
-        Source: row['source'],
-        Label: row['label'],
-        Quantity: row['counts']
-    }));
-    
-    const worksheet = XLSX.utils.json_to_sheet(data);
-    const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    
-    const blob = new Blob([excelBuffer], { type: "application/octet-stream" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.setAttribute("download", "data.xlsx");
-    document.body.appendChild(link);
-    
-    link.click();
-    document.body.removeChild(link);
-    }
+  }
 }

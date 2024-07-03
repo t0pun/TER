@@ -12,7 +12,7 @@ form {
 }
 
  .topic-input-element, .date-input-container {
-  margin-bottom: 15px; /* Consistent spacing between sections */
+  margin-bottom: 10px; /* Consistent spacing between sections */
 }
 .topic-input-element{
   width: 50%;
@@ -21,7 +21,7 @@ form {
 .date-input-container ,.topic-input-container {
   display:flex;
     justify-content: center;
-    padding: 10px;
+    padding: 5px;
 }
   
 .date-input-container > div , .topic-input-container > div{
@@ -73,6 +73,7 @@ button {
     border-radius: 8px; /* More rounded corners */
     transition: background-color 0.3s;
     outline: none;
+    margin-top: 10px;
 }
 
 button:hover {
@@ -88,4 +89,12 @@ mat-icon {
 }
 .graphs {
   padding:20px;
+}
+
+.span-guide {
+  cursor: help; 
+  text-decoration: underline; 
+  color: rgb(134, 40, 40); 
+  margin: 15px; /* Consistent spacing between sections */
+  
 }

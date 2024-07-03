@@ -28,10 +28,16 @@ export class ByTopicComponent {
   submitted : boolean = false;
   firstDate:string="";
   lastDate:string="";
-  entityData: any;
-  entityData2: any;
-  entityData3: any;
-  entityData4: any;
+
+  entityData11: any;
+  entityData21: any;
+  entityData31: any;
+  entityData41: any;
+
+  entityData12: any;
+  entityData22: any;
+  entityData32: any;
+  entityData42: any;
   
   constructor(private searchService: SearchService){
     this.searchService.getTopics().subscribe((data) => {
@@ -43,13 +49,13 @@ export class ByTopicComponent {
     this.firstDate=first_date;
     this.lastDate=last_date;
     if(this.selectedTopic1 && this.selectedTopic2){
-      //TODO Add second graphs
 
+/*********************************  Retreiving  Data For First Comparision Group ************************************/
       //First graph
       this.searchService.searchTopic1(this.firstDate, this.lastDate,this.selectedTopic1)
     .subscribe({
     next: (result) => {
-      this.entityData=result;
+      this.entityData11=result;
      
     },
     error: (error) => {
@@ -62,7 +68,7 @@ export class ByTopicComponent {
     this.searchService.searchTopic2(this.firstDate, this.lastDate,this.selectedTopic1)
     .subscribe({
     next: (result2) => {
-      this.entityData2=result2;
+      this.entityData21=result2;
      
     },
     error: (error) => {
@@ -75,7 +81,7 @@ export class ByTopicComponent {
   this.searchService.searchTopic3(this.firstDate, this.lastDate,this.selectedTopic1)
   .subscribe({
   next: (result3) => {
-    this.entityData3=result3;
+    this.entityData31=result3;
    
   },
   error: (error) => {
@@ -88,7 +94,7 @@ export class ByTopicComponent {
   this.searchService.searchTopic4(this.firstDate, this.lastDate,this.selectedTopic1)
   .subscribe({
   next: (result4) => {
-    this.entityData4=result4;
+    this.entityData41=result4;
    
   },
   error: (error) => {
@@ -96,6 +102,60 @@ export class ByTopicComponent {
     console.error('Search failed:', error);
   }
 });
+
+/*********************************  Retreiving Data For Second Comparision Group ************************************/
+   //First graph
+   this.searchService.searchTopic1(this.firstDate, this.lastDate,this.selectedTopic2)
+   .subscribe({
+   next: (result) => {
+     this.entityData12=result;
+    
+   },
+   error: (error) => {
+     // Handle any errors that occur during the search
+     console.error('Search failed:', error);
+   }
+ });
+
+   // Second Graph
+   this.searchService.searchTopic2(this.firstDate, this.lastDate,this.selectedTopic2)
+   .subscribe({
+   next: (result2) => {
+     this.entityData22=result2;
+    
+   },
+   error: (error) => {
+     // Handle any errors that occur during the search
+     console.error('Search failed:', error);
+   }
+ });
+
+ //Theird graph
+ this.searchService.searchTopic3(this.firstDate, this.lastDate,this.selectedTopic2)
+ .subscribe({
+ next: (result3) => {
+   this.entityData32=result3;
+  
+ },
+ error: (error) => {
+   // Handle any errors that occur during the search
+   console.error('Search failed:', error);
+ }
+});
+
+ //Forth graph
+ this.searchService.searchTopic4(this.firstDate, this.lastDate,this.selectedTopic2)
+ .subscribe({
+ next: (result4) => {
+   this.entityData42=result4;
+  
+ },
+ error: (error) => {
+   // Handle any errors that occur during the search
+   console.error('Search failed:', error);
+ }
+});
+
 }
 
   }

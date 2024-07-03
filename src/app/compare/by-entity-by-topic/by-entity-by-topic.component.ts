@@ -40,10 +40,14 @@ export class ByEntityByTopicComponent  {
   submitted : boolean = false;
   firstDate:string="";
   lastDate:string="";
-  entityData: any;
-  entityData2: any;
-  entityData3: any;
 
+  entityData11: any;
+  entityData21: any;
+  entityData31: any;
+
+  entityData12: any;
+  entityData22: any;
+  entityData32: any;
   
   constructor(private suggestionService: SuggestionService, private searchService: SearchService){
 
@@ -127,12 +131,16 @@ export class ByEntityByTopicComponent  {
     this.submitted=true;
     this.firstDate=first_date;
     this.lastDate=last_date;
-       if(this.selectedTopic1 && this.selectedOptions1){
+       if(this.selectedTopic1 && this.selectedOptions1 && this.selectedTopic2 && this.selectedOptions2){
+
+
+  /*********************************  Retreiving Data For First Comparision Group ************************************/
+
       this.searchService.searchTopicEntity1(this.selectedOptions1, this.firstDate, this.lastDate,this.selectedTopic1)
       .subscribe({
         next: (result1) => {
           // Handle the data received from the search
-          this.entityData=result1; // Emit the result to parent component
+          this.entityData11=result1; // Emit the result to parent component
         },
         error: (error1) => {
           // Handle any errors that occur during the search
@@ -145,7 +153,7 @@ export class ByEntityByTopicComponent  {
       .subscribe({
         next: (result2) => {
           // Handle the data received from the search
-          this.entityData2=result2;
+          this.entityData21=result2;
         },
         error: (error2) => {
           // Handle any errors that occur during the search
@@ -157,7 +165,47 @@ export class ByEntityByTopicComponent  {
       .subscribe({
         next: (result3) => {
           // Handle the data received from the search
-          this.entityData3=result3;
+          this.entityData31=result3;
+        },
+        error: (error3) => {
+          // Handle any errors that occur during the search
+          console.error('Search failed:', error3);
+        }
+      });
+
+
+  /*********************************  Retreiving Data For Second Comparision Group ************************************/
+
+      this.searchService.searchTopicEntity1(this.selectedOptions2, this.firstDate, this.lastDate,this.selectedTopic2)
+      .subscribe({
+        next: (result1) => {
+          // Handle the data received from the search
+          this.entityData12=result1; // Emit the result to parent component
+        },
+        error: (error1) => {
+          // Handle any errors that occur during the search
+          console.error('Search failed:', error1);
+        }
+      });
+    
+    
+    this.searchService.searchTopicEntity2(this.selectedOptions2, this.firstDate, this.lastDate,this.selectedTopic2)
+      .subscribe({
+        next: (result2) => {
+          // Handle the data received from the search
+          this.entityData22=result2;
+        },
+        error: (error2) => {
+          // Handle any errors that occur during the search
+          console.error('Search failed:', error2);
+        }
+      });
+    
+    this.searchService.searchTopicEntity3(this.selectedOptions2, this.firstDate, this.lastDate,this.selectedTopic2)
+      .subscribe({
+        next: (result3) => {
+          // Handle the data received from the search
+          this.entityData32=result3;
         },
         error: (error3) => {
           // Handle any errors that occur during the search

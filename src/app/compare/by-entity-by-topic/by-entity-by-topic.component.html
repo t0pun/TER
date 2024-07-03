@@ -4,7 +4,7 @@
 
     <div class="container-comparision-element">
       <div class="form-field-wrapper topic">
-        <label for="topic1">Choose a topic for first entities:</label>
+        <label for="topic1">Choose a topic for Group1 :</label>
         <mat-icon class="icon" matTooltip="What topic is relevant to your search?" matTooltipPosition="right">help_outline</mat-icon>
         <select id="topic1" [(ngModel)]="selectedTopic1" name="selectedTopic" (ngModelChange)="onTopicChange()" required>
           <option *ngFor="let topic of topics" [value]="topic">{{ topic }}</option>
@@ -13,7 +13,7 @@
     
       <!-- Entities input -->
       <mat-form-field>
-        <label for="entity1">First About (entities):</label>
+        <label for="entity1">Group1 About (entities):</label>
         <mat-icon class="icon-entity" matTooltip="Entites are physical unites that are ment to descirble a location, a person an organisations an event, etc.. . ex: Paris, Donald Trump." matTooltipPosition="right">help_outline</mat-icon>
         <div class="form-field-wrapper">
           <input matInput [matAutocomplete]="auto1" class="mat-input" id="entity1" [formControl]="formEntity1">
@@ -41,7 +41,7 @@
 
     <div class="container-comparision-element">
       <div class="form-field-wrapper topic">
-        <label for="topic2">Choose a topic for second entities:</label>
+        <label for="topic2">Choose a topic for Group2:</label>
         <mat-icon class="icon" matTooltip="What topic is relevant to your search?" matTooltipPosition="right">help_outline</mat-icon>
         <select id="topic2" [(ngModel)]="selectedTopic2" name="selectedTopic2" (ngModelChange)="onTopicChange()" required>
           <option *ngFor="let topic of topics" [value]="topic">{{ topic }}</option>
@@ -50,7 +50,7 @@
     
       <!-- Entities input -->
       <mat-form-field>
-        <label for="entity2">Second About (entities):</label>
+        <label for="entity2">Group2 About (entities):</label>
         <mat-icon class="icon-entity" matTooltip="Entites are physical unites that are ment to descirble a location, a person an organisations an event, etc.. . ex: Paris, Donald Trump." matTooltipPosition="right">help_outline</mat-icon>
         <div class="form-field-wrapper">
           <input matInput [matAutocomplete]="auto2" class="mat-input" id="entity2" [formControl]="formEntity2">
@@ -90,7 +90,9 @@
         <input id="end-date" type="date" placeholder="Enter End Date..." #lastDate>
       </div>
     </div>
-  
+
+    <span class="span-guide " matTooltip="The graphics are interactive, You can hover on them to have more information and use the tools to download jpg or even crop or hide some data by interacting with the legend of each graph">How to use our graphs</span>
+
     <!-- Submit button -->
     <div class="button-search">
         <button type="submit" [disabled]="selectedOptions1.length === 0 || selectedOptions2.length === 0">COMPARE</button>
@@ -101,13 +103,16 @@
   <div *ngIf="submitted">
     <div class="grid grid-cols-1 md:grid-cols-2 grid-rows-auto gap-4 graphs">
       <div class="col-span-1 md:col-span-2" style="width: 100%; height: 100%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 15px;">
-        <app-graph1 [entityData]="entityData"></app-graph1>
+        <app-graph1 [entityData1]="entityData11"  [entityData2]="entityData12"></app-graph1>
       </div>
       <div style="width: 100%; height: 100%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 15px;">
-        <app-graph2 [entityData]="entityData2"></app-graph2>
+        <app-graph2 [entityData1]="entityData21" [name]="' G1'" ></app-graph2>
       </div>
       <div style="width: 100%; height: 100%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 15px;">
-        <app-graph3 [entityData]="entityData3"></app-graph3>
+        <app-graph2 [entityData1]="entityData22" [name]="' G2'"></app-graph2>
+      </div>
+      <div class="col-span-1 md:col-span-2" style="width: 100%; height: 100%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 15px;">
+        <app-graph3 [entityData1]="entityData31"  [entityData2]="entityData32"></app-graph3>
       </div>
     </div>
   </div>

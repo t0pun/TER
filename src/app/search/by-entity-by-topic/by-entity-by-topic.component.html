@@ -34,7 +34,7 @@
         </mat-chip-grid>
       </div>
     </div>
-  
+
     <!-- Date input fields -->
     <div class="date-input-container">
       <div class="form-field-wrapper">
@@ -48,7 +48,9 @@
         <input id="end-date" type="date" placeholder="Enter End Date..." #lastDate>
       </div>
     </div>
-  
+    
+  <span class="span-guide date-input-container " matTooltip="The graphics are interactive, You can hover on them to have more information and use the tools to download jpg or even crop or hide some data by interacting with the legend of each graph">How to use our graphs</span>
+
     <!-- Submit button -->
     <div class="button-search">
         <button type="submit" [disabled]="selectedOptions.length === 0">SEARCH</button>

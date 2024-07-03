@@ -38,19 +38,17 @@ form {
 .date-input-container {
   display:flex;
     justify-content: space-between;
-    padding: 10px;
   }
   
 .date-input-container > div {
-    margin: 10px;
+    margin: 5px;
     
 }
 
 .span-guide {
-    cursor: help; 
-    text-decoration: underline; 
-    color: rgb(134, 40, 40); 
-    padding: 40px;
+  cursor: help; 
+  text-decoration: underline; 
+  color: rgb(134, 40, 40); 
 }
 
 mat-form-field{

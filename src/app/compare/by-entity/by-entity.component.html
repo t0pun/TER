@@ -4,7 +4,7 @@
 <div class="container-comparision">
   <div class="container-comparision-element">
     <mat-form-field>
-      <label for="entity1">First About (entities):</label>
+      <label for="entity1">Group1 About (entities):</label>
       <mat-icon class="icon-entity" matTooltip="Entites are physical unites that are ment to descirble a location, a person an organisations an event, etc.. . ex: Paris, Donald Trump." matTooltipPosition="right">help_outline</mat-icon>
       <input matInput [matAutocomplete]="auto1" class="mat-input" id = "entity1" [formControl]="formEntity1">
       <span class="tip">Tip: Include the maximum number of entities that describe your needs for better accuracy</span>
@@ -26,7 +26,7 @@
 </div>
 <div class="container-comparision-element">
   <mat-form-field>
-    <label for="entity2">Second About (entities):</label>
+    <label for="entity2">Group2 About (entities):</label>
     <mat-icon class="icon-entity" matTooltip="Entites are physical unites that are ment to descirble a location, a person an organisations an event, etc.. . ex: Paris, Donald Trump." matTooltipPosition="right">help_outline</mat-icon>
     <input matInput [matAutocomplete]="auto2" class="mat-input" id = "entity2" [formControl]="formEntity2">
     <span class="tip">Tip: Include the maximum number of entities that describe your needs for better accuracy</span>
@@ -62,6 +62,8 @@
   </div>
 
 </div>
+<span class="span-guide " matTooltip="The graphics are interactive, You can hover on them to have more information and use the tools to download jpg or even crop or hide some data by interacting with the legend of each graph">How to use our graphs</span>
+
 <div class="button-search">
   <button type="submit" [disabled]="selectedOptionsFirst.length === 0  && selectedOptionsSecond.length === 0 "> COMPARE</button>
 </div>
@@ -72,16 +74,19 @@
 <div *ngIf="submitted">
   <div class="grid grid-cols-1 md:grid-cols-2 grid-rows-auto gap-4 graphs">
     <div class="col-span-1 md:col-span-2" style="width: 100%; height: 100%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 15px;">
-      <app-graph1 [entityData]="entityData"></app-graph1>
+      <app-graph1 [entityData1]="entityData11"  [entityData2]="entityData12"></app-graph1>
     </div>
     <div style="width: 100%; height: 100%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 15px;">
-      <app-graph2 [entityData]="entityData2"></app-graph2>
+      <app-graph2 [entityData1]="entityData21" [name]="' G1'" ></app-graph2>
     </div>
     <div style="width: 100%; height: 100%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 15px;">
-      <app-graph3 [entityData]="entityData3"></app-graph3>
+      <app-graph2 [entityData1]="entityData22" [name]="' G2'"></app-graph2>
     </div>
     <div class="col-span-1 md:col-span-2" style="width: 100%; height: 100%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 15px;">
-      <app-graph5 [entityData]="entityData4"></app-graph5>
+      <app-graph3 [entityData1]="entityData31"  [entityData2]="entityData32"></app-graph3>
+    </div>
+    <div class="col-span-1 md:col-span-2" style="width: 100%; height: 100%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 15px;">
+      <app-graph5 [entityData1]="entityData41"  [entityData2]="entityData42"></app-graph5>
     </div>
   </div>
 </div>

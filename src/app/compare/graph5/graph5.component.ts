@@ -10,22 +10,23 @@ import * as XLSX from 'xlsx';
   styleUrl: './graph5.component.css'
 })
 export class Graph5Component {
-  @Input() entityData: any;
+  @Input() entityData1: any;
+  @Input() entityData2: any;
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['entityData'] && this.entityData) {
+    if ((changes['entityData1'] || changes['entityData2']) && this.entityData1 && this.entityData2) {
 
-      this.buildChart(this.entityData);
+      this.buildChart(this.entityData1, this.entityData2);
     }
   }
-  private buildChart(data1: any): void {
+  private buildChart(data_1: any,data_2: any): void {
     const values: number[] = []
     const labels: string[] = []
     const colors: string[] = []
 
-    for (let i = 0; i < data1.length; i++){
-      labels.push(data1[i]['entity'])
-      values.push(data1[i]['counts'])
+    for (let i = 0; i < data_1.length; i++){
+      labels.push(data_1[i]['entity'])
+      values.push(data_1[i]['counts'])
       colors.push(this.generateRandomColor())
     }
 
@@ -65,7 +66,7 @@ generateRandomColor(): string {
   return color;
 }
 downloadTSV(): void {
-  const data = this.entityData;
+  const data = this.entityData1;
   let tsvContent = "data:text/tab-separated-values;charset=utf-8,";
   tsvContent += "Entity\tQuantity\n";
   data.forEach((row: any) => {
@@ -83,7 +84,7 @@ downloadTSV(): void {
   document.body.removeChild(link);
 }
 downloadCSV(): void {
-  const data = this.entityData;
+  const data = this.entityData1;
   let csvContent = "data:text/csv;charset=utf-8,";
 
   // Add headers to CSV content
@@ -104,7 +105,7 @@ downloadCSV(): void {
 }
 
 downloadExcel(): void {
-const data = this.entityData.map((row: any) => ({
+const data = this.entityData1.map((row: any) => ({
     Entity: row['entity'],
     Quantity: row['counts']
 }));

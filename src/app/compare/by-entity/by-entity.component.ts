@@ -33,10 +33,15 @@ export class ByEntityComponent {
   submitted : boolean = false;
   firstDate:string="";
   lastDate:string="";
-  entityData: any;
-  entityData2: any;
-  entityData3: any;
-  entityData4: any;
+  entityData11: any;
+  entityData12: any;
+  entityData21: any;
+  entityData22: any;
+  entityData31: any;
+  entityData32: any;
+  entityData41: any;
+  entityData42: any;
+
   
   
   
@@ -105,35 +110,30 @@ export class ByEntityComponent {
     this.submitted=true;
     this.firstDate=first_date;
     this.lastDate=last_date;
-    console.log('First date' + first_date)
-    console.log('First date' + first_date)
-
-    console.log('entities 1:' + this.selectedOptionsFirst)
-    console.log('entities 2:' + this.selectedOptionsSecond)
-
-    
     if(this.selectedOptionsFirst && this.selectedOptionsSecond){
+
+  /*********************************  Retreiving  Data For First Comparision Group ************************************/
+
       this.searchService.searchEntity1(this.selectedOptionsFirst, this.firstDate, this.lastDate)
     .subscribe({
     next: (result) => {
-      this.entityData=result; // Emit the result to parent component
+      this.entityData11=result; 
     },
     error: (error) => {
-      // Handle any errors that occur during the search
+    
       console.error('Search failed:', error);
     }
-
-    //TODO add the second services
   });
+
 
   this.searchService.searchEntity2(this.selectedOptionsFirst, this.firstDate, this.lastDate)
   .subscribe({
   next: (result2) => {
-    // Handle the data received from the search
-    this.entityData2=result2; // Emit the result to parent component
+  
+    this.entityData21=result2; 
   },
   error: (error) => {
-    // Handle any errors that occur during the search
+  
     console.error('Search failed:', error);
   }
 });
@@ -141,11 +141,9 @@ export class ByEntityComponent {
 this.searchService.searchEntity3(this.selectedOptionsFirst, this.firstDate, this.lastDate)
 .subscribe({
 next: (result3) => {
-  // Handle the data received from the search
-  this.entityData3=result3; // Emit the result to parent component
+  this.entityData31=result3; 
 },
 error: (error) => {
-  // Handle any errors that occur during the search
   console.error('Search failed:', error);
 }
 });
@@ -153,19 +151,67 @@ error: (error) => {
 this.searchService.searchEntity4(this.selectedOptionsFirst, this.firstDate, this.lastDate)
 .subscribe({
 next: (result4) => {
-  this.entityData4=result4; // Emit the result to parent component
+  this.entityData41=result4; 
 },
 error: (error) => {
-  // Handle any errors that occur during the search
+  console.error('Search failed:', error);
+}
+});
+
+
+  /*********************************  Retreiving Data For Second Comparision Group ************************************/
+
+
+this.searchService.searchEntity1(this.selectedOptionsSecond, this.firstDate, this.lastDate)
+.subscribe({
+next: (result) => {
+  this.entityData12=result; 
+},
+error: (error) => {
+
+  console.error('Search failed:', error);
+}
+});
+
+this.searchService.searchEntity2(this.selectedOptionsSecond, this.firstDate, this.lastDate)
+.subscribe({
+next: (result2) => {
+  this.entityData22=result2; 
+},
+error: (error) => {
+  console.error('Search failed:', error);
+}
+});
+
+
+this.searchService.searchEntity3(this.selectedOptionsSecond, this.firstDate, this.lastDate)
+.subscribe({
+next: (result3) => {
+  this.entityData32=result3; 
+},
+error: (error) => {
+  console.error('Search failed:', error);
+}
+});
+
+
+
+this.searchService.searchEntity4(this.selectedOptionsSecond, this.firstDate, this.lastDate)
+.subscribe({
+next: (result4) => {
+  this.entityData42=result4; 
+},
+error: (error) => {
   console.error('Search failed:', error);
 }
 });
 
 }
 
+}
+
   }
 
-}
 
 
 

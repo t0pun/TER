@@ -20,11 +20,10 @@ form {
 .date-input-container {
   display:flex;
     justify-content: space-between;
-    padding: 10px;
   }
   
 .date-input-container > div {
-    margin: 10px;
+    margin: 5px;
 }
 
 input {
@@ -84,4 +83,10 @@ mat-icon {
 }
 .graphs {
   padding:20px;
+}
+
+.span-guide {
+  cursor: help; 
+  text-decoration: underline; 
+  color: rgb(134, 40, 40); 
 }

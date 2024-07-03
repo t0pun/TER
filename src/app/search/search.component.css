@@ -34,5 +34,6 @@
     cursor: help; 
     text-decoration: underline; 
     color: rgb(134, 40, 40); 
-    padding: 40px;
+    padding: 20px;
+    margin: 10px;
 }

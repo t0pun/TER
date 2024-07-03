@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import Plotly, { Data, Layout } from 'plotly.js-basic-dist-min';
 import * as XLSX from 'xlsx';
 @Component({
@@ -10,15 +10,18 @@ import * as XLSX from 'xlsx';
   styleUrl: './graph2.component.css'
 })
 export class Graph2Component implements OnChanges {
-  @Input() entityData: any;
-
+  @Input() entityData1: any;
+  @Input() name:any;
+  @ViewChild('graphContainer', { static: true }) graphContainer!: ElementRef; //Had to use this to be able to render this graph two times in one page
+  
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['entityData'] && this.entityData) {
-      this.buildChart(this.entityData);
+    if (changes['entityData1'] && this.entityData1 ) {
+      this.buildChart(this.entityData1);
     }
   }
 
-  private buildChart(data1: any): void {
+  private buildChart(data_1: any): void {
+    console.log(data_1)
     const values: number[] = [];
     const labels: string[] = ["TRUE", "FALSE", "MIXTURE", "OTHER"];
     const colors: string[] = ['#4CB140', '#cc0000', '#519DE9', '#F4C145'];
@@ -27,9 +30,9 @@ export class Graph2Component implements OnChanges {
     const counts: { [key: string]: number } = { "TRUE": 0, "FALSE": 0, "MIXTURE": 0, "OTHER": 0 };
 
     // Aggregate counts
-    for (let i = 0; i < data1.length; i++) {
-        const label = data1[i]['label'];
-        counts[label] += data1[i]['counts'];
+    for (let i = 0; i < data_1.length; i++) {
+        const label = data_1[i]['label'];
+        counts[label] += data_1[i]['counts'];
     }
 
     // Populate values array
@@ -51,7 +54,7 @@ export class Graph2Component implements OnChanges {
         }
     }];
     const layout: Partial<Layout> = {
-      title: 'Percentage of labels',
+      title: 'Percentage of labels for'+this.name,
       showlegend: true,
       xaxis: {
         type: 'date',
@@ -60,7 +63,7 @@ export class Graph2Component implements OnChanges {
       yaxis: {
         title: 'Number of Claims'
       },
-      margin: { t: 50, b: 50, l: 50, r: 200 },
+      margin: { t: 50, b: 50, l: 50, r: 200 }, 
       legend: {
         x: 5.1,
         y: 1,
@@ -73,10 +76,10 @@ export class Graph2Component implements OnChanges {
 
     var config = { responsive: true }
 
-    Plotly.newPlot('graph2', data, layout, config);
+    Plotly.newPlot(this.graphContainer.nativeElement, data, layout, config); // Use the ViewChild reference
 }
 downloadTSV(): void {
-  const data = this.entityData;
+  const data = this.entityData1;
   let tsvContent = "data:text/tab-separated-values;charset=utf-8,";
   tsvContent += "Label\tQuantity\n";
   data.forEach((row: any) => {
@@ -94,7 +97,7 @@ downloadTSV(): void {
   document.body.removeChild(link);
 }
 downloadCSV(): void {
-  const data = this.entityData;
+  const data = this.entityData1;
   let csvContent = "data:text/csv;charset=utf-8,";
 
   // Add headers to CSV content
@@ -115,7 +118,7 @@ downloadCSV(): void {
 }
 
 downloadExcel(): void {
-const data = this.entityData.map((row: any) => ({
+const data = this.entityData1.map((row: any) => ({
     Label: row['label'],
     Quantity: row['counts']
 }));

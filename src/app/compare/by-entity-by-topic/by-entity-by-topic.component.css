@@ -15,7 +15,7 @@ form {
 .topic{
   margin-bottom: 15px;
 }
-.mat-form-field, .selected-items, .topic-container, .date-input-container {
+ .date-input-container {
   margin-bottom: 15px; /* Consistent spacing between sections */
 }
 
@@ -97,6 +97,7 @@ button {
     border-radius: 8px; /* More rounded corners */
     transition: background-color 0.3s;
     outline: none;
+    margin-top: 10px;
 }
 
 button:hover {
@@ -144,4 +145,12 @@ button:hover {
     margin-top: 8px;
     font-size: 12px;
     color: #888;
+  }
+
+  .span-guide {
+    cursor: help; 
+    text-decoration: underline; 
+    color: rgb(134, 40, 40); 
+    margin: 15px; /* Consistent spacing between sections */
+    
   }
